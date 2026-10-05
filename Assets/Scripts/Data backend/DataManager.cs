@@ -6,12 +6,9 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance;
     
     private DataGetter _dataGetter;
-    private List<List<DataPoint>> _dataCache = new List<List<DataPoint>>();
+    private Dictionary<string, List<DataPoint>> _dataDict = new Dictionary<string, List<DataPoint>>();
     
-    private Dictionary<string, List<DataPoint>> _dataDict = new Dictionary<string, List<DataPoint>>()
-    {
-        {"", new List<DataPoint>()}
-    };
+
     
     private void Awake()
     {
@@ -25,47 +22,61 @@ public class DataManager : MonoBehaviour
     
 
     /// <summary>
-    ///   <para>Gets a specific data point of a specific tree.</para>
+    ///   <para>Gets a specific data point of a specific sensor/api.</para>
     /// </summary>
-    /// <param name="treeId">The ID of the specific tree you want to get data from.</param>
-    /// <param name="maxPoints">Amount of data points to return, starting at the end.</param>
-    public DataPoint GetDataPoint(string treeId, int index)
+    /// <param name="dataType">The type of api you want to call.</param>
+    /// <param name="sensorId">The ID of the specific sensor you want to get data from.</param>
+    /// <param name="index">Index of the specific datapoint you want.</param>
+    public DataPoint GetDataPoint(StaticVariables.DataType dataType, string sensorId, int index)
     {
-        DataPoint dataPoint = TryGetDataPoint(treeId, index);
-        return dataPoint;
+        switch (dataType)
+        {
+            case  StaticVariables.DataType.TreeSensor or StaticVariables.DataType.SoilSensor:
+                return TryGetTreeDataPoint(sensorId, index);
+            default:
+                Debug.LogError($"{dataType} is empty");
+                return new DataPoint();
+        }
     }
 
     /// <summary>
-    ///   <para>Gets a list of data points of a specific tree.</para>
+    ///   <para>Gets a list of data points of a specific sensor/api.</para>
     /// </summary>
-    /// <param name="treeId">The ID of the specific tree you want to get data from.</param>
+    /// <param name="dataType">The type of api you want to call.</param>
+    /// <param name="sensorId">The ID of the specific sensor you want to get data from.</param>
     /// <param name="maxPoints">Amount of data points to return, starting at the end.</param>
-    public List<DataPoint> GetDataPoints(string treeId, int maxPoints)
+    public List<DataPoint> GetDataPoints(StaticVariables.DataType dataType, string sensorId, int maxPoints)
     {
-        List<DataPoint> dataPoints = TryGetDataPoints(treeId, maxPoints);
-        return dataPoints;
+        switch (dataType)
+        {
+            case  StaticVariables.DataType.TreeSensor or  StaticVariables.DataType.SoilSensor:
+                return TryGetTreeDataPoints(sensorId, maxPoints);
+            default:
+                Debug.LogError($"{dataType} is empty");
+                return new List<DataPoint>();
+        }
     }
 
-    private DataPoint TryGetDataPoint(string treeId, int index)
+    private DataPoint TryGetTreeDataPoint(string sensorId, int index)
     {
-        if (_dataDict.ContainsKey(treeId))
+        if (_dataDict.ContainsKey(sensorId))
         {
-            List<DataPoint> dataPointList = _dataDict[treeId];
+            List<DataPoint> dataPointList = _dataDict[sensorId];
             if (index < dataPointList.Count)
             {
                 return dataPointList[index];
             }
         }
-        List<DataPoint> dataPoints = _dataGetter.GetData(treeId, index);
-        TrySaveDataPoints(treeId, dataPoints);
+        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index);
+        TrySaveDataPoints(sensorId, dataPoints);
         return dataPoints[index];
     }
 
-    private List<DataPoint> TryGetDataPoints(string treeId, int index)
+    private List<DataPoint> TryGetTreeDataPoints(string sensorId, int index)
     {
-        if (_dataDict.ContainsKey(treeId))
+        if (_dataDict.ContainsKey(sensorId))
         {
-            List<DataPoint> dataPointList = _dataDict[treeId];
+            List<DataPoint> dataPointList = _dataDict[sensorId];
             if (index > dataPointList.Count)
             {
                 for (int i = dataPointList.Count; i < index; i++)
@@ -75,8 +86,8 @@ public class DataManager : MonoBehaviour
                 return dataPointList;
             }
         }
-        List<DataPoint> dataPoints = _dataGetter.GetData(treeId, index);
-        TrySaveDataPoints(treeId, dataPoints);
+        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index);
+        TrySaveDataPoints(sensorId, dataPoints);
         return dataPoints;
     }
 
@@ -106,18 +117,18 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void TryAddDataPointsToDictionary(string treeId, List<DataPoint> dataPoints)
+    private void TryAddDataPointsToDictionary(string sensorId, List<DataPoint> dataPoints)
     {
-        bool isDataAvailable = _dataGetter.IsDataAvailable(treeId);
+        bool isDataAvailable = _dataGetter.IsDataAvailable(sensorId);
         if (!isDataAvailable)
-            Debug.LogError($"{treeId} is empty");
+            Debug.LogError($"{sensorId} is empty");
 
-        if (_dataDict.ContainsKey(treeId))
+        if (_dataDict.ContainsKey(sensorId))
         {
-            _dataDict[treeId].AddRange(dataPoints);
+            _dataDict[sensorId].AddRange(dataPoints);
             return;
         }
         
-        _dataDict.Add(treeId, dataPoints);
+        _dataDict.Add(sensorId, dataPoints);
     }
 }

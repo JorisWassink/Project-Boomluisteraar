@@ -6,6 +6,20 @@ using UnityEngine.UI;
 
 public class DataTestDisplay : MonoBehaviour
 {
+    [Tooltip("make sure the one you want is at index 0")]
+    [SerializeField]public List<string> AllSensorIds = new List<string>()
+    {
+        "9B261005",
+        "91261120",
+        "9B261002",
+        "91261115",
+        "91261114",
+        "91261121",
+        "9B261009",
+        "93261020",
+        "93261019"
+    };
+    
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private Button leftButton;
@@ -16,7 +30,7 @@ public class DataTestDisplay : MonoBehaviour
 
     private void Start()
     {
-        _dataList = DataManager.Instance.GetDataPoints("9B261009", 2000);
+        _dataList = DataManager.Instance.GetDataPoints(StaticVariables.DataType.TreeSensor, AllSensorIds[0], 2000);
         scrollbar.value = 1; //default to most recent data point
         scrollbar.numberOfSteps = _dataList.Count;
         scrollbar.onValueChanged.AddListener(OnScrollValueChanged);
@@ -48,6 +62,20 @@ public class DataTestDisplay : MonoBehaviour
         string dataString = "";
         switch (dataPoint.V3)
         {
+            case 3:
+                dataString = $"Data Type: Soil\n" +
+                             $"acceleration_component_X : {dataPoint.V5}\n" +
+                             $"acceleration_std_X: {dataPoint.V6}\n" +
+                             $"acceleration_component_Y: {dataPoint.V7}\n" +
+                             $"acceleration_std_Y: {dataPoint.V8}\n" +
+                             $"acceleration_component_Z: {dataPoint.V9}\n" +
+                             $"acceleration_std_Z: {dataPoint.V10}\n" +
+                             $"Battery Voltage: {dataPoint.V11 / 1000} V\n" +
+                             $"Air Temperature: {dataPoint.V12 / 100} °C\n" +
+                             $"Air Relative Humidity : {dataPoint.V13 / 100} %\n" +
+                             $"Soil Humidity 1: {dataPoint.V14} mV (raw)\n" +
+                             $"Soil Temperature: {dataPoint.V15} Ohm (raw)\n";
+                break;
             case 4 or 5:
                 int type = dataPoint.V3 % 2 * dataPoint.V3; //todo: simplify/explain
 
