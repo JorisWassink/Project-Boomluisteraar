@@ -30,7 +30,10 @@ public class DataTestDisplay : MonoBehaviour
 
     private void Start()
     {
-        _dataList = DataManager.Instance.GetDataPoints(StaticVariables.DataType.TreeSensor, AllSensorIds[0], 2000);
+        string selectedSensorId = AllSensorIds[0];
+        StaticVariables.DataType dataType = StaticVariables.TreeIdDictionary[selectedSensorId].Item2;
+        Debug.Log(dataType);
+        _dataList = DataManager.Instance.GetDataPoints(dataType, selectedSensorId, 2000);
         scrollbar.value = 1; //default to most recent data point
         scrollbar.numberOfSteps = _dataList.Count;
         scrollbar.onValueChanged.AddListener(OnScrollValueChanged);
@@ -57,6 +60,7 @@ public class DataTestDisplay : MonoBehaviour
     {
         string text = $"Data recorded at: {dataPoint.date}\n" + //1 + 2
                       $"Tree ID: {dataPoint.V2}\n" +
+                      $"String type: {dataPoint.V3}\n" +
                       $"timestamp: {dataPoint.V4}\n"; 
         
         string dataString = "";

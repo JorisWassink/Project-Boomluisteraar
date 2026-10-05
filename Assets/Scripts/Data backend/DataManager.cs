@@ -31,8 +31,8 @@ public class DataManager : MonoBehaviour
     {
         switch (dataType)
         {
-            case  StaticVariables.DataType.TreeSensor or StaticVariables.DataType.SoilSensor:
-                return TryGetTreeDataPoint(sensorId, index);
+            case  StaticVariables.DataType.CarbonSensor or StaticVariables.DataType.SoilSensor:
+                return TryGetTreeDataPoint(sensorId, index, dataType);
             default:
                 Debug.LogError($"{dataType} is empty");
                 return new DataPoint();
@@ -49,15 +49,15 @@ public class DataManager : MonoBehaviour
     {
         switch (dataType)
         {
-            case  StaticVariables.DataType.TreeSensor or  StaticVariables.DataType.SoilSensor:
-                return TryGetTreeDataPoints(sensorId, maxPoints);
+            case  StaticVariables.DataType.CarbonSensor or  StaticVariables.DataType.SoilSensor:
+                return TryGetTreeDataPoints(sensorId, maxPoints, dataType);
             default:
                 Debug.LogError($"{dataType} is empty");
                 return new List<DataPoint>();
         }
     }
 
-    private DataPoint TryGetTreeDataPoint(string sensorId, int index)
+    private DataPoint TryGetTreeDataPoint(string sensorId, int index, StaticVariables.DataType dataType)
     {
         if (_dataDict.ContainsKey(sensorId))
         {
@@ -67,12 +67,12 @@ public class DataManager : MonoBehaviour
                 return dataPointList[index];
             }
         }
-        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index);
+        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index, dataType);
         TrySaveDataPoints(sensorId, dataPoints);
         return dataPoints[index];
     }
 
-    private List<DataPoint> TryGetTreeDataPoints(string sensorId, int index)
+    private List<DataPoint> TryGetTreeDataPoints(string sensorId, int index, StaticVariables.DataType dataType)
     {
         if (_dataDict.ContainsKey(sensorId))
         {
@@ -86,7 +86,7 @@ public class DataManager : MonoBehaviour
                 return dataPointList;
             }
         }
-        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index);
+        List<DataPoint> dataPoints = _dataGetter.GetData(sensorId, index, dataType);
         TrySaveDataPoints(sensorId, dataPoints);
         return dataPoints;
     }

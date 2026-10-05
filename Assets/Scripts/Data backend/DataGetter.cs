@@ -9,11 +9,17 @@ using UnityEngine;
 public class DataGetter : MonoBehaviour
 {
     private static readonly HttpClient HttpClient = new HttpClient();
+    private static readonly Dictionary<StaticVariables.DataType, HashSet<int>> IgnoredTypes = new()
+    {
+        [StaticVariables.DataType.CarbonSensor] = new() { 3, 6, 7 },
+        [StaticVariables.DataType.CyberSensor]  = new() { 3 },
+        [StaticVariables.DataType.SoilSensor]   = new() { 4, 5, 6, 7, 8 },
+    };
     
-    public List<DataPoint> GetData(string id, int maxPoints)
+    public List<DataPoint> GetData(string id, int maxPoints, StaticVariables.DataType dataType)
     {
         string dataUrl = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
-        return Task.Run(() => GetDataAsync(dataUrl, maxPoints)).Result; // still blocks, but no deadlock
+        return Task.Run(() => GetDataAsync(dataUrl, maxPoints, dataType)).Result; // still blocks, but no deadlock
     }
 
     public bool IsDataAvailable(string id)
@@ -28,37 +34,42 @@ public class DataGetter : MonoBehaviour
         return response.IsSuccessStatusCode;
     }
 
-    private static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints)
+    private static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints, StaticVariables.DataType dataType)
     {
         Debug.Log($"Getting {maxPoints} lines of data");
         string rawText = await HttpClient.GetStringAsync(dataUrl);
-        return ConvertStringToDataPoints(rawText, maxPoints);
+        return ConvertStringToDataPoints(rawText, maxPoints, dataType);
     }
 
-    private static List<DataPoint> ConvertStringToDataPoints(string rawText, int maxPoints)
+    private static List<DataPoint> ConvertStringToDataPoints(string rawText, int maxPoints, StaticVariables.DataType dataType)
     {
         if (string.IsNullOrWhiteSpace(rawText))
             return new List<DataPoint>();
 
-        var result = new List<DataPoint>(maxPoints);
+        List<DataPoint> result = new List<DataPoint>(maxPoints);
         int lineEnd = rawText.Length;
         int count = 0;
-
-        // while (lineEnd > 0 && count < maxPoints)
-        while (lineEnd > 0)
+        
+        IgnoredTypes.TryGetValue(dataType, out var skip); // null if no filter for this type
+        while (lineEnd > 0 && count < maxPoints)
         {
             int newlineIndex = rawText.LastIndexOf('\n', lineEnd - 1);
             int lineStart = newlineIndex + 1;
             int length = lineEnd - lineStart;
 
+            lineEnd = newlineIndex;
+
             if (length > 0 && rawText[lineStart + length - 1] == '\r')
                 length--;
-
+            
             if (length > 0)
             {
                 var line = rawText.AsSpan(lineStart, length);
-                var parts = line.ToString().Split(';'); 
+                var parts = line.ToString().Split(';');
+                int dataPointType = ParseInt(GetPart(parts, 2));
 
+                if (skip?.Contains(dataPointType) == true) continue;
+                
                 result.Add(new DataPoint
                 {
                     date = GetPart(parts, 0),
@@ -88,8 +99,6 @@ public class DataGetter : MonoBehaviour
                 });
                 count++;
             }
-
-            lineEnd = newlineIndex; // -1 when no more newlines; loop condition catches it
         }
 
         result.Reverse(); // we collected newest-to-oldest, flip to chronological order
