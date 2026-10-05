@@ -20,25 +20,31 @@ public class DataTestDisplay : MonoBehaviour
         "93261019"
     };
     
+    [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
+    [SerializeField] private Button leftTitleButton;
+    [SerializeField] private Button rightTitleButton;
     
     private List<DataPoint> _dataList;
     private int _currentDataPointIndex;
+    private int _currentSensorIndex = 0;
 
     private void Start()
     {
-        string selectedSensorId = AllSensorIds[0];
-        StaticVariables.DataType dataType = StaticVariables.TreeIdDictionary[selectedSensorId].Item2;
-        Debug.Log(dataType);
-        _dataList = DataManager.Instance.GetDataPoints(dataType, selectedSensorId, 2000);
+        ChangeSensor(0);
         scrollbar.value = 1; //default to most recent data point
         scrollbar.numberOfSteps = _dataList.Count;
         scrollbar.onValueChanged.AddListener(OnScrollValueChanged);
+        
         leftButton.onClick.AddListener(() => SetDataPoint(_currentDataPointIndex - 1));
         rightButton.onClick.AddListener(() => SetDataPoint(_currentDataPointIndex + 1));
+        
+        leftTitleButton.onClick.AddListener(() => ChangeSensor(_currentSensorIndex - 1));
+        rightTitleButton.onClick.AddListener(() => ChangeSensor(_currentSensorIndex + 1));
+        
         OnScrollValueChanged(1);
     }
 
@@ -49,8 +55,28 @@ public class DataTestDisplay : MonoBehaviour
         SetDataPoint(index);
     }
 
+    private void ChangeSensor(int index)
+    {
+        if(index < 0)
+            index = AllSensorIds.Count - 1;
+        if(index >= AllSensorIds.Count)
+            index = 0;
+        
+        _currentSensorIndex = index;
+        string selectedSensorId = AllSensorIds[index];
+        titleText.text = StaticVariables.TreeIdDictionary[selectedSensorId].Item1;
+        StaticVariables.DataType dataType = StaticVariables.TreeIdDictionary[selectedSensorId].Item2;
+        _dataList = DataManager.Instance.GetDataPoints(dataType, selectedSensorId, 2000);
+        OnScrollValueChanged(1);
+    }
+
     private void SetDataPoint(int index)
     {
+        if(index < 0)
+            index = _dataList.Count - 1;
+        if(index >= _dataList.Count)
+            index = 0;
+        
         _currentDataPointIndex = index;
         DataPoint currentDataPoint = _dataList[index];
         SetText(currentDataPoint);

@@ -49,7 +49,7 @@ public class DataManager : MonoBehaviour
     {
         switch (dataType)
         {
-            case  StaticVariables.DataType.CarbonSensor or  StaticVariables.DataType.SoilSensor:
+            case  StaticVariables.DataType.CarbonSensor or  StaticVariables.DataType.SoilSensor or StaticVariables.DataType.CyberSensor:
                 return TryGetTreeDataPoints(sensorId, maxPoints, dataType);
             default:
                 Debug.LogError($"{dataType} is empty");
