@@ -16,8 +16,21 @@ public class DataGetter : MonoBehaviour
         return Task.Run(() => GetDataAsync(dataUrl, maxPoints)).Result; // still blocks, but no deadlock
     }
 
-    public static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints)
+    public bool IsDataAvailable(string id)
     {
+        string dataUrl = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
+        return Task.Run(() => IsDataAvailableAsync(dataUrl)).Result;
+    }
+
+    private static async Task<bool> IsDataAvailableAsync(string dataUrl)
+    {
+        using HttpResponseMessage response = await HttpClient.GetAsync(dataUrl);
+        return response.IsSuccessStatusCode;
+    }
+
+    private static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints)
+    {
+        Debug.Log($"Getting {maxPoints} lines of data");
         string rawText = await HttpClient.GetStringAsync(dataUrl);
         return ConvertStringToDataPoints(rawText, maxPoints);
     }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class DataTestDisplay : MonoBehaviour
 {
-    [SerializeField] private DataGetter dataGetter;
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private Button leftButton;
@@ -17,7 +16,7 @@ public class DataTestDisplay : MonoBehaviour
 
     private void Start()
     {
-        _dataList = dataGetter.GetData("9B261009", 2000);
+        _dataList = DataManager.Instance.GetDataPoints("9B261009", 2000);
         scrollbar.value = 1; //default to most recent data point
         scrollbar.numberOfSteps = _dataList.Count;
         scrollbar.onValueChanged.AddListener(OnScrollValueChanged);
