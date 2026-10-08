@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class DataTestDisplay : MonoBehaviour
 {
-    [Tooltip("make sure the one you want is at index 0")]
-    [SerializeField]public List<string> AllSensorIds = new List<string>()
+    private List<string> AllSensorIds = new List<string>()
     {
         "9B261005",
         "91261120",
