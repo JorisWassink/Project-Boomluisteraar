@@ -17,6 +17,8 @@ public static class StaticVariables
         {"93261019", ("Carpinus betulus (soil)", DataType.SoilSensor)}
     };
     
+    public static string SelectedTreeId{get; set;}
+    
     public enum DataType
     {
         None,

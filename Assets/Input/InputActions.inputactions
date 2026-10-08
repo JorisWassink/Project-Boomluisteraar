@@ -8,12 +8,12 @@
             "actions": [
                 {
                     "name": "OnTap",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "ac082fba-bffc-4b87-b53a-a86a4eb3adcd",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false,
+                    "initialStateCheck": true,
                     "priority": 0
                 }
             ],

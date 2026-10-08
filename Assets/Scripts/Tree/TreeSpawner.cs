@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TreeSpawner : MonoBehaviour
 {
     //temp script for menu
     [SerializeField] private GameObject treePrefab;
+    [SerializeField] private Camera cam;
     List<TreeWorldMap> _trees  = new List<TreeWorldMap>();
+    public static UnityEvent OnTreeTapped = new UnityEvent();
     
     private List<string> AllSensorIds = new List<string>()
     {
@@ -41,10 +45,39 @@ public class TreeSpawner : MonoBehaviour
         }
     }
 
-    public void OnTap(Vector2 pos)
+    public void OnTap(InputAction.CallbackContext context)
     {
-        Debug.DrawLine(transform.position, pos, Color.red);
+        //todo: not hardcode this
+        float floorY = 0;
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 mouseVec3 = new Vector3(mousePosition.x, mousePosition.y, mousePosition.y);
+        Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseVec3);
+        
+
+        float maxY = mouseWorldPosition.y;
+        float minY = cam.transform.position.y;
+        
+        float a = (1-0)/(maxY-minY);
+        
+        float b = 0- (a * minY);
+        
+        float t = floorY * a + b;
+        
+        Vector3 pointOnFloor = Vector3.Lerp(cam.transform.position, mouseWorldPosition, t);
+        
+        
+        Debug.DrawLine(cam.transform.position, pointOnFloor,  Color.red, 99999);
+        
+        
+        foreach (var tree in _trees)
+        {
+            float distance =  Vector3.Distance(pointOnFloor, tree.transform.position);
+            if (distance < 10)
+            {
+                StaticVariables.SelectedTreeId = tree.treeId;
+                SceneManager.LoadScene("GameplayScene");
+            }
+        }
+        
     }
-    
-    
 }
