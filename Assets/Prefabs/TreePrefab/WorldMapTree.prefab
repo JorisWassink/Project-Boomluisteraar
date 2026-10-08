@@ -121,9 +121,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6131190563310961461}
-  - component: {fileID: 8277426150426205293}
+  - component: {fileID: 4259389900292402792}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: WorldMapTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +146,7 @@ Transform:
   - {fileID: 5574162861184391904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8277426150426205293
+--- !u!114 &4259389900292402792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,11 +155,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6179839856108454505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba3a824bc820ca3269d07e4d69ba3067, type: 3}
+  m_Script: {fileID: 11500000, guid: 253b68d2cd1b34aceae6090c4c14700a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TreeInstance
-  treeId: 
-  treeName: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &6204945415606392404
 GameObject:
   m_ObjectHideFlags: 0

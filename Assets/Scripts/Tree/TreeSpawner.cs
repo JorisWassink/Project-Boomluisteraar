@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TreeSpawner : MonoBehaviour
 {
-    //temp script
+    //temp script for menu
     [SerializeField] private GameObject treePrefab;
+    List<TreeWorldMap> _trees  = new List<TreeWorldMap>();
     
     private List<string> AllSensorIds = new List<string>()
     {
@@ -33,9 +35,16 @@ public class TreeSpawner : MonoBehaviour
             
             Vector3 treePosition = new Vector3(treeX, 0f, treeZ);
             GameObject treeInstanceObject = Instantiate(treePrefab, treePosition, Quaternion.identity, transform);
-            TreeInstance treeInstance = treeInstanceObject.GetComponent<TreeInstance>();
+            TreeWorldMap treeInstance = treeInstanceObject.GetComponent<TreeWorldMap>();
             treeInstance.InitializeTree(AllSensorIds[treeIndex]);
+            _trees.Add(treeInstance);
         }
-        
     }
+
+    public void OnTap(Vector2 pos)
+    {
+        Debug.DrawLine(transform.position, pos, Color.red);
+    }
+    
+    
 }
