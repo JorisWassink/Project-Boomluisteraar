@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -7,6 +8,8 @@ public class InputManager : MonoBehaviour
 {
     //TODO: make this use managers
     [SerializeField] private Camera currentCamera;
+    
+    public UnityEvent OnMouseClick;
     
     public static InputManager Instance;
   
@@ -47,11 +50,9 @@ public class InputManager : MonoBehaviour
         return pointOnFloor;
     }
 
-    private void OnDrawGizmos()
+    public void InvokeMouseClick()
     {
-        Vector3 mousePositionInWorld = GetMousePositionInWorld();
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(mousePositionInWorld, 1f);
+        OnMouseClick.Invoke();
     }
 }
 
