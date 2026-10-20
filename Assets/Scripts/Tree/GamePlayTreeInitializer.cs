@@ -6,8 +6,11 @@ public class GamePlayTreeInitializer : MonoBehaviour
 
     void Awake()
     {
+        string treeId = StaticVariables.SelectedTreeId;
+        if(treeId == null) treeId = "91261114";
         GameObject treeObject = Instantiate(treePrefab,  transform);
         TreeGameplay treeGameplay = treeObject.GetComponent<TreeGameplay>(); 
-        treeGameplay.InitializeTree(StaticVariables.SelectedTreeId);
+        treeGameplay.InitializeTree(treeId);
+        GameplayManager.Instance.currentTreeGameplay = treeGameplay;
     }
 }
