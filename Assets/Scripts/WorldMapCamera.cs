@@ -16,12 +16,13 @@ public class WorldMapCamera : MonoBehaviour
     
     private bool _dragging = false;
     private bool _positionDirty = false;
-    private float _cancelTime;
 
     //event functions
     private void Start()
     {
         _camera = GetComponent<Camera>();
+        InputManager.Instance.onMousePressed.AddListener(OnMousePressed);
+        InputManager.Instance.onMouseRelease.AddListener(OnMouseReleased);
     }
 
     private void Update()
@@ -51,23 +52,19 @@ public class WorldMapCamera : MonoBehaviour
     }
     
     //own functions
-    public void OnDrag(InputAction.CallbackContext context)
+    private void OnMousePressed()
     {
-        if (context.started)
-        {
-            _startCamPos = transform.position;
-            _dragOrigin = GroundPointFrom(_startCamPos);
-            _dragging = true;
-        }
-
-        if (context.canceled)
-        {
-            _cancelTime = Time.deltaTime;
-            _dragging = false;
-            _positionDirty = true;
-            _cancelPosition = Physics.Raycast(transform.position, Vector3.down ,out var raycastHit) ? 
-                raycastHit.point : new Vector3(transform.position.x, 0, transform.position.z);
-        }
+        _startCamPos = transform.position;
+        _dragOrigin = GroundPointFrom(_startCamPos);
+        _dragging = true;
+    }
+    
+    private void OnMouseReleased()
+    {
+        _dragging = false;
+        _positionDirty = true;
+        _cancelPosition = Physics.Raycast(transform.position, Vector3.down ,out var raycastHit) ? 
+            raycastHit.point : new Vector3(transform.position.x, 0, transform.position.z);
     }
     
     //helpers

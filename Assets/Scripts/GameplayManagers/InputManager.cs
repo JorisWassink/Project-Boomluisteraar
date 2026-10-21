@@ -9,11 +9,19 @@ public class InputManager : MonoBehaviour
     //TODO: make this use managers
     [SerializeField] private Camera currentCamera;
     
-    public UnityEvent OnMouseClick;
+    [Tooltip("How long before the click becomes a drag")]
+    [SerializeField] public float clickDuration;
+    
+    public UnityEvent onMousePressed;
+    public UnityEvent onMouseHold;
+    public UnityEvent onMouseRelease;
+    public UnityEvent onMouseClick;
     
     public static InputManager Instance;
-  
 
+    private Vector2 _mousePositionAtClick = Vector2.zero; 
+  
+    //Unity event functions
     private void Awake()
     {
         if (Instance == null)
@@ -22,6 +30,26 @@ public class InputManager : MonoBehaviour
         }
     }
     
+    //Own functions
+    public void InvokeMouseClick(InputAction.CallbackContext context)
+    {
+        if (context.performed) onMouseHold.Invoke();
+        if (context.started)
+        {
+            _mousePositionAtClick = Mouse.current.position.ReadValue();
+            onMousePressed.Invoke();
+        }
+        
+        if (context.canceled)
+        {
+            onMouseRelease.Invoke();
+            if (context.duration > clickDuration) return;
+            if (Mouse.current.position.ReadValue() == _mousePositionAtClick)
+                onMouseClick.Invoke();
+        }
+    }
+    
+    //Helpers
     public Vector3 GetMousePositionInWorld()
     {
         Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -49,10 +77,6 @@ public class InputManager : MonoBehaviour
         Vector3 pointOnFloor = Vector3.Lerp(currentCamera.transform.position, mouseWorldPosition, t);
         return pointOnFloor;
     }
-
-    public void InvokeMouseClick()
-    {
-        OnMouseClick.Invoke();
-    }
+ 
 }
 
