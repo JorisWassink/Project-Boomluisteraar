@@ -12,15 +12,25 @@ public class TreeWorldMap : TreeInstance
     [SerializeField] private bool isUnlocked = true;
     [SerializeField] private RawImage lockSprite;
     
+    //TODO: fix camera getting
+    private Camera cam;
+    
     private void Awake()
     {
         InitializeTree(id);
         if (!isUnlocked) SetLocked();
+        else lockSprite.enabled = false;
     }
 
     private void Start()
     {
         InputManager.Instance.onMouseClick.AddListener(OnMouseClicked);
+    }
+
+    private void Update()
+    {
+        if(cam == null || isUnlocked) return;
+        lockSprite.transform.rotation.SetLookRotation(cam.transform.position);
     }
 
     //Own functions
@@ -49,7 +59,6 @@ public class TreeWorldMap : TreeInstance
         }
 
         lockSprite.enabled = true;
-        lockSprite.transform.rotation.SetLookRotation(transform.up);
     }
 
     //Debug Functions
