@@ -47,27 +47,7 @@ public class TreeSpawner : MonoBehaviour
 
     public void OnTap(InputAction.CallbackContext context)
     {
-        //todo: not hardcode this
-        float floorY = 0;
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Vector3 mouseVec3 = new Vector3(mousePosition.x, mousePosition.y, mousePosition.y);
-        Vector3 mouseWorldPosition = cam.ScreenToWorldPoint(mouseVec3);
-        
-
-        float maxY = mouseWorldPosition.y;
-        float minY = cam.transform.position.y;
-        
-        float a = (1-0)/(maxY-minY);
-        
-        float b = 0- (a * minY);
-        
-        float t = floorY * a + b;
-        
-        Vector3 pointOnFloor = Vector3.Lerp(cam.transform.position, mouseWorldPosition, t);
-        
-        
-        Debug.DrawLine(cam.transform.position, pointOnFloor,  Color.red, 99999);
-        
+        Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld();
         
         foreach (var tree in _trees)
         {
