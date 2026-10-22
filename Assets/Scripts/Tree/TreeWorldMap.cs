@@ -34,11 +34,11 @@ public class TreeWorldMap : TreeInstance
     }
 
     //Own functions
-    private void OnMouseClicked()
+    private void OnMouseClicked(Vector2 clickPosition)
     {
         if(!isUnlocked) return;
         
-        Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld();
+        Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld(clickPosition);
         
         float distance =  Vector3.Distance(pointOnFloor, transform.position);
         if (distance < hitboxRadius)

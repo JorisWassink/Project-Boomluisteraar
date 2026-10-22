@@ -27,9 +27,6 @@ public class WorldMapCamera : MonoBehaviour
 
     private void Update()
     {
-        Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld();
-        Vector3 dragDifference = pointOnFloor - _dragOrigin;
-        
         if (_dragging)
         {
             Vector3 diff = _dragOrigin - GroundPointFrom(_startCamPos);
@@ -52,14 +49,14 @@ public class WorldMapCamera : MonoBehaviour
     }
     
     //own functions
-    private void OnMousePressed()
+    private void OnMousePressed(Vector2 clickPosition)
     {
         _startCamPos = transform.position;
         _dragOrigin = GroundPointFrom(_startCamPos);
         _dragging = true;
     }
     
-    private void OnMouseReleased()
+    private void OnMouseReleased(Vector2 clickPosition)
     {
         _dragging = false;
         _positionDirty = true;
@@ -70,7 +67,7 @@ public class WorldMapCamera : MonoBehaviour
     //helpers
     private Vector3 GroundPointFrom(Vector3 camPos)
     {
-        Ray ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = _camera.ScreenPointToRay(Pointer.current.position.ReadValue());
         return camPos + ray.direction * (-camPos.y / ray.direction.y);
     }
     
