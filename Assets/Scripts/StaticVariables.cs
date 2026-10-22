@@ -17,12 +17,22 @@ public static class StaticVariables
         {"93261019", ("Carpinus betulus (soil)", DataType.SoilSensor)}
     };
     
+    public static string SelectedTreeId{get; set;}
+    
     public enum DataType
     {
+        None,
         CyberSensor,
         CarbonSensor,
         SoilSensor
     }
-    
-    
+
+    public static (string, DataType) TryGetTreeData(string id)
+    {
+        if (TreeIdDictionary.ContainsKey(id))
+            return TreeIdDictionary[id];
+        
+        Debug.LogError($"There is no such id '{id}'");
+        return ("ID NOT DEFINED", DataType.None);
+    }
 }

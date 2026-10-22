@@ -100,3 +100,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+Project Boomluisteraar_BurstDebugInformation_DoNotShip/
+
+AndroidBuild_BackUpThisFolder_ButDontShipItWithYourGame/
