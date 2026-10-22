@@ -12,14 +12,17 @@ public class InputManager : MonoBehaviour
     [Tooltip("How long before the click becomes a drag")]
     [SerializeField] public float clickDuration;
     
-    public UnityEvent onMousePressed;
-    public UnityEvent onMouseHold;
-    public UnityEvent onMouseRelease;
-    public UnityEvent onMouseClick;
+    public UnityEvent<Vector2> onMousePressed;
+    public UnityEvent<Vector2> onMouseHold;
+    public UnityEvent<Vector2> onMouseRelease;
+    public UnityEvent<Vector2> onMouseClick;
     
     public static InputManager Instance;
 
     private Vector2 _mousePositionAtClick = Vector2.zero; 
+    
+    private static Vector2 PointerPos =>
+        Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
   
     //Unity event functions
     private void Awake()
@@ -33,31 +36,38 @@ public class InputManager : MonoBehaviour
     //Own functions
     public void InvokeMouseClick(InputAction.CallbackContext context)
     {
-        if (context.performed) onMouseHold.Invoke();
+        
+        Vector2 clickPosition = PointerPos;
+        Vector3 rayPos = GetMousePositionInWorld(clickPosition);
+        Debug.Log(context.interaction);
+        Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 999);
+        
+        if (context.performed) onMouseHold.Invoke(clickPosition);
         if (context.started)
         {
             _mousePositionAtClick = Mouse.current.position.ReadValue();
-            onMousePressed.Invoke();
+            onMousePressed.Invoke(clickPosition);
         }
         
         if (context.canceled)
         {
-            onMouseRelease.Invoke();
+            onMouseRelease.Invoke(clickPosition);
             if (context.duration > clickDuration) return;
             if (Mouse.current.position.ReadValue() == _mousePositionAtClick)
-                onMouseClick.Invoke();
+                onMouseClick.Invoke(clickPosition);
         }
     }
     
     //Helpers
-    public Vector3 GetMousePositionInWorld()
+    public Vector3 GetMousePositionInWorld(Vector2 clickPosition)
     {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Vector3 mouseVec3 = new Vector3(mousePosition.x, mousePosition.y, mousePosition.y);
+        Vector3 cameraPosition = currentCamera.transform.position;
+        
+        Vector3 mouseVec3 = new Vector3(clickPosition.x, clickPosition.y, 1f); 
         Vector3 mouseWorldPosition = currentCamera.ScreenToWorldPoint(mouseVec3);
         
         RaycastHit raycastHit;
-        if (Physics.Raycast(currentCamera.transform.position, mouseWorldPosition - currentCamera.transform.position,
+        if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition,
                 out raycastHit))
         {
             return raycastHit.point;
@@ -66,7 +76,7 @@ public class InputManager : MonoBehaviour
         //if no collider has been found, default to y = 0
         float floorY = 0;
         float maxY = mouseWorldPosition.y;
-        float minY = currentCamera.transform.position.y;
+        float minY = cameraPosition.y;
         
         float a = (1-0)/(maxY-minY);
         
@@ -74,7 +84,7 @@ public class InputManager : MonoBehaviour
         
         float t = floorY * a + b;
         
-        Vector3 pointOnFloor = Vector3.Lerp(currentCamera.transform.position, mouseWorldPosition, t);
+        Vector3 pointOnFloor = Vector3.Lerp(cameraPosition, mouseWorldPosition, t);
         return pointOnFloor;
     }
  
