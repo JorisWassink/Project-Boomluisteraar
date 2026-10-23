@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   currentCamera: {fileID: 330585545}
+  meshRenderer: {fileID: 854744489}
   clickDuration: 0.1
   onMousePressed:
     m_PersistentCalls:

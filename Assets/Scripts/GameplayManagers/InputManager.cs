@@ -36,7 +36,6 @@ public class InputManager : MonoBehaviour
     //Own functions
     public void InvokeMouseClick(InputAction.CallbackContext context)
     {
-        
         Vector2 clickPosition = PointerPos;
         Vector3 rayPos = GetMousePositionInWorld(clickPosition);
         Debug.Log(context.interaction);
@@ -45,15 +44,16 @@ public class InputManager : MonoBehaviour
         if (context.performed) onMouseHold.Invoke(clickPosition);
         if (context.started)
         {
-            _mousePositionAtClick = Mouse.current.position.ReadValue();
+            _mousePositionAtClick = PointerPos;
             onMousePressed.Invoke(clickPosition);
+
         }
         
         if (context.canceled)
         {
             onMouseRelease.Invoke(clickPosition);
             if (context.duration > clickDuration) return;
-            if (Mouse.current.position.ReadValue() == _mousePositionAtClick)
+            if (PointerPos == _mousePositionAtClick)
                 onMouseClick.Invoke(clickPosition);
         }
     }
