@@ -12,7 +12,7 @@
                     "id": "ac082fba-bffc-4b87-b53a-a86a4eb3adcd",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold,Tap",
+                    "interactions": "",
                     "initialStateCheck": true,
                     "priority": 0
                 }
@@ -20,8 +20,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "b0a7a296-f1fd-4ada-8e92-d25facd0115e",
-                    "path": "<Mouse>/press",
+                    "id": "ce6515e9-4e8f-4100-bbae-d1324ec9fd3d",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -31,8 +31,8 @@
                 },
                 {
                     "name": "",
-                    "id": "ce6515e9-4e8f-4100-bbae-d1324ec9fd3d",
-                    "path": "<Touchscreen>/Press",
+                    "id": "78fc93e1-5bb6-4f16-9cea-050dc6311e46",
+                    "path": "<Mouse>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
