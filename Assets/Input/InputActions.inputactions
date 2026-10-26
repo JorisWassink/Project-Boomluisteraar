@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "MenuPlayer",
+            "id": "6445cb74-b802-46f3-8679-ac9e39725da7",
+            "actions": [
+                {
+                    "name": "OnTap",
+                    "type": "Value",
+                    "id": "ac082fba-bffc-4b87-b53a-a86a4eb3adcd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ce6515e9-4e8f-4100-bbae-d1324ec9fd3d",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OnTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78fc93e1-5bb6-4f16-9cea-050dc6311e46",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OnTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
