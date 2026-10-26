@@ -104,3 +104,5 @@ InitTestScene*.unity*
 Project Boomluisteraar_BurstDebugInformation_DoNotShip/
 
 AndroidBuild_BackUpThisFolder_ButDontShipItWithYourGame/
+
+.vscode/

@@ -18,8 +18,8 @@ public class TreeWorldMap : TreeInstance
     private void Awake()
     {
         InitializeTree(id);
-        if (!isUnlocked) SetLocked();
-        else lockSprite.enabled = false;
+        // if (!isUnlocked) SetLocked();
+        // else lockSprite.enabled = false;
     }
 
     private void Start()
