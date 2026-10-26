@@ -45,6 +45,9 @@ public class InputManager : MonoBehaviour
     {
 
         Vector2 clickPosition = PointerPos;
+        Vector3 rayPos = GetMousePositionInWorld(clickPosition);
+        Debug.Log(context.action);
+        Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 999);
         
         if (context.performed) onMouseHold.Invoke(clickPosition);
         if (context.started)
