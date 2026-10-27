@@ -58,6 +58,11 @@ public class WorldMapTree_Inspector : Editor
         _sensorTypeField.SetValueWithoutNotify(entry.Value.Item2.ToString());
         var idProp = serializedObject.FindProperty("id");
         idProp.stringValue = entry.Key;
+        
+        var go = ((Component)serializedObject.targetObject).gameObject;
+        Undo.RecordObject(go, "Rename GameObject");
+        go.name = treeName;
+        
         serializedObject.ApplyModifiedProperties();
     }
 }
