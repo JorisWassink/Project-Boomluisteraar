@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TreeWorldMap : TreeInstance
 {
-    [SerializeField] private string id = "9B261005";
+    [HideInInspector] public string id = "9B261005";
     [SerializeField] private float hitboxRadius = 10f;
     [SerializeField] private bool isUnlocked = true;
     [SerializeField] private RawImage lockSprite;
@@ -18,8 +18,8 @@ public class TreeWorldMap : TreeInstance
     private void Awake()
     {
         InitializeTree(id);
-        if (!isUnlocked) SetLocked();
-        else lockSprite.enabled = false;
+        // if (!isUnlocked) SetLocked();
+        // else lockSprite.enabled = false;
     }
 
     private void Start()

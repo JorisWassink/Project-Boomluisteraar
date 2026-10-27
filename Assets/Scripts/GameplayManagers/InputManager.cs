@@ -6,23 +6,23 @@ using UnityEngine.Serialization;
 
 public class InputManager : MonoBehaviour
 {
-    //TODO: make this use managers
+    [Tooltip("Temporary fix, just put the camera here")]
     [SerializeField] private Camera currentCamera;
     
     [Tooltip("How long before the click becomes a drag")]
     [SerializeField] public float clickDuration;
     
-    public UnityEvent<Vector2> onMousePressed;
-    public UnityEvent<Vector2> onMouseHold;
-    public UnityEvent<Vector2> onMouseRelease;
-    public UnityEvent<Vector2> onMouseClick;
+    [NonSerialized] public UnityEvent<Vector2> onMousePressed = new UnityEvent<Vector2>();
+    [NonSerialized] public UnityEvent<Vector2> onMouseHold= new UnityEvent<Vector2>();
+    [NonSerialized] public UnityEvent<Vector2> onMouseRelease= new UnityEvent<Vector2>();
+    [NonSerialized] public UnityEvent<Vector2> onMouseClick= new UnityEvent<Vector2>();
     
-    public static InputManager Instance;
-
-    private Vector2 _mousePositionAtClick = Vector2.zero; 
+    private DeviceChecker _deviceChecker;
+    private Vector2 _mousePositionAtClick; 
     
     private static Vector2 PointerPos =>
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
+    public static InputManager Instance;
   
     //Unity event functions
     private void Awake()
@@ -32,13 +32,21 @@ public class InputManager : MonoBehaviour
             Instance = this;
         }
     }
+
+    private void Start()
+    {
+        _deviceChecker = gameObject.AddComponent<DeviceChecker>();
+        _mousePositionAtClick = Vector2.zero;
+        _deviceChecker.LogDeviceData();
+    }
     
     //Own functions
     public void InvokeMouseClick(InputAction.CallbackContext context)
     {
+
         Vector2 clickPosition = PointerPos;
         Vector3 rayPos = GetMousePositionInWorld(clickPosition);
-        Debug.Log(context.interaction);
+        Debug.Log(context.action);
         Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 999);
         
         if (context.performed) onMouseHold.Invoke(clickPosition);
@@ -46,7 +54,6 @@ public class InputManager : MonoBehaviour
         {
             _mousePositionAtClick = PointerPos;
             onMousePressed.Invoke(clickPosition);
-
         }
         
         if (context.canceled)
@@ -57,6 +64,7 @@ public class InputManager : MonoBehaviour
                 onMouseClick.Invoke(clickPosition);
         }
     }
+    
     
     //Helpers
     public Vector3 GetMousePositionInWorld(Vector2 clickPosition)
