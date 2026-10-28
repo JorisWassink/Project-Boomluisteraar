@@ -27,7 +27,7 @@ public class WorldTreeManager : MonoBehaviour
         CheckProgression();
     }
     
-    //Own functions
+    //private functions
     private void CheckProgression()
     {
         int playerExperience = progressionManager.PlayerExperience;
