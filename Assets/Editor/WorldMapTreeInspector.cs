@@ -30,11 +30,10 @@ public class WorldMapTree_Inspector : Editor
         _sensorTypeField.AddToClassList(BaseField<StaticVariables.DataType>.alignedFieldUssClassName);
 
         dropdown.RegisterValueChangedCallback(evt => OnTreeSelected(evt.newValue));
-
-        root.Add(dropdown);
-        root.Add(_idField);
-        root.Add(_sensorTypeField);
-
+        
+        // normal inspector
+        InspectorElement.FillDefaultInspector(root, serializedObject, this);
+        
         var divider = new VisualElement();
         divider.style.height = 1;
         divider.style.marginTop = 6;
@@ -42,9 +41,10 @@ public class WorldMapTree_Inspector : Editor
         divider.style.backgroundColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
         root.Add(divider);
 
-        // normal inspector
-        InspectorElement.FillDefaultInspector(root, serializedObject, this);
-
+        root.Add(dropdown);
+        root.Add(_idField);
+        root.Add(_sensorTypeField);
+        
         OnTreeSelected(dropdown.value);
         return root;
     }
@@ -58,11 +58,7 @@ public class WorldMapTree_Inspector : Editor
         _sensorTypeField.SetValueWithoutNotify(entry.Value.Item2.ToString());
         var idProp = serializedObject.FindProperty("id");
         idProp.stringValue = entry.Key;
-        
-        var go = ((Component)serializedObject.targetObject).gameObject;
-        Undo.RecordObject(go, "Rename GameObject");
-        go.name = treeName;
-        
+
         serializedObject.ApplyModifiedProperties();
     }
 }

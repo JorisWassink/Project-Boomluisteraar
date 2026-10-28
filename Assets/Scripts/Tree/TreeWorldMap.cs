@@ -7,19 +7,20 @@ using UnityEngine.UI;
 
 public class TreeWorldMap : TreeInstance
 {
-    [HideInInspector] public string id = "9B261005";
+    [SerializeField] public int requiredExperience = 0;
+    
     [SerializeField] private float hitboxRadius = 10f;
-    [SerializeField] private bool isUnlocked = true;
     [SerializeField] private RawImage lockSprite;
     
+    [HideInInspector] public string id = "9B261005";
     //TODO: fix camera getting
-    private Camera cam;
+    private Camera _cam;
+    private bool _isUnlocked = true;
     
+    //Unity event functions
     private void Awake()
     {
         InitializeTree(id);
-        // if (!isUnlocked) SetLocked();
-        // else lockSprite.enabled = false;
     }
 
     private void Start()
@@ -29,14 +30,21 @@ public class TreeWorldMap : TreeInstance
 
     private void Update()
     {
-        if(cam == null || isUnlocked) return;
-        lockSprite.transform.rotation.SetLookRotation(cam.transform.position);
+        if(_cam == null || _isUnlocked) return;
+        lockSprite.transform.rotation.SetLookRotation(_cam.transform.position);
     }
 
-    //Own functions
+    //Public functions
+    public void SetLockedStatus(bool isLocked)
+    {
+        _isUnlocked = !isLocked;
+        lockSprite.enabled = isLocked;
+    }
+    
+    //private functions
     private void OnMouseClicked(Vector2 clickPosition)
     {
-        if(!isUnlocked) return;
+        if(!_isUnlocked) return;
         
         Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld(clickPosition);
         
@@ -46,19 +54,6 @@ public class TreeWorldMap : TreeInstance
             StaticVariables.SelectedTreeId = treeId;
             SceneManager.LoadScene("GameplayScene");
         }
-    }
-
-    private void SetLocked()
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent<MeshRenderer>(out var component))
-            {
-                component.material.color = Color.gray2;
-            }
-        }
-
-        lockSprite.enabled = true;
     }
 
     //Debug Functions
