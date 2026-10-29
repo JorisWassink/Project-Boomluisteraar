@@ -15,7 +15,6 @@ public class WorldMapTree_Inspector : Editor
     TextField _idField;
     TextField _sensorTypeField;
 
-    // dictionary keys of the selectable trees, same order as the dropdown
     List<string> _ids;
 
     TreeWorldMap Script => (TreeWorldMap)target;
@@ -26,16 +25,16 @@ public class WorldMapTree_Inspector : Editor
         var root = new VisualElement();
 
         _ids = StaticVariables.GetTreeIds;
-
         var choices = _ids.Select(StaticVariables.GetTreeName).ToList();
 
-        var treeIdProp = serializedObject.FindProperty("treeId");
+        var idProp = serializedObject.FindProperty("id");
         var modelsProp = serializedObject.FindProperty("models");
 
-        var dropdown = new DropdownField("Tree", choices, 0);
-        dropdown.BindProperty(treeIdProp);
+        int startIndex = Mathf.Max(0, _ids.IndexOf(idProp.stringValue));
+
+        var dropdown = new DropdownField("Tree", choices, startIndex);
         dropdown.SetEnabled(!IsPrefabContext());
-        dropdown.RegisterValueChangedCallback(_ => OnTreeSelected(dropdown.value));
+        dropdown.RegisterValueChangedCallback(_ => OnTreeSelected(_ids[dropdown.index]));
 
         _idField = MakeReadOnlyField("ID");
         _sensorTypeField = MakeReadOnlyField("Sensor Type");
@@ -48,28 +47,33 @@ public class WorldMapTree_Inspector : Editor
         root.Add(_sensorTypeField);
         root.Add(MakeDivider());
 
-        // respawn when a prefab is assigned or changed
         root.TrackPropertyValue(modelsProp, _ =>
         {
             if (!IsPrefabContext()) SpawnModel(_ids[Mathf.Max(0, dropdown.index)]);
         });
 
-        // treeId is stored as the display name, so this is the one place it's matched
-        OnTreeSelected(dropdown.value);
+        UpdateInfoFields(_ids[startIndex]);
+
+        if (string.IsNullOrEmpty(idProp.stringValue) && !IsPrefabContext())
+            OnTreeSelected(_ids[startIndex]);
 
         return root;
     }
 
-    void OnTreeSelected(string id)
+    void UpdateInfoFields(string id)
     {
         var entry = StaticVariables.GetTreeEntry(id);
-        var treeName = entry.name;
-        var treeType = entry.type;
-
         _idField.SetValueWithoutNotify(id);
-        _sensorTypeField.SetValueWithoutNotify(treeName);
+        _sensorTypeField.SetValueWithoutNotify(entry.type.ToString());
+    }
+
+    void OnTreeSelected(string id)
+    {
+        UpdateInfoFields(id);
 
         if (IsPrefabContext()) return;
+
+        var treeName = StaticVariables.GetTreeEntry(id).name;
 
         serializedObject.Update();
         serializedObject.FindProperty("id").stringValue = id;

@@ -13,7 +13,7 @@ public class TreeWorldMap : TreeInstance
     [SerializeField] private float hitboxRadius = 10f;
     [SerializeField] private RawImage lockSprite;
     
-    [HideInInspector] public string id = "9B261005";
+    [HideInInspector] public string id;
     [HideInInspector] public List<TreeModel> models = new();
     //TODO: fix camera getting
     private Camera _cam;

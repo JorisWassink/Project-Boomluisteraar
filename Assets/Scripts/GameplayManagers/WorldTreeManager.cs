@@ -30,7 +30,7 @@ public class WorldTreeManager : MonoBehaviour
     //private functions
     private void CheckProgression()
     {
-        int playerExperience = progressionManager.PlayerExperience;
+        int playerExperience = progressionManager.playerExperience;
         foreach (TreeWorldMap tree in _trees)
         {
             bool shouldBeLocked = playerExperience < tree.requiredExperience;
