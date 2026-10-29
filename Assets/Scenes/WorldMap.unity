@@ -222,11 +222,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: id
-      value: 9B261002
+      value: 91261121
       objectReference: {fileID: 0}
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: treeId
-      value: Fagus sylvatica
+      value: tamme kastanje
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: requiredExperience
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -757,6 +761,10 @@ PrefabInstance:
       propertyPath: treeId
       value: Carpinus betulus
       objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: requiredExperience
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.195974
@@ -1277,6 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71451e6983f97aa91591c28022f137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  PlayerExperience: 0
 --- !u!1 &1335202701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,6 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1717210710}
+  - component: {fileID: 1717210711}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -1541,6 +1551,18 @@ Transform:
   - {fileID: 627607893}
   m_Father: {fileID: 1015413896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1717210711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717210709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1aa43b04dba51199a4d2532be2b3ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldTreeManager
 --- !u!1 &1770734573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,7 +1664,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3541619908865483311, guid: d79ad95ab462ea976b2f3444cb7806b4, type: 3}
       propertyPath: m_Name
-      value: Sequoiadendron giganteum
+      value: Fagus_Sylvatica
       objectReference: {fileID: 0}
     - target: {fileID: 3599275797743215475, guid: d79ad95ab462ea976b2f3444cb7806b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1686,11 +1708,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915571474352115246, guid: d79ad95ab462ea976b2f3444cb7806b4, type: 3}
       propertyPath: id
-      value: 9B261005
+      value: 9B261002
       objectReference: {fileID: 0}
     - target: {fileID: 6915571474352115246, guid: d79ad95ab462ea976b2f3444cb7806b4, type: 3}
       propertyPath: treeId
-      value: Sequoiadendron giganteum
+      value: Fagus sylvatica
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736562425990751730, guid: d79ad95ab462ea976b2f3444cb7806b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1756,6 +1782,10 @@ PrefabInstance:
       propertyPath: treeId
       value: Sequoiadendron giganteum
       objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: requiredExperience
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.491074
@@ -1819,7 +1849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502477962640389458, guid: fb8bfff537e0e02cda1381c2b8bcfe5e, type: 3}
       propertyPath: m_fontSize
-      value: 54.55
+      value: 62.75
       objectReference: {fileID: 0}
     - target: {fileID: 1806071737185537252, guid: fb8bfff537e0e02cda1381c2b8bcfe5e, type: 3}
       propertyPath: m_Pivot.x
@@ -1900,6 +1930,10 @@ PrefabInstance:
     - target: {fileID: 1806071737185537252, guid: fb8bfff537e0e02cda1381c2b8bcfe5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875450473129155579, guid: fb8bfff537e0e02cda1381c2b8bcfe5e, type: 3}
+      propertyPath: m_fontSize
+      value: 47.9
       objectReference: {fileID: 0}
     - target: {fileID: 5709925457785490813, guid: fb8bfff537e0e02cda1381c2b8bcfe5e, type: 3}
       propertyPath: m_fontSize

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -13,6 +14,8 @@ public class TreeWorldMap : TreeInstance
     [SerializeField] private RawImage lockSprite;
     
     [HideInInspector] public string id = "9B261005";
+    [HideInInspector] public List<TreeModel> models = new();
+    
     //TODO: fix camera getting
     private Camera _cam;
     private bool _isUnlocked = true;
@@ -39,6 +42,12 @@ public class TreeWorldMap : TreeInstance
     {
         _isUnlocked = !isLocked;
         lockSprite.enabled = isLocked;
+
+        MeshRenderer[] mr = GetComponentsInChildren<MeshRenderer>();
+        foreach (var renderer in mr)
+        {
+            renderer.material.color =  isLocked ? Color.gray2 : Color.red;
+        }
     }
     
     //private functions
@@ -63,3 +72,4 @@ public class TreeWorldMap : TreeInstance
         Gizmos.DrawWireSphere(transform.position, hitboxRadius);
     }
 }
+

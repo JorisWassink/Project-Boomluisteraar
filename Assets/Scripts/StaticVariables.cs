@@ -36,3 +36,10 @@ public static class StaticVariables
         return ("ID NOT DEFINED", DataType.None);
     }
 }
+
+[System.Serializable]
+public class TreeModel
+{
+    public string treeName;
+    public GameObject prefab;
+}
