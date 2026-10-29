@@ -9,7 +9,7 @@ public abstract class TreeInstance : MonoBehaviour
     public virtual void InitializeTree(string id)
     {
         treeId = id;
-        treeName = StaticVariables.TryGetTreeData(id).Item1;
+        treeName = StaticVariables.GetTreeName(id);
         gameObject.name = treeName;
     }
 }

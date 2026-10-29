@@ -63,8 +63,8 @@ public class DataTestDisplay : MonoBehaviour
         
         _currentSensorIndex = index;
         string selectedSensorId = AllSensorIds[index];
-        titleText.text = StaticVariables.TreeIdDictionary[selectedSensorId].Item1;
-        StaticVariables.DataType dataType = StaticVariables.TreeIdDictionary[selectedSensorId].Item2;
+        titleText.text = StaticVariables.GetTreeName(selectedSensorId);
+        StaticVariables.DataType dataType = StaticVariables.GetTreeType(selectedSensorId);
         _dataList = DataManager.Instance.GetDataPoints(dataType, selectedSensorId, 2000);
         OnScrollValueChanged(1);
     }

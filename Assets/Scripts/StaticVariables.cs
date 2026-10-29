@@ -3,19 +3,25 @@ using UnityEngine;
 
 public static class StaticVariables
 {
-    public static Dictionary<string, (string, DataType)> TreeIdDictionary = new Dictionary<string, (string, DataType)>()
+    static TreeDataBase _treeDataBase;
+    static TreeDataBase DB
     {
-        {"9B261005", ("Sequoiadendron giganteum",DataType.CarbonSensor)},
-        {"91261120", ("Quercus robur",DataType.CyberSensor)},
-        {"9B261002", ("Fagus sylvatica",DataType.CarbonSensor)},
-        {"91261115", ("Broussonetia papyrifera",DataType.CyberSensor)},
-        {"91261114", ("Fagus sylvatica 'Atropurpunicea'",DataType.CyberSensor)},
-        {"9B261009", ("Carpinus betulus",DataType.CarbonSensor)},
-        {"91261121", ("tamme kastanje",DataType.CyberSensor)},
-        
-        {"93261020", ("tamme kastanje (soil)", DataType.SoilSensor)},
-        {"93261019", ("Carpinus betulus (soil)", DataType.SoilSensor)}
-    };
+        get
+        {
+            if (_treeDataBase == null)
+                _treeDataBase = Resources.Load<TreeDataBase>("TreeDataBase");
+            return _treeDataBase;
+        }
+    }
+    
+    public static Dictionary<string, GameObject> treeModelDictionary = new Dictionary<string, GameObject>();
+
+    public static TreeDataBase.TreeEntry GetTreeEntry(string id) => DB.GetTreeEntry(id);
+    public static TreeDataBase.TreeEntry GetTreeEntryByName(string name) => DB.GetTreeEntryByName(name);
+    public static GameObject GetTreeModel(string treeId) => DB.GetTreeModel(treeId);
+    public static string GetTreeName(string treeId) => DB.GetTreeName(treeId);
+    public static DataType GetTreeType(string treeId) => DB.GetTreeType(treeId);
+    public static List<string> GetTreeIds => DB.GetTreeIds();
     
     public static string SelectedTreeId{get; set;}
     
@@ -26,20 +32,11 @@ public static class StaticVariables
         CarbonSensor,
         SoilSensor
     }
-
-    public static (string, DataType) TryGetTreeData(string id)
-    {
-        if (TreeIdDictionary.ContainsKey(id))
-            return TreeIdDictionary[id];
-        
-        Debug.LogError($"There is no such id '{id}'");
-        return ("ID NOT DEFINED", DataType.None);
-    }
 }
 
 [System.Serializable]
 public class TreeModel
 {
-    public string treeName;
+    public string id;
     public GameObject prefab;
 }

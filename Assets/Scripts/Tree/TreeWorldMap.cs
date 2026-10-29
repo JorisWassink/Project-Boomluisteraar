@@ -15,7 +15,6 @@ public class TreeWorldMap : TreeInstance
     
     [HideInInspector] public string id = "9B261005";
     [HideInInspector] public List<TreeModel> models = new();
-    
     //TODO: fix camera getting
     private Camera _cam;
     private bool _isUnlocked = true;
@@ -72,4 +71,3 @@ public class TreeWorldMap : TreeInstance
         Gizmos.DrawWireSphere(transform.position, hitboxRadius);
     }
 }
-

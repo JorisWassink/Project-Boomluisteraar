@@ -258,17 +258,17 @@ MonoBehaviour:
   lockSprite: {fileID: 2840415035747427531}
   id: 
   models:
-  - treeName: Sequoiadendron giganteum
+  - id: 9B261005
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - treeName: Quercus robur
+  - id: 91261120
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - treeName: Fagus sylvatica
+  - id: 9B261002
     prefab: {fileID: 4105606081656854162, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
-  - treeName: Broussonetia papyrifera
+  - id: 91261115
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - treeName: Fagus sylvatica 'Atropurpunicea'
+  - id: 91261114
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - treeName: Carpinus betulus
+  - id: 9B261009
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - treeName: tamme kastanje
+  - id: 91261121
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}

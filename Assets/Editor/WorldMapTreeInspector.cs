@@ -14,26 +14,28 @@ public class WorldMapTree_Inspector : Editor
 
     TextField _idField;
     TextField _sensorTypeField;
-    
-    Transform ModelParent => Script.transform.Find(ModelParentName);
-    
+
+    // dictionary keys of the selectable trees, same order as the dropdown
+    List<string> _ids;
+
     TreeWorldMap Script => (TreeWorldMap)target;
+    Transform ModelParent => Script.transform.Find(ModelParentName);
 
     public override VisualElement CreateInspectorGUI()
     {
         var root = new VisualElement();
 
-        var choices = StaticVariables.TreeIdDictionary.Values
-            .Where(v => v.Item2 != StaticVariables.DataType.SoilSensor)
-            .Select(v => v.Item1)
-            .ToList();
+        _ids = StaticVariables.GetTreeIds;
+
+        var choices = _ids.Select(StaticVariables.GetTreeName).ToList();
 
         var treeIdProp = serializedObject.FindProperty("treeId");
+        var modelsProp = serializedObject.FindProperty("models");
 
         var dropdown = new DropdownField("Tree", choices, 0);
         dropdown.BindProperty(treeIdProp);
         dropdown.SetEnabled(!IsPrefabContext());
-        dropdown.RegisterValueChangedCallback(evt => OnTreeSelected(evt.newValue));
+        dropdown.RegisterValueChangedCallback(_ => OnTreeSelected(dropdown.value));
 
         _idField = MakeReadOnlyField("ID");
         _sensorTypeField = MakeReadOnlyField("Sensor Type");
@@ -45,28 +47,32 @@ public class WorldMapTree_Inspector : Editor
         root.Add(_idField);
         root.Add(_sensorTypeField);
         root.Add(MakeDivider());
-        root.Add(BuildModelsList(choices));
 
-        // read from the property, the dropdown's own value isn't bound yet
-        var initial = choices.Contains(treeIdProp.stringValue) ? treeIdProp.stringValue : choices[0];
-        OnTreeSelected(initial);
+        // respawn when a prefab is assigned or changed
+        root.TrackPropertyValue(modelsProp, _ =>
+        {
+            if (!IsPrefabContext()) SpawnModel(_ids[Mathf.Max(0, dropdown.index)]);
+        });
+
+        // treeId is stored as the display name, so this is the one place it's matched
+        OnTreeSelected(dropdown.value);
 
         return root;
     }
 
-    void OnTreeSelected(string treeName)
+    void OnTreeSelected(string id)
     {
-        var entry = StaticVariables.TreeIdDictionary
-            .FirstOrDefault(kv => kv.Value.Item1 == treeName);
-        if (entry.Key == null) return;
+        var entry = StaticVariables.GetTreeEntry(id);
+        var treeName = entry.name;
+        var treeType = entry.type;
 
-        _idField.SetValueWithoutNotify(entry.Key);
-        _sensorTypeField.SetValueWithoutNotify(entry.Value.Item2.ToString());
+        _idField.SetValueWithoutNotify(id);
+        _sensorTypeField.SetValueWithoutNotify(treeName);
 
         if (IsPrefabContext()) return;
 
         serializedObject.Update();
-        serializedObject.FindProperty("id").stringValue = entry.Key;
+        serializedObject.FindProperty("id").stringValue = id;
         serializedObject.ApplyModifiedProperties();
 
         var go = Script.gameObject;
@@ -76,10 +82,10 @@ public class WorldMapTree_Inspector : Editor
             go.name = treeName;
         }
 
-        SpawnModel(treeName);
+        SpawnModel(id);
     }
 
-    void SpawnModel(string treeName)
+    void SpawnModel(string id)
     {
         var parent = ModelParent;
         if (parent == null)
@@ -88,7 +94,7 @@ public class WorldMapTree_Inspector : Editor
             return;
         }
 
-        var prefab = FindPrefab(treeName);
+        var prefab = FindPrefab(id);
         var existing = parent.Find(ModelChildName);
 
         // already showing the right model, don't respawn
@@ -108,59 +114,11 @@ public class WorldMapTree_Inspector : Editor
         Undo.RegisterCreatedObjectUndo(inst, "Spawn tree model");
     }
 
-    GameObject FindPrefab(string treeName)
+    GameObject FindPrefab(string id)
     {
-        var list = serializedObject.FindProperty("models");
-        for (int i = 0; i < list.arraySize; i++)
-        {
-            var el = list.GetArrayElementAtIndex(i);
-            if (el.FindPropertyRelative("treeName").stringValue == treeName)
-                return el.FindPropertyRelative("prefab").objectReferenceValue as GameObject;
-        }
-        return null;
+        return StaticVariables.GetTreeModel(id);
     }
-
-    VisualElement BuildModelsList(List<string> names)
-    {
-        var list = serializedObject.FindProperty("models");
-        SyncModels(list, names);
-
-        var foldout = new Foldout { text = "Models", value = true };
-        for (int i = 0; i < list.arraySize; i++)
-        {
-            var field = new ObjectField(names[i])
-            {
-                objectType = typeof(GameObject),
-                allowSceneObjects = false
-            };
-            field.BindProperty(list.GetArrayElementAtIndex(i).FindPropertyRelative("prefab"));
-            foldout.Add(field);
-        }
-        return foldout;
-    }
-
-    // one entry per tree name, keeps prefabs already assigned
-    void SyncModels(SerializedProperty list, List<string> names)
-    {
-        var old = new Dictionary<string, UnityEngine.Object>();
-        for (int i = 0; i < list.arraySize; i++)
-        {
-            var el = list.GetArrayElementAtIndex(i);
-            old[el.FindPropertyRelative("treeName").stringValue] =
-                el.FindPropertyRelative("prefab").objectReferenceValue;
-        }
-
-        list.arraySize = names.Count;
-        for (int i = 0; i < names.Count; i++)
-        {
-            var el = list.GetArrayElementAtIndex(i);
-            el.FindPropertyRelative("treeName").stringValue = names[i];
-            old.TryGetValue(names[i], out var prefab);
-            el.FindPropertyRelative("prefab").objectReferenceValue = prefab;
-        }
-        serializedObject.ApplyModifiedProperties();
-    }
-
+    
     bool IsPrefabContext()
     {
         var go = Script.gameObject;
