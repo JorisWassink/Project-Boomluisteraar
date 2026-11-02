@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,22 +8,63 @@ public class WorldMapUI : MonoBehaviour
 {
     [SerializeField] private string labelText;
     [SerializeField] private TextMeshProUGUI experienceLabel;
-    
-    private ProgressionManager progressionManager;
+    [SerializeField] private WorldMapUIScreens worldMapUIScreens;
 
-    //Unity event functions
+    private GameObject _currentUI;
+    private TreeSelectionManager _treeSelectionManager;
+    private ProgressionManager _progressionManager;
+    
+    private List<GameObject> Screens =>  new List<GameObject>
+    {
+        worldMapUIScreens.mainMapUI, 
+        worldMapUIScreens.collectiblesUI
+    };
+
+    //Unity Event Functions
     private void Start()
     {
-        progressionManager = ProgressionManager.Instance;
-        progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
+        _treeSelectionManager = TreeSelectionManager.Instance;
+        _progressionManager = ProgressionManager.Instance;
+        _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
+        SetDefaultUI();
     }
     
-    //Private functions
+    //Public Functions
+    public void SetCollectiblesUI()
+    {
+        SetCurrentUI(worldMapUIScreens.collectiblesUI);
+        _treeSelectionManager.SetUIMode(true);
+    }
+
+    public void SetDefaultUI()
+    {
+        SetCurrentUI(worldMapUIScreens.mainMapUI);
+        _treeSelectionManager.SetUIMode(false);
+    }
+    
+    //Private Functions
     private void UpdateExperienceLabel()
     {
-        int points = progressionManager.playerExperience;
+        int points = _progressionManager.playerExperience;
 
         experienceLabel.text = labelText + points;
     }
+
+    private void SetCurrentUI(GameObject currentUI)
+    {
+        foreach (GameObject ui in Screens)
+        {
+            ui.SetActive(false);
+        }
+        currentUI.SetActive(true);
+        _currentUI = currentUI;
+    }
+}
+
+[Serializable]
+public struct WorldMapUIScreens
+{
+    public GameObject mainMapUI;
+    public GameObject collectiblesUI;
 }
