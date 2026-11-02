@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &838226279993158508
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7326137711335115290}
+    m_Modifications:
+    - target: {fileID: 4105606081656854162, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_Name
+      value: Fagus_Sylvatica Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+--- !u!4 &8402058988828883956 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9168174896078278808, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
+  m_PrefabInstance: {fileID: 838226279993158508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4843618933923408349
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131190563310961461, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179839856108454505, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      propertyPath: m_Name
+      value: gp_Fagus_Sylvatica
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 5234188478679891750, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+    - {fileID: 6204945415606392404, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2782193980172231623, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8402058988828883956}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+--- !u!4 &7326137711335115290 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2782193980172231623, guid: 74d4c0a457dcaf0afb1822b191db213f, type: 3}
+  m_PrefabInstance: {fileID: 4843618933923408349}
+  m_PrefabAsset: {fileID: 0}
