@@ -17,14 +17,17 @@ public class InputManager : MonoBehaviour
     [NonSerialized] public UnityEvent<Vector2> onMouseRelease= new UnityEvent<Vector2>();
     [NonSerialized] public UnityEvent<Vector2> onMouseClick= new UnityEvent<Vector2>();
     
+    private TreeSelectionManager _treeSelectionManager;
     private DeviceChecker _deviceChecker;
-    private Vector2 _mousePositionAtClick; 
+    
+    private Vector2 _mousePositionAtClick;
+    private bool _mouseActive = true;
     
     private static Vector2 PointerPos =>
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
     public static InputManager Instance;
   
-    //Unity event functions
+    //Unity Event Functions
     private void Awake()
     {
         if (Instance == null)
@@ -36,14 +39,19 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         _deviceChecker = gameObject.AddComponent<DeviceChecker>();
+        _treeSelectionManager = TreeSelectionManager.Instance;
+        
         _mousePositionAtClick = Vector2.zero;
         _deviceChecker.LogDeviceData();
+        
+        _treeSelectionManager.onSetUIMode.AddListener(SetUIMode);
     }
     
-    //Own functions
+    //Public Functions
     public void InvokeMouseClick(InputAction.CallbackContext context)
     {
-
+        if(!_mouseActive) return;
+        
         Vector2 clickPosition = PointerPos;
         Vector3 rayPos = GetMousePositionInWorld(clickPosition);
         Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 5);
@@ -63,7 +71,12 @@ public class InputManager : MonoBehaviour
                 onMouseClick.Invoke(clickPosition);
         }
     }
-    
+
+    //Private Functions
+    private void SetUIMode(bool value)
+    {
+        _mouseActive = !value;
+    }
     
     //Helpers
     public Vector3 GetMousePositionInWorld(Vector2 clickPosition)

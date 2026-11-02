@@ -23,8 +23,7 @@ public class TreeGameplayUI : MonoBehaviour
     private Canvas _activeCanvas;
     private List<Canvas> _allCanvases = new List<Canvas>();
     
-
-
+    //Unity Event Functions
     private void Start()
     {
         if(treeNameText == null) Debug.LogError("TreeGameplayUI: No TreeNameText assigned");
@@ -42,7 +41,7 @@ public class TreeGameplayUI : MonoBehaviour
         
     }
 
-    //Button events
+    //Public Functions
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("Scenes/WorldMap");
@@ -51,7 +50,8 @@ public class TreeGameplayUI : MonoBehaviour
     public void ShowTreeInfo() => SetUI(UIMenu.TreeInfo);
     public void ShowMiniGameMenu() => SetUI(UIMenu.MiniGameMenu);
     public void ShowDialogueMenu() => SetUI(UIMenu.DialogueMenu);
-
+    
+    //Private Functions
     private void SetUI(UIMenu menu)
     {
         Canvas canvas;
@@ -70,11 +70,11 @@ public class TreeGameplayUI : MonoBehaviour
         {
             if (c != canvas)
             {
-                c.enabled = false;
+                c.gameObject.SetActive(false);
                 continue;
             }
             
-            c.enabled = true;
+            c.gameObject.SetActive(true);
             _activeCanvas = c;
         }
     }

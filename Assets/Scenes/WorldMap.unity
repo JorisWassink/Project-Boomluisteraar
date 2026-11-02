@@ -451,7 +451,7 @@ MonoBehaviour:
     y: -89.00601
     width: 153.90057
     height: 111.49869
-  viewportSize: {x: 51.961777, y: 92.37631}
+  viewportSize: {x: 46.134155, y: 92.37631}
 --- !u!1 &402575571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278099722}
   - component: {fileID: 1278099723}
+  - component: {fileID: 1278099724}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1433,6 +1434,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerExperience: 0
   onPointsUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1278099724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278099721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cebf2a2a5bc2aa25939aaf27e341f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeSelectionManager
+  onSetUIMode:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1317447686 stripped

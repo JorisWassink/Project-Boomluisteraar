@@ -11,34 +11,39 @@ public class WorldMapUI : MonoBehaviour
     [SerializeField] private WorldMapUIScreens worldMapUIScreens;
 
     private GameObject _currentUI;
+    private TreeSelectionManager _treeSelectionManager;
     private ProgressionManager _progressionManager;
+    
     private List<GameObject> Screens =>  new List<GameObject>
     {
         worldMapUIScreens.mainMapUI, 
         worldMapUIScreens.collectiblesUI
     };
 
-    //Unity event functions
+    //Unity Event Functions
     private void Start()
     {
+        _treeSelectionManager = TreeSelectionManager.Instance;
         _progressionManager = ProgressionManager.Instance;
         _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();
     }
     
-    //Public functions
+    //Public Functions
     public void SetCollectiblesUI()
     {
         SetCurrentUI(worldMapUIScreens.collectiblesUI);
+        _treeSelectionManager.SetUIMode(true);
     }
 
     public void SetDefaultUI()
     {
         SetCurrentUI(worldMapUIScreens.mainMapUI);
+        _treeSelectionManager.SetUIMode(false);
     }
     
-    //Private functions
+    //Private Functions
     private void UpdateExperienceLabel()
     {
         int points = _progressionManager.playerExperience;
