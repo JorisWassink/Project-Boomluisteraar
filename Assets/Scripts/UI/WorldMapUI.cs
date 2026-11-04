@@ -35,6 +35,7 @@ public class WorldMapUI : MonoBehaviour
     {
         SetCurrentUI(worldMapUIScreens.collectiblesUI);
         _treeSelectionManager.SetUIMode(true);
+        _progressionManager.PrintAllCollectibleNamesDebug();
     }
 
     public void SetDefaultUI()

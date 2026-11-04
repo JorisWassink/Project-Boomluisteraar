@@ -19,7 +19,6 @@ public class TreeSelectionManager : MonoBehaviour
     //Public Functions
     public void SetUIMode(bool value)
     {
-        Debug.Log("SetUIMode: " + value);
         onSetUIMode.Invoke(value);
     }
 }
