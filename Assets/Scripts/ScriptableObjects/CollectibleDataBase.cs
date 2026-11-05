@@ -56,6 +56,11 @@ public class CollectibleDataBase : ScriptableObject
     {
         return allCollectibles.ConvertAll(t => t.Id);
     }
+    
+    public List<string> GetDefaultCollectibleIds()
+    {
+        return defaultCollectibles.ConvertAll(t => t.Id);
+    }
 
     public string GetCollectibleName(string collectibleId)
     {

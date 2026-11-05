@@ -32,7 +32,9 @@ public static class StaticVariables
     public static DataType GetTreeType(string treeId) => Trees.GetTreeType(treeId);
     public static List<string> GetCollectibleIdsByTree(string treeId) => Collectibles.GetCollectibleIdsByTree(treeId);
     public static string GetCollectibleName(string collectibleID) => Collectibles.GetCollectibleName(collectibleID);
+    public static Texture2D GetCollectibleSprite(string collectibleID) => Collectibles.GetCollectibleSprite(collectibleID);
     public static List<string> GetAllCollectibleIds => Collectibles.GetAllCollectibleIds();
+    public static List<string> GetDefaultCollectibleIds => Collectibles.GetDefaultCollectibleIds();
     public static List<string> GetTreeIds => Trees.GetTreeIds();
     
     public static string SelectedTreeId{get; set;}

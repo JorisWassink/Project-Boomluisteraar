@@ -42,6 +42,11 @@ public class ProgressionManager : MonoBehaviour
     {
         playerExperience -= points;
     }
+
+    public bool CollectibleIsUnlocked(string collectibleID)
+    {
+        return collectibles[collectibleID];
+    }
     
     //Private functions
     private void UpdatePoints(int points)
