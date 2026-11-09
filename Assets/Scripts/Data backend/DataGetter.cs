@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 public class DataGetter : MonoBehaviour
 {
@@ -15,16 +19,25 @@ public class DataGetter : MonoBehaviour
         [StaticVariables.DataType.CyberSensor]  = new() { 3 },
         [StaticVariables.DataType.SoilSensor]   = new() { 4, 5, 6, 7, 8 },
     };
-    
+
     public List<DataPoint> GetData(string id, int maxPoints, StaticVariables.DataType dataType)
     {
-        string dataUrl = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
-        return Task.Run(() => GetDataAsync(dataUrl, maxPoints, dataType)).Result; // still blocks, but no deadlock
+        string dataUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest/data/{id}.json";
+        Debug.Log($"Getting {maxPoints} lines of data");
+        
+        using var client = new WebClient();
+        string json = client.DownloadString(dataUrl);   // blocks until done
+
+        if (json == "null") return null;
+        Debug.Log("json collected");
+        var dict = JsonConvert.DeserializeObject<Dictionary<string, DataPoint>>(json);
+        return new List<DataPoint>(dict.Values);
     }
 
     public bool IsDataAvailable(string id)
     {
-        string dataUrl = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
+        string dataUrlOld = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
+        string dataUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest.json";
         return Task.Run(() => IsDataAvailableAsync(dataUrl)).Result;
     }
 
@@ -37,15 +50,61 @@ public class DataGetter : MonoBehaviour
     private static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints, StaticVariables.DataType dataType)
     {
         Debug.Log($"Getting {maxPoints} lines of data");
-        string rawText = await HttpClient.GetStringAsync(dataUrl);
-        return ConvertStringToDataPoints(rawText, maxPoints, dataType);
+        
+        using var req = UnityWebRequest.Get(dataUrl);
+        await req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success && req.downloadHandler.text != "null")
+        {
+            Debug.Log(req.downloadHandler.text);
+            var l = JsonConvert.DeserializeObject<List<DataPointJson>>(req.downloadHandler.text);
+            Debug.Log(l.Count);
+            
+            return JsonConvert.DeserializeObject<List<DataPoint>>(req.downloadHandler.text);
+            //return ConvertStringToDataPoints(l[0], maxPoints, dataType);
+        }
+        else Debug.LogError(req.error);
+
+        return null;
+
+        // string rawText = await HttpClient.GetStringAsync(dataUrl);
+        // return ConvertStringToDataPoints(rawText, maxPoints, dataType);
+    }
+
+    private IEnumerator GetJsonData(string dataUrl, System.Action<List<DataPoint>> onDone)
+    {
+        using var req = UnityWebRequest.Get(dataUrl);
+        yield return req.SendWebRequest();          // waits until finished
+
+        if (req.result == UnityWebRequest.Result.Success && req.downloadHandler.text != "null")
+        {
+            try
+            {
+                var list = JsonConvert.DeserializeObject<List<DataPoint>>(req.downloadHandler.text);
+                onDone(list);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("JSON parse failed: " + e.Message);
+                onDone(null);
+            }
+        }
+        else
+        {
+            Debug.LogWarning(req.error);
+            onDone(null);
+        }
     }
 
     private static List<DataPoint> ConvertStringToDataPoints(string rawText, int maxPoints, StaticVariables.DataType dataType)
     {
-        if (string.IsNullOrWhiteSpace(rawText))
-            return new List<DataPoint>();
-
+        // if (string.IsNullOrWhiteSpace(rawText))
+        //     return new List<DataPoint>();
+        
+        DataPointJson json = JsonUtility.FromJson<DataPointJson>(rawText);
+        Debug.Log(rawText);
+        return new List<DataPoint>();
+        
         List<DataPoint> result = new List<DataPoint>(maxPoints);
         int lineEnd = rawText.Length;
         int count = 0;
@@ -104,6 +163,8 @@ public class DataGetter : MonoBehaviour
         result.Reverse(); // we collected newest-to-oldest, flip to chronological order
         return result;
     }
+    
+    
     private static string GetPart(string[] parts, int index) => index < parts.Length ? parts[index].Trim() : "";
 
     private static double ParseDouble(string value) =>
@@ -112,7 +173,13 @@ public class DataGetter : MonoBehaviour
     private static int ParseInt(string value) =>
         int.TryParse(value, out var result) ? result : 0;
 }
-    
+
+public class DataPointJson
+{
+    public string dataType { get; set; } = "";
+}
+
+
 public class DataPoint
 {
     public string date { get; set; } = "";
