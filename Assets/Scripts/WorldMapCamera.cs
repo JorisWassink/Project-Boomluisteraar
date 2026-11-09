@@ -13,11 +13,11 @@ public class WorldMapCamera : MonoBehaviour
     private Camera _camera;
 
     private Vector3 _startCamPos;
-    
+
     private bool _dragging = false;
     private bool _positionDirty = false;
 
-    //event functions
+    //Unity Event Functions
     private void Start()
     {
         _camera = GetComponent<Camera>();
@@ -48,7 +48,7 @@ public class WorldMapCamera : MonoBehaviour
         }
     }
     
-    //own functions
+    //Private Functions
     private void OnMousePressed(Vector2 clickPosition)
     {
         _startCamPos = transform.position;
@@ -64,7 +64,7 @@ public class WorldMapCamera : MonoBehaviour
             raycastHit.point : new Vector3(transform.position.x, 0, transform.position.z);
     }
     
-    //helpers
+    //Helpers
     private Vector3 GroundPointFrom(Vector3 camPos)
     {
         Ray ray = _camera.ScreenPointToRay(Pointer.current.position.ReadValue());

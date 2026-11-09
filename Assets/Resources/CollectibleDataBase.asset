@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 658014b786de07f5ca5dad8aaf9c5931, type: 3}
+  m_Name: CollectibleDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  defaultSprite: {fileID: 2800000, guid: 5557e8bc801101e8fb51d3553a9a6536, type: 3}
+  treeCollectibles:
+  - treeName: Sequoiadendron giganteum
+    treeId: 9B261005
+    collectibles: []
+  - treeName: Quercus robur
+    treeId: 91261120
+    collectibles: []
+  - treeName: Fagus sylvatica
+    treeId: 9B261002
+    collectibles:
+    - name: Fagus Leaf
+      sprite: {fileID: 2800000, guid: 5557e8bc801101e8fb51d3553a9a6536, type: 3}
+      id: f11aa848-5932-4350-8ef4-ea0024c6686a
+  - treeName: Broussonetia papyrifera
+    treeId: 91261115
+    collectibles: []
+  - treeName: Fagus sylvatica 'Atropurpunicea'
+    treeId: 91261114
+    collectibles: []
+  - treeName: Carpinus betulus
+    treeId: 9B261009
+    collectibles: []
+  - treeName: Tamme kastanje
+    treeId: 91261121
+    collectibles: []
+  defaultCollectibles:
+  - name: Ladybug
+    sprite: {fileID: 2800000, guid: b4263b6ae5277ff33ac8d4975b886b89, type: 3}
+    id: 8d20ef13-f5d0-4c21-9301-90aca3198e1c
+  - name: Green Ladybug
+    sprite: {fileID: 2800000, guid: 09f52622f31164fbaac9dd7010c8bfa0, type: 3}
+    id: 46f40769-edae-41c3-bb15-12ba2dbfbd28
+  - name: Blue Ladybug
+    sprite: {fileID: 2800000, guid: e13105c1013712694899be4eba3663eb, type: 3}
+    id: ff8551ec-0903-4d74-8e9d-f02aa426de55
+  - name: Pink Ladybug
+    sprite: {fileID: 2800000, guid: 09d7c2c1d128f460c9f4d98566a9e18b, type: 3}
+    id: 85302ec5-eb9b-404d-a9d7-3842b1d6fac4
