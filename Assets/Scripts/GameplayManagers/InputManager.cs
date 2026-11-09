@@ -26,7 +26,14 @@ public class InputManager : MonoBehaviour
     private static Vector2 PointerPos =>
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
     public static InputManager Instance;
-  
+
+    //QUICKFIX MOMENT
+    [SerializeField] private float tapMovementTolerance = 40f;
+
+    private Vector2 _pressPosition;
+    private double _pressTime;
+    private bool _pressActive;
+
     //Unity Event Functions
     private void Awake()
     {
@@ -46,29 +53,55 @@ public class InputManager : MonoBehaviour
         
         _treeSelectionManager.onSetUIMode.AddListener(SetUIMode);
     }
-    
+
     //Public Functions
+
+
+    //Maybe change the name of this func to somethjig like HandlePointerInput? maybe its just my ocd XD
     public void InvokeMouseClick(InputAction.CallbackContext context)
     {
-        if(!_mouseActive) return;
-        
-        Vector2 clickPosition = PointerPos;
-        Vector3 rayPos = GetMousePositionInWorld(clickPosition);
-        Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 5);
-        
-        if (context.performed) onMouseHold.Invoke(clickPosition);
+        if (context.control.device is not Pointer pointer)
+            return;
+
+        Vector2 position = pointer.position.ReadValue();
+
         if (context.started)
         {
-            _mousePositionAtClick = PointerPos;
-            onMousePressed.Invoke(clickPosition);
+            _pressPosition = position;
+            _pressTime = context.time;
+            _pressActive = _mouseActive;
+
+            if (_pressActive)onMousePressed.Invoke(position);
         }
-        
+
+        if (context.performed && _pressActive)
+        {
+            onMouseHold.Invoke(position);
+        }
+
         if (context.canceled)
         {
-            onMouseRelease.Invoke(clickPosition);
-            if (context.duration > clickDuration) return;
-            if (PointerPos == _mousePositionAtClick)
-                onMouseClick.Invoke(clickPosition);
+            if (!_pressActive) return;
+
+            _pressActive = false;
+
+            onMouseRelease.Invoke(position);
+
+            if (!_mouseActive) return;
+
+            double duration = context.time - _pressTime;
+            float movement = Vector2.Distance(_pressPosition, position);
+
+            float maxDuration = clickDuration > 0f ? clickDuration : 0.4f;
+
+            bool validTap = duration <= maxDuration && movement <= tapMovementTolerance;
+
+            Debug.Log($"Tap detected: duration={duration:F2}, " + $"movement={movement:F1}, valid={validTap}");
+
+            if (validTap)
+            {
+                onMouseClick.Invoke(position);
+            }
         }
     }
 
@@ -87,8 +120,7 @@ public class InputManager : MonoBehaviour
         Vector3 mouseWorldPosition = currentCamera.ScreenToWorldPoint(mouseVec3);
         
         RaycastHit raycastHit;
-        if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition,
-                out raycastHit))
+        if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition, out raycastHit))
         {
             return raycastHit.point;
         }
@@ -107,6 +139,11 @@ public class InputManager : MonoBehaviour
         Vector3 pointOnFloor = Vector3.Lerp(cameraPosition, mouseWorldPosition, t);
         return pointOnFloor;
     }
- 
+
+    public Ray GetPointerRay(Vector2 screenPosition)
+    {
+        return currentCamera.ScreenPointToRay(screenPosition);
+    }
+
 }
 
