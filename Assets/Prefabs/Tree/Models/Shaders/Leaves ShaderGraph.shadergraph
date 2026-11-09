@@ -810,7 +810,7 @@
                 "m_Node": {
                     "m_Id": "9b09f904bf764d7ea90de2dc3d911ff3"
                 },
-                "m_SlotId": 7
+                "m_SlotId": 4
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -1453,8 +1453,8 @@
     "m_ObjectId": "0cf21e2c5c504d688ef8317de07de8a1",
     "m_Title": "Alpha",
     "m_Position": {
-        "x": 1007.199462890625,
-        "y": -3059.200439453125
+        "x": 1007.199951171875,
+        "y": -3059.199951171875
     }
 }
 
@@ -2065,8 +2065,8 @@
     "m_ObjectId": "2570b394a9054cd586c3998d94b8dacb",
     "m_Title": "Manually creating the gradient to be able to control it",
     "m_Position": {
-        "x": -1077.60009765625,
-        "y": -2574.400390625
+        "x": -1077.5999755859375,
+        "y": -2574.39990234375
     }
 }
 
@@ -2283,7 +2283,7 @@
     "m_ObjectId": "2ac82eb0af8c4c4ba0e60d79e94bdaaf",
     "m_Title": "Controlling the light position",
     "m_Position": {
-        "x": -2071.200439453125,
+        "x": -2071.2001953125,
         "y": -2820.7998046875
     }
 }
@@ -3027,7 +3027,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "4907ecd3850e4cd58bc62fb5f0fd86fd",
     "m_Id": 0,
-    "m_DisplayName": "Cutoff threshold",
+    "m_DisplayName": "Overall Blend",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -5805,7 +5805,7 @@
     "m_ObjectId": "b00a50159e6f4d73a1ccabc5e2be1535",
     "m_Title": "Wind Logic",
     "m_Position": {
-        "x": -1116.801025390625,
+        "x": -1116.800048828125,
         "y": -4460.7998046875
     }
 }
@@ -5972,7 +5972,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"96240e4036bfd3046910f95a91972dc3\",\"type\":3}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -6302,7 +6302,7 @@
     "m_ObjectId": "cc97b701c9324bf5813acb7c1b7ffd70",
     "m_Title": "Final Color and colorspace conversion",
     "m_Position": {
-        "x": 285.5993957519531,
+        "x": 285.60009765625,
         "y": -2604.7998046875
     }
 }
@@ -6670,8 +6670,8 @@
     "m_ObjectId": "dae1eb15ecf64418b081750ecb012e2e",
     "m_Title": "Camera Logic",
     "m_Position": {
-        "x": -951.2003784179688,
-        "y": -3590.400390625
+        "x": -951.199951171875,
+        "y": -3590.39990234375
     }
 }
 
@@ -7212,6 +7212,7 @@
     "isMainTexture": false,
     "useTilingAndOffset": false,
     "useTexelSize": true,
+    "isHDR": false,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
