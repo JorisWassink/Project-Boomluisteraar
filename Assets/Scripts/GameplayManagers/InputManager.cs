@@ -42,9 +42,9 @@ public class InputManager : MonoBehaviour
         _treeSelectionManager = TreeSelectionManager.Instance;
         
         _mousePositionAtClick = Vector2.zero;
-        _deviceChecker.LogDeviceData();
-        
-        _treeSelectionManager.onSetUIMode.AddListener(SetUIMode);
+        //_deviceChecker.LogDeviceData();
+        if(_treeSelectionManager != null)
+            _treeSelectionManager.onSetUIMode.AddListener(SetUIMode);
     }
     
     //Public Functions

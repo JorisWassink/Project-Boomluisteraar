@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class DataGetter : MonoBehaviour
 {
@@ -19,243 +20,198 @@ public class DataGetter : MonoBehaviour
         [StaticVariables.DataType.CyberSensor]  = new() { 3 },
         [StaticVariables.DataType.SoilSensor]   = new() { 4, 5, 6, 7, 8 },
     };
+    
+    private readonly string latestUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest";
 
+    //Public Functions
     public List<DataPoint> GetData(string id, int maxPoints, StaticVariables.DataType dataType)
     {
-        string dataUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest/data/{id}.json";
-        Debug.Log($"Getting {maxPoints} lines of data");
+        DateTime startTime = DateTime.Now;
+        int totalDownloadingTime = 0;
+        int totalParsingTime = 0;
         
-        using var client = new WebClient();
-        string json = client.DownloadString(dataUrl);   // blocks until done
+        List<DataPoint> points = new ();
+        
+        //first get the keys
+        string fullUrl = $"{latestUrl}/{id}.json";
+        List<string> keys = GetDataKeys(fullUrl);
+        
+        int keyGettingTime =  (int)(DateTime.Now - startTime).TotalMilliseconds;
+        for (int i = keys.Count - 1; i > keys.Count - (maxPoints + 1); i--)
+        {
+            DateTime beginDownloadingTime = DateTime.Now;
+            string key = keys[i];
+            string dataUrl = $"{latestUrl}/{id}/{key}.json";
+            
+            using var client = new WebClient();
+            string json = client.DownloadString(dataUrl);   // blocks until done
 
-        if (json == "null") return null;
-        Debug.Log("json collected");
-        var dict = JsonConvert.DeserializeObject<Dictionary<string, DataPoint>>(json);
-        return new List<DataPoint>(dict.Values);
+            DateTime endDownloadingTime = DateTime.Now;
+            totalDownloadingTime += (int)(endDownloadingTime - beginDownloadingTime).TotalMilliseconds;
+            if (json == "null") return null;
+            
+            points.Add(ParsePoint(json));
+            totalParsingTime +=  (int)(DateTime.Now - endDownloadingTime).TotalMilliseconds;
+        }
+        
+        DateTime endTime = DateTime.Now;
+        Debug.Log($"Data collection complete.\n" +
+                  $"Data Keys Download time: {keyGettingTime} ms \n" +
+                  $"Average Download time: {totalDownloadingTime / maxPoints} ms\n" +
+                  $"Average Parsing time: {totalParsingTime / maxPoints} ms\n" +
+                  $"Total time: {(endTime - startTime).TotalMilliseconds} ms");
+        return new List<DataPoint>(points);
     }
-
+    
     public bool IsDataAvailable(string id)
     {
-        string dataUrlOld = $"http://nature4cloud.org:5002/nbiot_ap/TTCyber/{id}/ttcloud.txt";
         string dataUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest.json";
         return Task.Run(() => IsDataAvailableAsync(dataUrl)).Result;
     }
 
+    //Private Functions
     private static async Task<bool> IsDataAvailableAsync(string dataUrl)
     {
         using HttpResponseMessage response = await HttpClient.GetAsync(dataUrl);
         return response.IsSuccessStatusCode;
     }
 
-    private static async Task<List<DataPoint>> GetDataAsync(string dataUrl, int maxPoints, StaticVariables.DataType dataType)
+    private List<string> GetDataKeys(string url)
     {
-        Debug.Log($"Getting {maxPoints} lines of data");
-        
-        using var req = UnityWebRequest.Get(dataUrl);
-        await req.SendWebRequest();
+        string dataUrl = $"{url}?shallow=true";
+        using var client = new WebClient();
+        string json = client.DownloadString(dataUrl);
+        if (json == "null") return new List<string>();
 
-        if (req.result == UnityWebRequest.Result.Success && req.downloadHandler.text != "null")
-        {
-            Debug.Log(req.downloadHandler.text);
-            var l = JsonConvert.DeserializeObject<List<DataPointJson>>(req.downloadHandler.text);
-            Debug.Log(l.Count);
-            
-            return JsonConvert.DeserializeObject<List<DataPoint>>(req.downloadHandler.text);
-            //return ConvertStringToDataPoints(l[0], maxPoints, dataType);
-        }
-        else Debug.LogError(req.error);
+        var keys = new List<string>();
+        foreach (var prop in JObject.Parse(json).Properties())
+            keys.Add(prop.Name);
 
-        return null;
-
-        // string rawText = await HttpClient.GetStringAsync(dataUrl);
-        // return ConvertStringToDataPoints(rawText, maxPoints, dataType);
-    }
-
-    private IEnumerator GetJsonData(string dataUrl, System.Action<List<DataPoint>> onDone)
-    {
-        using var req = UnityWebRequest.Get(dataUrl);
-        yield return req.SendWebRequest();          // waits until finished
-
-        if (req.result == UnityWebRequest.Result.Success && req.downloadHandler.text != "null")
-        {
-            try
-            {
-                var list = JsonConvert.DeserializeObject<List<DataPoint>>(req.downloadHandler.text);
-                onDone(list);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("JSON parse failed: " + e.Message);
-                onDone(null);
-            }
-        }
-        else
-        {
-            Debug.LogWarning(req.error);
-            onDone(null);
-        }
-    }
-
-    private static List<DataPoint> ConvertStringToDataPoints(string rawText, int maxPoints, StaticVariables.DataType dataType)
-    {
-        // if (string.IsNullOrWhiteSpace(rawText))
-        //     return new List<DataPoint>();
-        
-        DataPointJson json = JsonUtility.FromJson<DataPointJson>(rawText);
-        Debug.Log(rawText);
-        return new List<DataPoint>();
-        
-        List<DataPoint> result = new List<DataPoint>(maxPoints);
-        int lineEnd = rawText.Length;
-        int count = 0;
-        
-        IgnoredTypes.TryGetValue(dataType, out var skip); // null if no filter for this type
-        while (lineEnd > 0 && count < maxPoints)
-        {
-            int newlineIndex = rawText.LastIndexOf('\n', lineEnd - 1);
-            int lineStart = newlineIndex + 1;
-            int length = lineEnd - lineStart;
-
-            lineEnd = newlineIndex;
-
-            if (length > 0 && rawText[lineStart + length - 1] == '\r')
-                length--;
-            
-            if (length > 0)
-            {
-                var line = rawText.AsSpan(lineStart, length);
-                var parts = line.ToString().Split(';');
-                int dataPointType = ParseInt(GetPart(parts, 2));
-
-                if (skip?.Contains(dataPointType) == true) continue;
-                
-                result.Add(new DataPoint
-                {
-                    date = GetPart(parts, 0),
-                    V2 = GetPart(parts, 1),
-                    V3 = ParseInt(GetPart(parts, 2)),
-                    V4 = GetPart(parts, 3),
-                    V5 = ParseDouble(GetPart(parts, 4)),
-                    V6 = ParseDouble(GetPart(parts, 5)),
-                    V7 = ParseDouble(GetPart(parts, 6)),
-                    V8 = ParseDouble(GetPart(parts, 7)),
-                    V9 = ParseDouble(GetPart(parts, 8)),
-                    V10 = ParseDouble(GetPart(parts, 9)),
-                    V11 = ParseDouble(GetPart(parts, 10)),
-                    V12 = ParseDouble(GetPart(parts, 11)),
-                    V13 = ParseDouble(GetPart(parts, 12)),
-                    V14 = ParseDouble(GetPart(parts, 13)),
-                    V15 = ParseDouble(GetPart(parts, 14)),
-                    V16 = ParseDouble(GetPart(parts, 15)),
-                    V17 = ParseDouble(GetPart(parts, 16)),
-                    V18 = ParseDouble(GetPart(parts, 17)),
-                    V19 = ParseDouble(GetPart(parts, 18)),
-                    V20 = ParseDouble(GetPart(parts, 19)),
-                    V21 = ParseDouble(GetPart(parts, 20)),
-                    V22 = ParseDouble(GetPart(parts, 21)),
-                    V23 = ParseDouble(GetPart(parts, 22)),
-                    V24 = ParseDouble(GetPart(parts, 23)),
-                });
-                count++;
-            }
-        }
-
-        result.Reverse(); // we collected newest-to-oldest, flip to chronological order
-        return result;
+        keys.Sort(string.CompareOrdinal);
+        return keys;
     }
     
+    //Helpers
+    private DataPoint ParsePoint(string json)
+    {
+        var obj = JObject.Parse(json);
+        return (string)obj["dataType"] switch
+        {
+            "SapFlow"       => obj.ToObject<SapFlowDataPoint>(),
+            "Spectrometer"  => obj.ToObject<SpectrometerDataPoint>(),
+            "Spectrometer2" => obj.ToObject<Spectrometer2DataPoint>(),
+            "General"          => obj.ToObject<GeneralDataPoint>(),
+            "Soil"          => obj.ToObject<SoilDataPoint>(),
+            _               => obj.ToObject<DataPoint>(),
+        };
+    }
     
-    private static string GetPart(string[] parts, int index) => index < parts.Length ? parts[index].Trim() : "";
-
-    private static double ParseDouble(string value) =>
-        double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result) ? result : 0;
-
-    private static int ParseInt(string value) =>
-        int.TryParse(value, out var result) ? result : 0;
 }
-
-public class DataPointJson
-{
-    public string dataType { get; set; } = "";
-}
-
 
 public class DataPoint
 {
-    public string date { get; set; } = "";
-    public string V2 { get; set; } = "";
-    public int V3 { get; set; }
-    public string V4 { get; set; } = "";
-    public double V5 { get; set; }
-    public double V6 { get; set; }
-    public double V7 { get; set; }
-    public double V8 { get; set; }
-    public double V9 { get; set; }
-    public double V10 { get; set; }
-    public double V11 { get; set; }
-    public double V12 { get; set; }
-    public double V13 { get; set; }
-    public double V14 { get; set; }
-    public double V15 { get; set; }
-    public double V16 { get; set; }
-    public double V17 { get; set; }
-    public double V18 { get; set; }
-    public double V19 { get; set; }
-    public double V20 { get; set; }
-    public double V21 { get; set; }
-    public double V22 { get; set; }
-    public double V23 { get; set; }
-    public double V24 { get; set; }
-    public string StartMeasuring { get; set; } = "";
-    public string BoomNr { get; set; } = "";
-    public string Soort { get; set; } = "";
-    public int Plantjaar { get; set; }
-    public string DataLink { get; set; } = "";
+    public string time { get; set; } = "";
+    public string sensorId { get; set; } = "";
+    public int stringType { get; set; }
+    public string timeStamp { get; set; } = "";
 }
 
-public class SapReadingList
+public class SapFlowDataPoint : DataPoint
 {
-    List<SapReading> SapReadings = new List<SapReading>();
-    public SapReading averageReading;
+    public List<SapReading> SapFlowScans { get; set; } =  new ();
+}
 
-    public SapReadingList(DataPoint string4, DataPoint string5)
+public class GeneralDataPoint : DataPoint
+{
+    public Vec position { get; set; } = new Vec();
+    public Vec positionSTD { get; set; } = new Vec();
+    public float battery { get; set; }
+    public float heaterProbePowerInput { get; set; }
+    public float airTemperature { get; set; }
+    public float airHumidity { get; set; }
+    public float growth { get; set; }
+    
+    public override string ToString()
     {
-        if (string4.V3 != 4 && string5.V3 != 5)
-            Debug.LogError("Provided Datapoint is no Sap reading");
-
-        SapReadings.Add(new SapReading(string4.V5, string4.V6, string4.V7, string4.V8));
-        SapReadings.Add(new SapReading(string4.V9, string4.V10, string4.V11, string4.V12));
-        SapReadings.Add(new SapReading(string4.V13, string4.V14, string4.V15, string4.V16));
-        SapReadings.Add(new SapReading(string4.V17, string4.V18, string4.V19, string4.V20));
-        SapReadings.Add(new SapReading(string4.V21, string4.V22, string4.V23, string4.V24));
-        
-        SapReadings.Add(new SapReading(string5.V5, string5.V6, string5.V7, string5.V8));
-        SapReadings.Add(new SapReading(string5.V9, string5.V10, string5.V11, string5.V12));
-        SapReadings.Add(new SapReading(string5.V13, string5.V14, string5.V15, string5.V16));
-        SapReadings.Add(new SapReading(string5.V17, string5.V18, string5.V19, string5.V20));
-        SapReadings.Add(new SapReading(string5.V21, string5.V22, string5.V23, string5.V24));
-        
-        averageReading = new SapReading(
-            SapReadings.First().TimeIndex,   
-            SapReadings.Average(r => r.DownProbe),
-            SapReadings.Average(r => r.HeatProbe),
-            SapReadings.Average(r => r.UpProbe)
-        );
+        return $"position: {position}\n" +
+               $"positionSTD: {positionSTD}\n" +
+               $"battery: {battery}\n" +
+               $"heaterProbePowerInput: {heaterProbePowerInput}\n" +
+               $"airTemperature: {airTemperature}\n" +
+               $"airHumidity: {airHumidity}\n" +
+               $"growth: {growth}";
     }
+}
+
+public class SoilDataPoint : DataPoint
+{
+    public Vec acceleration { get; set; } = new Vec();
+    public Vec accelerationSTD { get; set; } = new Vec();
+    public float batteryVoltage { get; set; }    // V
+    public float airTemperature { get; set; }    // °C
+    public float airHumidity { get; set; }       // %
+    public float soilHumidity { get; set; }      // mV (raw)
+    public float soilTemperature { get; set; }   // Ohm (raw)
+
+    public override string ToString()
+    {
+        return $"Data Type: Soil\n" +
+               $"acceleration: {acceleration}\n" +
+               $"acceleration_std: {accelerationSTD}\n" +
+               $"Battery Voltage: {batteryVoltage} V\n" +
+               $"Air Temperature: {airTemperature} °C\n" +
+               $"Air Relative Humidity: {airHumidity} %\n" +
+               $"Soil Humidity 1: {soilHumidity} mV (raw)\n" +
+               $"Soil Temperature: {soilTemperature} Ohm (raw)";
+    }
+}
+
+public class SpectrometerDataPoint : DataPoint
+{
+    public float gain { get; set; }
+    public Dictionary<string, float> channels { get; set; } = new Dictionary<string, float>();
+
+    public override string ToString()
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("Data Type: Spectrometer");
+        sb.AppendLine($"Gain: {gain}");
+        foreach (var kv in channels)
+            sb.AppendLine($"\t{kv.Key.Replace("nm", "")}: {kv.Value}");
+        return sb.ToString().TrimEnd();
+    }
+}
+
+public class Spectrometer2DataPoint : SpectrometerDataPoint
+{
+    public float clearNoCalib { get; set; }
+    public float nitNoCalib { get; set; }
+
+    public override string ToString()
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("Data Type: Spectrometer (2)");
+        sb.AppendLine($"Gain: {gain}");
+        foreach (var kv in channels)
+            sb.AppendLine($"\t{kv.Key.Replace("nm", "")}: {kv.Value}");
+        sb.AppendLine($"CLEAR No Calib: {clearNoCalib}");
+        sb.Append($"NIT No Calib: {nitNoCalib}");
+        return sb.ToString();
+    }
+}
+
+
+public class Vec
+{
+    public float x, y, z;
+    public Vector3 ToVector3() => new Vector3(x, y, z);
 }
 
 public class SapReading
 {
-    public double TimeIndex { get; set; }
-    public double DownProbe  { get; set; } 
-    public double HeatProbe { get; set; } 
-    public double UpProbe  { get; set; } 
-
-    public SapReading(double ti, double dp, double hp, double up)
-    {
-        TimeIndex = ti;
-        DownProbe = dp;
-        HeatProbe = hp;
-        UpProbe = up;
-    }
+    [JsonProperty("scanNumber")]      public int scanNumber { get; set; }
+    [JsonProperty("timeStamp")]       public double timeIndex { get; set; }
+    [JsonProperty("downStreamProbe")] public double downProbe { get; set; }
+    [JsonProperty("heater")]          public double heatProbe { get; set; }
+    [JsonProperty("upStreamProbe")]   public double upProbe { get; set; }
 }
