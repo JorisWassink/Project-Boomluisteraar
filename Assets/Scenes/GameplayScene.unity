@@ -625,7 +625,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5bb8c6b5cfa396fa8f7c6f070568072, type: 2}
+  - {fileID: 2100000, guid: 6f575672494e3ec4e95eca98aa4f81ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1221,6 +1221,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowMiniGameMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 676341285250009189, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
+      propertyPath: m_fontSize
+      value: 19.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1306745215693651669, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
       value: 18
@@ -1272,6 +1276,10 @@ PrefabInstance:
     - target: {fileID: 2575764786926003336, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660786843625722383, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
+      propertyPath: m_fontSize
+      value: 26.7
       objectReference: {fileID: 0}
     - target: {fileID: 3449892146038708777, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1416,6 +1424,14 @@ PrefabInstance:
     - target: {fileID: 7278928744673456197, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7450332555124016099, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
+      propertyPath: m_fontSize
+      value: 20.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460415261555612933, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
+      propertyPath: m_fontSize
+      value: 48.9
       objectReference: {fileID: 0}
     - target: {fileID: 7727961476862095906, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_LocalPosition.x
