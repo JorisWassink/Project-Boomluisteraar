@@ -11,6 +11,8 @@ public enum UIMenu
 {
     TreeInfo,
     MiniGameMenu,
+    //temp
+    MinigameTest,
     DialogueMenu
 }
 
@@ -46,11 +48,14 @@ public class TreeGameplayUI : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/WorldMap");
     }
-    
+
     public void ShowTreeInfo() => SetUI(UIMenu.TreeInfo);
     public void ShowMiniGameMenu() => SetUI(UIMenu.MiniGameMenu);
     public void ShowDialogueMenu() => SetUI(UIMenu.DialogueMenu);
-    
+
+    //temp
+    public void MiniGameTest() => SceneManager.LoadScene("JUMPUP");
+
     //Private Functions
     private void SetUI(UIMenu menu)
     {

@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   currentCamera: {fileID: 330585545}
   clickDuration: 0.1
+  tapMovementTolerance: 40
 --- !u!4 &59835722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
@@ -1756,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
+      value: 0.000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1916,6 +1917,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22468896, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22485076, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22485076, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22485076, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22488670, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
