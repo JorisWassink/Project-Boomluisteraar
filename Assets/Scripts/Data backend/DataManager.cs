@@ -119,10 +119,6 @@ public class DataManager : MonoBehaviour
 
     private void TryAddDataPointsToDictionary(string sensorId, List<DataPoint> dataPoints)
     {
-        bool isDataAvailable = _dataGetter.IsDataAvailable(sensorId);
-        if (!isDataAvailable)
-            Debug.LogError($"{sensorId} is empty");
-
         if (_dataDict.ContainsKey(sensorId))
         {
             _dataDict[sensorId].AddRange(dataPoints);
