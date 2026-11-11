@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2638ebd64d9364b8fc1704afd8cfa7, type: 3}
+  m_Name: ScriptableObjectDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjectDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  collectibleDataBase: {fileID: 11400000, guid: 8e826877d3b37997cb08c59338c499e5, type: 2}
