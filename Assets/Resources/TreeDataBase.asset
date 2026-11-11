@@ -40,7 +40,7 @@ MonoBehaviour:
   - name: Tamme kastanje
     id: 91261121
     type: 1
-    model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
+    model: {fileID: 8801485122542755193, guid: f370ff532e31537429715901b4a37530, type: 3}
   soils:
   - name: Tamme kastanje (soil)
     id: 93261020
