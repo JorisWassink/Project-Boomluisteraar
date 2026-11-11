@@ -13,7 +13,8 @@ using Newtonsoft.Json.Linq;
 
 public class DataGetter : MonoBehaviour
 {
-    private static readonly HttpClient HttpClient = new HttpClient();
+    static readonly HttpClient HttpClient = new HttpClient(new HttpClientHandler { UseProxy = false });
+    
     private static readonly Dictionary<StaticVariables.DataType, HashSet<int>> IgnoredTypes = new()
     {
         [StaticVariables.DataType.CarbonSensor] = new() { 3, 6, 7 },
@@ -21,80 +22,77 @@ public class DataGetter : MonoBehaviour
         [StaticVariables.DataType.SoilSensor]   = new() { 4, 5, 6, 7, 8 },
     };
     
-    private readonly string latestUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest";
+    private readonly string latestUrl = $"https://boomluisteraareu-default-rtdb.europe-west1.firebasedatabase.app/feed/latest";
 
     //Public Functions
     public List<DataPoint> GetData(string id, int maxPoints, StaticVariables.DataType dataType)
     {
         DateTime startTime = DateTime.Now;
-        int totalDownloadingTime = 0;
-        int totalParsingTime = 0;
         
-        List<DataPoint> points = new ();
+        List<DataPoint> points = new();
         
         //first get the keys
-        string fullUrl = $"{latestUrl}/{id}.json";
-        List<string> keys = GetDataKeys(fullUrl);
+        string countUrl = $"{latestUrl}/count/{id}.json";
+        int dataAmount = GetDataAmount(countUrl);
         
-        int keyGettingTime =  (int)(DateTime.Now - startTime).TotalMilliseconds;
-        for (int i = keys.Count - 1; i > keys.Count - (maxPoints + 1); i--)
+        int newest = dataAmount + 1;
+        int oldest = Math.Max(0, dataAmount - maxPoints);
+        
+        string url = $"{latestUrl}/data/{id}.json" +
+                     $"?orderBy=%22%24key%22&startAt=%22{oldest}%22&endAt=%22{newest}%22";
+        try
         {
-            DateTime beginDownloadingTime = DateTime.Now;
-            string key = keys[i];
-            string dataUrl = $"{latestUrl}/{id}/{key}.json";
-            
-            using var client = new WebClient();
-            string json = client.DownloadString(dataUrl);   // blocks until done
-
-            DateTime endDownloadingTime = DateTime.Now;
-            totalDownloadingTime += (int)(endDownloadingTime - beginDownloadingTime).TotalMilliseconds;
-            if (json == "null") return null;
-            
-            points.Add(ParsePoint(json));
-            totalParsingTime +=  (int)(DateTime.Now - endDownloadingTime).TotalMilliseconds;
+            string json = HttpClient.GetStringAsync(url).Result;
+            points = ParseData(json);
         }
-        
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
         DateTime endTime = DateTime.Now;
         Debug.Log($"Data collection complete.\n" +
-                  $"Data Keys Download time: {keyGettingTime} ms \n" +
-                  $"Average Download time: {totalDownloadingTime / maxPoints} ms\n" +
-                  $"Average Parsing time: {totalParsingTime / maxPoints} ms\n" +
                   $"Total time: {(endTime - startTime).TotalMilliseconds} ms");
         return new List<DataPoint>(points);
     }
     
-    public bool IsDataAvailable(string id)
+
+    private int GetDataAmount(string url)
     {
-        string dataUrl = $"https://boomluisteraar-default-rtdb.firebaseio.com/feed/latest.json";
-        return Task.Run(() => IsDataAvailableAsync(dataUrl)).Result;
+        string json = HttpClient.GetStringAsync(url).Result;
+        if (json == "null") return 0;
+
+        return int.Parse(json);
     }
 
-    //Private Functions
-    private static async Task<bool> IsDataAvailableAsync(string dataUrl)
-    {
-        using HttpResponseMessage response = await HttpClient.GetAsync(dataUrl);
-        return response.IsSuccessStatusCode;
-    }
-
-    private List<string> GetDataKeys(string url)
-    {
-        string dataUrl = $"{url}?shallow=true";
-        using var client = new WebClient();
-        string json = client.DownloadString(dataUrl);
-        if (json == "null") return new List<string>();
-
-        var keys = new List<string>();
-        foreach (var prop in JObject.Parse(json).Properties())
-            keys.Add(prop.Name);
-
-        keys.Sort(string.CompareOrdinal);
-        return keys;
-    }
-    
     //Helpers
-    private DataPoint ParsePoint(string json)
+    private List<DataPoint> ParseData(string json)
     {
-        var obj = JObject.Parse(json);
+        List<DataPoint> points = new ();
+        if (string.IsNullOrEmpty(json) || json == "null") return points;
+
+        var token = JToken.Parse(json);
+
+        if (token is JArray arr)              
+        {
+            foreach (var item in arr)
+                if (item is JObject o) points.Add(ParsePoint(o));
+        }
+        else if (token is JObject obj)
+        {
+            if (obj["dataType"] != null)                
+                points.Add(ParsePoint(obj));
+            else                                       
+                foreach (var prop in obj.Properties())
+                    if (prop.Value is JObject o) points.Add(ParsePoint(o));
+        }
+
+        return points;
+    }
+
+    
+    private DataPoint ParsePoint(JObject obj)
+    {
         return (string)obj["dataType"] switch
         {
             "SapFlow"       => obj.ToObject<SapFlowDataPoint>(),
