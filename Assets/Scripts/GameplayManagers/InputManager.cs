@@ -4,87 +4,88 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
-    [Tooltip("Temporary fix, just put the camera here")]
-    [SerializeField] private Camera currentCamera;
-    
     [Tooltip("How long before the click becomes a drag")]
     [SerializeField] public float clickDuration;
     
-    [NonSerialized] public UnityEvent<Vector2> onMousePressed = new UnityEvent<Vector2>();
-    [NonSerialized] public UnityEvent<Vector2> onMouseHold= new UnityEvent<Vector2>();
-    [NonSerialized] public UnityEvent<Vector2> onMouseRelease= new UnityEvent<Vector2>();
-    [NonSerialized] public UnityEvent<Vector2> onMouseClick= new UnityEvent<Vector2>();
+    [NonSerialized] public UnityEvent<Vector3> onPointInputStart = new ();
+    [NonSerialized] public UnityEvent<Vector3> onPointInputEnd= new ();
+    [NonSerialized] public UnityEvent<Vector3> onPointInputTap= new ();
     
-    private TreeSelectionManager _treeSelectionManager;
+    private GameManager _gameManager;
     private DeviceChecker _deviceChecker;
     
     private Vector2 _mousePositionAtClick;
-    private bool _mouseActive = true;
+    private bool _canPoint = true;
+    
+    private Camera CurrentCamera => _gameManager.currentCamera;
     
     private static Vector2 PointerPos =>
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
+    
     public static InputManager Instance;
   
     //Unity Event Functions
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;
+        
         _deviceChecker = gameObject.AddComponent<DeviceChecker>();
-        _treeSelectionManager = TreeSelectionManager.Instance;
         
         _mousePositionAtClick = Vector2.zero;
         //_deviceChecker.LogDeviceData();
-        if(_treeSelectionManager != null)
-            _treeSelectionManager.onSetUIMode.AddListener(SetUIMode);
     }
     
     //Public Functions
-    public void InvokeMouseClick(InputAction.CallbackContext context)
+    public void OnPointInput(InputAction.CallbackContext context)
     {
-        if(!_mouseActive) return;
+        if(!_canPoint) return;
         
-        Vector2 clickPosition = PointerPos;
-        Vector3 rayPos = GetMousePositionInWorld(clickPosition);
-        Debug.DrawRay(rayPos, Vector3.up * 50, Color.red, 5);
+        Vector3 worldPos = GetMousePositionInWorld(PointerPos);
         
-        if (context.performed) onMouseHold.Invoke(clickPosition);
         if (context.started)
         {
             _mousePositionAtClick = PointerPos;
-            onMousePressed.Invoke(clickPosition);
+            onPointInputStart.Invoke(worldPos);
         }
         
         if (context.canceled)
         {
-            onMouseRelease.Invoke(clickPosition);
+            onPointInputEnd.Invoke(worldPos);
             if (context.duration > clickDuration) return;
             if (PointerPos == _mousePositionAtClick)
-                onMouseClick.Invoke(clickPosition);
+                onPointInputTap.Invoke(worldPos);
         }
+        
+        Debug.DrawRay(worldPos, Vector3.up * 50, Color.red, 5);
     }
 
-    //Private Functions
-    private void SetUIMode(bool value)
+    public void SetUIMode(bool value)
     {
-        _mouseActive = !value;
+        _canPoint = !value;
     }
     
     //Helpers
     public Vector3 GetMousePositionInWorld(Vector2 clickPosition)
     {
-        Vector3 cameraPosition = currentCamera.transform.position;
+        Vector3 cameraPosition = CurrentCamera.transform.position;
         
         Vector3 mouseVec3 = new Vector3(clickPosition.x, clickPosition.y, 1f); 
-        Vector3 mouseWorldPosition = currentCamera.ScreenToWorldPoint(mouseVec3);
+        Vector3 mouseWorldPosition = CurrentCamera.ScreenToWorldPoint(mouseVec3);
         
         RaycastHit raycastHit;
         if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition,

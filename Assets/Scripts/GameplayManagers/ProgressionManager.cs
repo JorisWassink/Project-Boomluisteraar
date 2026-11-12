@@ -11,17 +11,8 @@ public class ProgressionManager : MonoBehaviour
     
     private Dictionary<string, bool> collectibles = new Dictionary<string, bool>();
     
-    public static ProgressionManager Instance;
 
     //Unity event functions
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
-
     private void Start()
     {
         List<string> allCollectibleIds = StaticVariables.GetAllCollectibleIds;

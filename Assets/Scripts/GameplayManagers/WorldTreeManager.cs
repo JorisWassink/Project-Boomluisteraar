@@ -1,36 +1,56 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldTreeManager : MonoBehaviour
 {
-    //TODO: editor tooling maybe?
-    private List<TreeWorldMap> _trees = new List<TreeWorldMap>();
-    private ProgressionManager progressionManager;
+    private List<TreeWorldMap> _trees = new ();
     
-    public static WorldTreeManager Instance;
-    
-    //Unity Event Functions
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
+    private GameManager _gameManager;
+    private ProgressionManager ProgressionManager => _gameManager.progressionManager;
+    private InputManager InputManager => _gameManager.inputManager;
+
     
     void Start()
     {
         _trees = new List<TreeWorldMap>(GetComponentsInChildren<TreeWorldMap>());
-        progressionManager = ProgressionManager.Instance;
         
-        //TODO: make this be called when the worldmap gets loaded, for now this works i think
+        _gameManager = GameManager.Instance;
+        
+        InputManager.onPointInputTap.AddListener(OnPointInput);
+        
         CheckProgression();
     }
-    
+
+    private void OnDestroy()
+    {
+        InputManager.onPointInputTap.RemoveListener(OnPointInput);
+    }
+
     //private functions
+    private void OnPointInput(Vector3 pointPosition)
+    {
+        int closestTreeIndex = -1;
+        float closestDistance = float.MaxValue;
+
+        for (int index = 0; index < _trees.Count; index++)
+        {
+            var tree = _trees[index];
+            float currentDistance = Vector3.Distance(pointPosition, tree.transform.position);
+            if (currentDistance <= closestDistance)
+            {
+                closestDistance = currentDistance;
+                closestTreeIndex = index;
+            }
+        }
+        
+        //test for hitbox in tree so they can be independent 
+        _trees[closestTreeIndex].TrySelectTree(closestDistance);
+    }
+    
     private void CheckProgression()
     {
-        int playerExperience = progressionManager.playerExperience;
+        int playerExperience = ProgressionManager.playerExperience;
         foreach (TreeWorldMap tree in _trees)
         {
             bool shouldBeLocked = playerExperience < tree.requiredExperience;

@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -335,6 +336,18 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1755bd4939912c0afeb110e56193b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraRegistrar
 --- !u!1 &402575571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 676341285250009189, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
-      value: 19.4
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1306745215693651669, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
@@ -1279,7 +1292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2660786843625722383, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
-      value: 26.7
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3449892146038708777, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1427,11 +1440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7450332555124016099, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
-      value: 20.1
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7460415261555612933, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_fontSize
-      value: 48.9
+      value: 24.25
       objectReference: {fileID: 0}
     - target: {fileID: 7727961476862095906, guid: 853d05e445eac3a5fad7005bdd6aeee2, type: 3}
       propertyPath: m_LocalPosition.x

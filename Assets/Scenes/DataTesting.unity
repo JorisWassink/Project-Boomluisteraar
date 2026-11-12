@@ -1419,7 +1419,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1121609704}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InvokeMouseClick
+        m_MethodName: OnPointInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

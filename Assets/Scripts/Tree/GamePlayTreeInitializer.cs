@@ -11,6 +11,6 @@ public class GamePlayTreeInitializer : MonoBehaviour
         GameObject treeObject = Instantiate(treePrefab,  transform);
         TreeGameplay treeGameplay = treeObject.GetComponent<TreeGameplay>(); 
         treeGameplay.InitializeTree(treeId);
-        GameplayManager.Instance.currentTreeGameplay = treeGameplay;
+        GameManager.Instance.gameplayManager.currentTreeGameplay = treeGameplay;
     }
 }

@@ -213,12 +213,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18763484}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.49475, y: 5.68126, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1955871800}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &18763486
 MonoBehaviour:
@@ -249,7 +249,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 18763487}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InvokeMouseClick
+        m_MethodName: OnPointInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: MenuPlayer
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 330585545}
 --- !u!114 &18763487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c10ea34cda89b1a9b0b7516a21312a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  currentCamera: {fileID: 330585545}
   clickDuration: 0.1
 --- !u!4 &59835722 stripped
 Transform:
@@ -308,6 +307,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -452,6 +452,18 @@ MonoBehaviour:
     width: 153.90057
     height: 111.49869
   viewportSize: {x: 46.134155, y: 92.37631}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1755bd4939912c0afeb110e56193b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraRegistrar
 --- !u!1 &402575571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,8 +1276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1278099722}
-  - component: {fileID: 1278099723}
-  - component: {fileID: 1278099724}
+  - component: {fileID: 1278099725}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1282,13 +1293,13 @@ Transform:
   m_GameObject: {fileID: 1278099721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.18505, y: -0.00001, z: -2.28315}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1278099723
+--- !u!114 &1278099725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1297,28 +1308,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1278099721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a71451e6983f97aa91591c28022f137, type: 3}
+  m_Script: {fileID: 11500000, guid: ff63db1b7502e4233ae24bfd636237e3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  playerExperience: 0
-  onPointsUpdate:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1278099724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278099721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cebf2a2a5bc2aa25939aaf27e341f83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TreeSelectionManager
-  onSetUIMode:
-    m_PersistentCalls:
-      m_Calls: []
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  treeSelectionManager: {fileID: 0}
+  gameplayManager: {fileID: 0}
+  progressionManager: {fileID: 0}
+  inputManager: {fileID: 0}
+  currentCamera: {fileID: 0}
 --- !u!4 &1317447686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
@@ -2164,7 +2161,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 832575519}
-  - {fileID: 18763485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1975629598 stripped
@@ -2378,3 +2374,4 @@ SceneRoots:
   - {fileID: 1015413896}
   - {fileID: 759814965}
   - {fileID: 1278099722}
+  - {fileID: 18763485}

@@ -15,6 +15,7 @@ public class TreeWorldMap : TreeInstance
     
     [HideInInspector] public string id;
     [HideInInspector] public List<TreeModel> models = new();
+    
     //TODO: fix camera getting
     private Camera _cam;
     private bool _isUnlocked = true;
@@ -23,11 +24,6 @@ public class TreeWorldMap : TreeInstance
     private void Awake()
     {
         InitializeTree(id);
-    }
-
-    private void Start()
-    {
-        InputManager.Instance.onMouseClick.AddListener(OnMouseClicked);
     }
 
     private void Update()
@@ -49,18 +45,14 @@ public class TreeWorldMap : TreeInstance
         }
     }
     
-    //private functions
-    private void OnMouseClicked(Vector2 clickPosition)
+    public void TrySelectTree(float distance)
     {
         if(!_isUnlocked) return;
         
-        Vector3 pointOnFloor = InputManager.Instance.GetMousePositionInWorld(clickPosition);
-        
-        float distance =  Vector3.Distance(pointOnFloor, transform.position);
         if (distance < hitboxRadius)
         {
             StaticVariables.SelectedTreeId = treeId;
-            SceneManager.LoadScene("GameplayScene");
+            GameManager.Instance.SwitchScene(Scene.TreeView);
         }
     }
 

@@ -27,7 +27,7 @@ public class TreeGameplayUI : MonoBehaviour
     private void Start()
     {
         if(treeNameText == null) Debug.LogError("TreeGameplayUI: No TreeNameText assigned");
-        treeNameText.text = GameplayManager.Instance.currentTreeGameplay.name;
+        treeNameText.text = GameManager.Instance.gameplayManager.currentTreeGameplay.name;
         
         Canvas thisCanvas = GetComponent<Canvas>();
         if(thisCanvas == null)
@@ -42,9 +42,9 @@ public class TreeGameplayUI : MonoBehaviour
     }
 
     //Public Functions
-    public void GoToMainMenu()
+    public void GoToWorldMap()
     {
-        SceneManager.LoadScene("Scenes/WorldMap");
+        GameManager.Instance.SwitchScene(Scene.WorldMap);
     }
     
     public void ShowTreeInfo() => SetUI(UIMenu.TreeInfo);
