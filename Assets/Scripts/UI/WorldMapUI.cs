@@ -11,6 +11,7 @@ public class WorldMapUI : MonoBehaviour
     [SerializeField] private WorldMapUIScreens worldMapUIScreens;
 
     private GameObject _currentUI;
+    private GameManager _gameManager;
     private TreeSelectionManager _treeSelectionManager;
     private ProgressionManager _progressionManager;
     
@@ -23,8 +24,10 @@ public class WorldMapUI : MonoBehaviour
     //Unity Event Functions
     private void Start()
     {
-        _treeSelectionManager = TreeSelectionManager.Instance;
-        _progressionManager = ProgressionManager.Instance;
+        _gameManager = GameManager.Instance;
+        _treeSelectionManager = _gameManager.treeSelectionManager;
+        _progressionManager = _gameManager.progressionManager;
+        
         _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();

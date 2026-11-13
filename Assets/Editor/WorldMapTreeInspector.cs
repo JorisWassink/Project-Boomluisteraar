@@ -54,6 +54,8 @@ public class WorldMapTree_Inspector : Editor
 
         UpdateInfoFields(_ids[startIndex]);
 
+        Script.modelRotation = ModelParent.localRotation.eulerAngles;
+
         if (string.IsNullOrEmpty(idProp.stringValue) && !IsPrefabContext())
             OnTreeSelected(_ids[startIndex]);
 
@@ -115,6 +117,7 @@ public class WorldMapTree_Inspector : Editor
         inst.name = ModelChildName;
         inst.transform.localPosition = Vector3.zero;
         inst.transform.localRotation = Quaternion.identity;
+        
         Undo.RegisterCreatedObjectUndo(inst, "Spawn tree model");
     }
 

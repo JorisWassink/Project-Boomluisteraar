@@ -15,7 +15,9 @@ public class CollectibleUI : MonoBehaviour
     
     [SerializeField] private GameObject collectiblePrefab;
     
+    private GameManager _gameManager;
     private ProgressionManager _progressionManager;
+    
     private List<string> _treeIds;
     private List<string> _pages = new();
     
@@ -25,12 +27,14 @@ public class CollectibleUI : MonoBehaviour
     //Unity Event Functions
     private void Awake()
     {
-        _progressionManager = ProgressionManager.Instance;
         _pages.Add("default");
     }
     
     private void Start()
     {
+        _gameManager = GameManager.Instance;
+        _progressionManager = _gameManager.progressionManager;
+        
         _treeIds = StaticVariables.GetTreeIds;
         _pages.AddRange(_treeIds);
         
