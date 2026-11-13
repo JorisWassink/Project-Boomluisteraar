@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
     [Tooltip("How long before the click becomes a drag")]
     [SerializeField] public float clickDuration;
     
+    [Tooltip("How much to drag before click is disabled")]
+    [SerializeField] public float dragAmount;
+    
     [NonSerialized] public UnityEvent<Vector3> onPointInputStart = new ();
     [NonSerialized] public UnityEvent<Vector3> onPointInputEnd= new ();
     [NonSerialized] public UnityEvent<Vector3> onPointInputTap= new ();
@@ -67,7 +70,7 @@ public class InputManager : MonoBehaviour
         {
             onPointInputEnd.Invoke(worldPos);
             if (context.duration > clickDuration) return;
-            if (PointerPos == _mousePositionAtClick)
+            if (Vector3.Distance(PointerPos, _mousePositionAtClick) < dragAmount)
                 onPointInputTap.Invoke(worldPos);
         }
         

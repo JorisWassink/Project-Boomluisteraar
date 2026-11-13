@@ -36,7 +36,7 @@ public class WorldTreeManager : MonoBehaviour
         for (int index = 0; index < _trees.Count; index++)
         {
             var tree = _trees[index];
-            float currentDistance = Vector3.Distance(pointPosition, tree.transform.position);
+            float currentDistance = Vector3.Distance(pointPosition, tree.pointPosition);
             if (currentDistance <= closestDistance)
             {
                 closestDistance = currentDistance;

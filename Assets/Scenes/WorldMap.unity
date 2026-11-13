@@ -135,6 +135,22 @@ PrefabInstance:
       propertyPath: treeId
       value: Fagus sylvatica
       objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: treeHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.x
+      value: -74.2753
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.y
+      value: -0.0000067571345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.z
+      value: -28.72889
+      objectReference: {fileID: 0}
     - target: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.9
@@ -278,7 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c10ea34cda89b1a9b0b7516a21312a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  clickDuration: 0.1
+  clickDuration: 0.3
+  dragAmount: 0.1
 --- !u!4 &59835722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
@@ -644,6 +661,22 @@ PrefabInstance:
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: treeId
       value: Broussonetia papyrifera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: hitboxRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.x
+      value: -44.2753
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.y
+      value: -0.0000067571345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.z
+      value: -43.189205
       objectReference: {fileID: 0}
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: requiredExperience
@@ -1212,6 +1245,22 @@ PrefabInstance:
       value: Quercus robur
       objectReference: {fileID: 0}
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: hitboxRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.x
+      value: -57.375298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.y
+      value: -0.0000067571345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.z
+      value: -21.889204
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: requiredExperience
       value: 10
       objectReference: {fileID: 0}
@@ -1686,6 +1735,22 @@ PrefabInstance:
       value: Carpinus betulus
       objectReference: {fileID: 0}
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: hitboxRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.x
+      value: -23.175299
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.y
+      value: -0.0000067571345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.z
+      value: -17.189203
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: requiredExperience
       value: 10
       objectReference: {fileID: 0}
@@ -2078,6 +2143,22 @@ PrefabInstance:
     - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: treeId
       value: Fagus sylvatica
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: treeHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.x
+      value: -2.9452991
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.y
+      value: -0.0000067571345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259389900292402792, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
+      propertyPath: pointPosition.z
+      value: -20.458889
       objectReference: {fileID: 0}
     - target: {fileID: 6131190563310961461, guid: fe0940344729bfc5990f009e40a908d1, type: 3}
       propertyPath: m_LocalPosition.x
