@@ -7671,9 +7671,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8303352928453506203, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8303352928453506203, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: acff4859c93695b4ea8a6f5e6adf665d, type: 2}
+    - target: {fileID: -8303352928453506203, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa1b6e1adaae8eb42a0c808f52e8a45d, type: 2}
     - target: {fileID: 919132149155446097, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
       propertyPath: m_Name
       value: CastanaeSativa_trunk
@@ -7681,10 +7689,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -7030219592342931679, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1879036148762769687}
   m_SourcePrefab: {fileID: 100100000, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
 --- !u!4 &4881559520655688596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
   m_PrefabInstance: {fileID: 4914678404477265023}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6511032427955016542 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7030219592342931679, guid: 0f72b9f65fb543e4fad887f4a66bfcf7, type: 3}
+  m_PrefabInstance: {fileID: 4914678404477265023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1879036148762769687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511032427955016542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644debc0b7d33d043af3caab53baa000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.GPUDriven.Runtime::UnityEngine.Rendering.DisallowGPUDrivenRendering
+  m_applyToChildrenRecursively: 0
