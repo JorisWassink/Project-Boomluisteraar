@@ -16,7 +16,9 @@ public enum UIMenu
 
 public class TreeGameplayUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI treeNameText;
+    [SerializeField] private TextMeshProUGUI treeNameTextDutch;
+    [SerializeField] private TextMeshProUGUI treeNameTextLatin;
+    
     [SerializeField] private Canvas miniGameMenu;
     
     private Canvas _treeInfoCanvas;
@@ -26,8 +28,8 @@ public class TreeGameplayUI : MonoBehaviour
     //Unity Event Functions
     private void Start()
     {
-        if(treeNameText == null) Debug.LogError("TreeGameplayUI: No TreeNameText assigned");
-        treeNameText.text = GameManager.Instance.gameplayManager.currentTreeGameplay.name;
+        treeNameTextDutch.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameDutch;
+        treeNameTextLatin.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameLatin;
         
         Canvas thisCanvas = GetComponent<Canvas>();
         if(thisCanvas == null)

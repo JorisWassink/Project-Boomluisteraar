@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7727961476862095906}
   m_Layer: 0
-  m_Name: UI
+  m_Name: TreeViewUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4640077457708195312, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+      propertyPath: m_fontSize
+      value: 39.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5116374657366526291, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -411,11 +415,23 @@ PrefabInstance:
     - target: {fileID: 5182902649442949045, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479889593374376309, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+      propertyPath: m_fontSize
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6025019597774237497, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: miniGameMenu
       value: 
       objectReference: {fileID: 4361336826714742750}
+    - target: {fileID: 6025019597774237497, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+      propertyPath: treeNameTextDutch
+      value: 
+      objectReference: {fileID: 6651765541634010487}
+    - target: {fileID: 6025019597774237497, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+      propertyPath: treeNameTextLatin
+      value: 
+      objectReference: {fileID: 4126022256227245832}
     - target: {fileID: 6653041423360269993, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -490,6 +506,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4579946248496810074, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
   m_PrefabInstance: {fileID: 3135845277712014448}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4126022256227245832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1352858673836950392, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+  m_PrefabInstance: {fileID: 3135845277712014448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &6651765541634010487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8632014199458574599, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
+  m_PrefabInstance: {fileID: 3135845277712014448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &8654205223809971017 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6025019597774237497, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
