@@ -36,7 +36,7 @@ MonoBehaviour:
   - treeName: Carpinus betulus
     treeId: 9B261009
     collectibles: []
-  - treeName: Tamme kastanje
+  - treeName: Castanea sativa
     treeId: 91261121
     collectibles: []
   defaultCollectibles:

@@ -497,10 +497,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 147185022760059548, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3827071050074883175}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8745579887626137515, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6025019597774237497}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
 --- !u!224 &862617876540996866 stripped
 RectTransform:
@@ -517,26 +514,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5785270922755768116, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
   m_PrefabInstance: {fileID: 716711831216832414}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8119091890050961461 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8745579887626137515, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
-  m_PrefabInstance: {fileID: 716711831216832414}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6025019597774237497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119091890050961461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b0d5305f1166251936672d5a5279f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TreeGameplayUI
-  treeNameTextDutch: {fileID: 8632014199458574599}
-  treeNameTextLatin: {fileID: 1352858673836950392}
-  miniGameMenu: {fileID: 0}
 --- !u!224 &8530163545481465658 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9192830972122853540, guid: abfa64fac494fff0395e1fcfe6973737, type: 3}
@@ -558,10 +535,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3800711746226556687, guid: 5bf6f0ca8b55d2a4fa68dd2b91d5a822, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 6025019597774237497}
     - target: {fileID: 3800711746226556687, guid: 5bf6f0ca8b55d2a4fa68dd2b91d5a822, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -802,7 +775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 25.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -928,7 +905,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 21.8
+      value: 27.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowMiniGameMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TreeGameplayUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1054,7 +1055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 16.15
+      value: 20.65
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSizeMin
@@ -1168,7 +1169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359086033833331760, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
       propertyPath: m_fontSize
-      value: 39.8
+      value: 51.35
       objectReference: {fileID: 0}
     - target: {fileID: 8429384452506582678, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
       propertyPath: m_Name
@@ -1179,17 +1180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
---- !u!114 &1352858673836950392 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8359086033833331760, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
-  m_PrefabInstance: {fileID: 7405925213517057864}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &4398406497770679549 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6615056513053434805, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
@@ -1209,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontSize
-      value: 38.9
+      value: 49.7
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_VerticalAlignment
@@ -1313,17 +1303,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6048887933149163708, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
   m_PrefabInstance: {fileID: 8429359338165876902}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8632014199458574599 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
-  m_PrefabInstance: {fileID: 8429359338165876902}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &8848831685584003536
 PrefabInstance:
   m_ObjectHideFlags: 0
