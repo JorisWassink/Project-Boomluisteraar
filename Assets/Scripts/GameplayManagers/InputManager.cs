@@ -29,7 +29,14 @@ public class InputManager : MonoBehaviour
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
     
     public static InputManager Instance;
-  
+
+    //QUICKFIX MOMENT
+    [SerializeField] private float tapMovementTolerance = 40f;
+
+    private Vector2 _pressPosition;
+    private double _pressTime;
+    private bool _pressActive;
+
     //Unity Event Functions
     private void Awake()
     {
@@ -52,7 +59,7 @@ public class InputManager : MonoBehaviour
         _mousePositionAtClick = Vector2.zero;
         //_deviceChecker.LogDeviceData();
     }
-    
+
     //Public Functions
     public void OnPointInput(InputAction.CallbackContext context)
     {
@@ -65,7 +72,12 @@ public class InputManager : MonoBehaviour
             _mousePositionAtClick = PointerPos;
             onPointInputStart.Invoke(worldPos);
         }
-        
+
+        if (context.performed && _pressActive)
+        {
+            onMouseHold.Invoke(position);
+        }
+
         if (context.canceled)
         {
             onPointInputEnd.Invoke(worldPos);
@@ -91,8 +103,7 @@ public class InputManager : MonoBehaviour
         Vector3 mouseWorldPosition = CurrentCamera.ScreenToWorldPoint(mouseVec3);
         
         RaycastHit raycastHit;
-        if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition,
-                out raycastHit))
+        if (Physics.Raycast(cameraPosition, mouseWorldPosition - cameraPosition, out raycastHit))
         {
             return raycastHit.point;
         }
@@ -111,6 +122,11 @@ public class InputManager : MonoBehaviour
         Vector3 pointOnFloor = Vector3.Lerp(cameraPosition, mouseWorldPosition, t);
         return pointOnFloor;
     }
- 
+
+    public Ray GetPointerRay(Vector2 screenPosition)
+    {
+        return currentCamera.ScreenPointToRay(screenPosition);
+    }
+
 }
 

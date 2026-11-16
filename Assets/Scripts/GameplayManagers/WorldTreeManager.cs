@@ -20,6 +20,14 @@ public class WorldTreeManager : MonoBehaviour
         InputManager.onPointInputTap.AddListener(OnPointInput);
         
         CheckProgression();
+
+        if (InputManager.Instance == null)
+        {
+            Debug.LogError("WorldTreeManager: InputManager missing!");
+            return;
+        }
+
+        InputManager.Instance.onMouseClick.AddListener(OnWorldTap);
     }
 
     private void OnDestroy()

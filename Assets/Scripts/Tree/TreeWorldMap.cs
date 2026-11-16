@@ -24,17 +24,24 @@ public class TreeWorldMap : TreeInstance
     //TODO: fix camera getting
     private Camera _cam;
     private bool _isUnlocked = true;
-    
+
+
+    //QUIK FIX
+    public bool IsUnlocked => _isUnlocked;
+    public float HitboxRadius => hitboxRadius;
+
     //Unity event functions
     private void Awake()
     {
         InitializeTree(id);
     }
 
+    /*
     private void Start()
     {
         pointPosition = GetModelCenterOnFloor();
     }
+    */
 
     private void Update()
     {
@@ -86,6 +93,14 @@ public class TreeWorldMap : TreeInstance
         
         var halfWay = new Vector3(transform.position.x, transform.position.y, transform.position.z + dot / 2);
         return halfWay;
+    }
+
+    public void SelectTree()
+    {
+        if (!_isUnlocked) return;
+
+        StaticVariables.SelectedTreeId = treeId;
+        SceneManager.LoadScene("GameplayScene");
     }
 
     //Debug Functions
