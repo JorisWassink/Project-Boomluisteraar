@@ -13,16 +13,16 @@ public class WorldMapCamera : MonoBehaviour
     private Camera _camera;
 
     private Vector3 _startCamPos;
-    
+
     private bool _dragging = false;
     private bool _positionDirty = false;
 
-    //event functions
+    //Unity Event Functions
     private void Start()
     {
         _camera = GetComponent<Camera>();
-        InputManager.Instance.onMousePressed.AddListener(OnMousePressed);
-        InputManager.Instance.onMouseRelease.AddListener(OnMouseReleased);
+        InputManager.Instance.onPointInputStart.AddListener(OnMousePressed);
+        InputManager.Instance.onPointInputEnd.AddListener(OnMouseReleased);
     }
 
     private void Update()
@@ -48,15 +48,15 @@ public class WorldMapCamera : MonoBehaviour
         }
     }
     
-    //own functions
-    private void OnMousePressed(Vector2 clickPosition)
+    //Private Functions
+    private void OnMousePressed(Vector3 clickPosition)
     {
         _startCamPos = transform.position;
         _dragOrigin = GroundPointFrom(_startCamPos);
         _dragging = true;
     }
     
-    private void OnMouseReleased(Vector2 clickPosition)
+    private void OnMouseReleased(Vector3 clickPosition)
     {
         _dragging = false;
         _positionDirty = true;
@@ -64,7 +64,7 @@ public class WorldMapCamera : MonoBehaviour
             raycastHit.point : new Vector3(transform.position.x, 0, transform.position.z);
     }
     
-    //helpers
+    //Helpers
     private Vector3 GroundPointFrom(Vector3 camPos)
     {
         Ray ray = _camera.ScreenPointToRay(Pointer.current.position.ReadValue());

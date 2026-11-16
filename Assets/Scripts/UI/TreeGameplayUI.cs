@@ -11,71 +11,57 @@ public enum UIMenu
 {
     TreeInfo,
     MiniGameMenu,
-    DialogueMenu
+    DialogueMenu,
+    CollectibleMenu
 }
 
 public class TreeGameplayUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI treeNameText;
-    [SerializeField] private Canvas miniGameMenu;
+    [SerializeField] private TextMeshProUGUI treeNameTextDutch;
+    [SerializeField] private TextMeshProUGUI treeNameTextLatin;
     
-    private Canvas _treeInfoCanvas;
-    private Canvas _activeCanvas;
-    private List<Canvas> _allCanvases = new List<Canvas>();
+    [SerializeField] private GameObject treeInfoMenu;
+    [SerializeField] private GameObject miniGameMenu;
+    [SerializeField] private GameObject collectibleMenu;
+    [SerializeField] private GameObject dialogueMenu;
     
-
-
+    private GameManager GameManager => GameManager.Instance;
+    
+    private GameObject _treeInfoUI;
+    private GameObject _activeUI;
+    private List<GameObject> _allUIs = new ();
+    
+    //Unity Event Functions
     private void Start()
     {
-        if(treeNameText == null) Debug.LogError("TreeGameplayUI: No TreeNameText assigned");
-        treeNameText.text = GameplayManager.Instance.currentTreeGameplay.name;
+        treeNameTextDutch.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameDutch;
+        treeNameTextLatin.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameLatin;
         
-        Canvas thisCanvas = GetComponent<Canvas>();
-        if(thisCanvas == null)
-            Debug.LogError("TreeGameplayUI: Canvas not found");
-        else 
-            _treeInfoCanvas = thisCanvas;
+        _allUIs.Add(treeInfoMenu);
+        _allUIs.Add(miniGameMenu);
+        _allUIs.Add(collectibleMenu);
+        _allUIs.Add(dialogueMenu);
         
-        _allCanvases.Add(_treeInfoCanvas);
-        _allCanvases.Add(miniGameMenu);
-        SetUI(UIMenu.TreeInfo);
-        
+        SetUI(treeInfoMenu);
     }
 
-    //Button events
-    public void GoToMainMenu()
+    //Public Functions
+    public void GoToWorldMap()
     {
-        SceneManager.LoadScene("Scenes/WorldMap");
+        GameManager.Instance.SwitchScene(Scene.WorldMap);
     }
-    
-    public void ShowTreeInfo() => SetUI(UIMenu.TreeInfo);
-    public void ShowMiniGameMenu() => SetUI(UIMenu.MiniGameMenu);
-    public void ShowDialogueMenu() => SetUI(UIMenu.DialogueMenu);
-
-    private void SetUI(UIMenu menu)
+    public void ShowTreeInfo() => SetUI(treeInfoMenu);
+    public void ShowMiniGameMenu() => GameManager.SwitchScene(Scene.JumpUpMiniGame);
+    public void ShowCollectibleMenu() => SetUI(collectibleMenu);
+    public void ShowDialogueMenu() => SetUI(dialogueMenu);
+    //Private Functions
+    private void SetUI(GameObject menu)
     {
-        Canvas canvas;
-        switch (menu)
+        foreach (GameObject ui in _allUIs)
         {
-            case UIMenu.MiniGameMenu:
-                canvas = miniGameMenu;
-                break;
-            
-            case UIMenu.TreeInfo:
-            default:
-                canvas = _treeInfoCanvas;
-                break;
+            ui.SetActive(false);
         }
-        foreach (var c in _allCanvases)
-        {
-            if (c != canvas)
-            {
-                c.enabled = false;
-                continue;
-            }
-            
-            c.enabled = true;
-            _activeCanvas = c;
-        }
+        menu.SetActive(true);
+        _activeUI = menu;
     }
 }

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 658014b786de07f5ca5dad8aaf9c5931, type: 3}
+  m_Name: CollectibleDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  defaultSprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+  treeCollectibles:
+  - treeName: Sequoiadendron giganteum
+    dutchName: Mammoetboom
+    treeId: 9B261005
+    collectibles: []
+  - treeName: Quercus robur
+    dutchName: Zomereik
+    treeId: 91261120
+    collectibles:
+    - name: Eikenblad
+      sprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 6c9de211a1b3d5046830159eff0a69c2, type: 3}
+      description: Een blad van de zomereik
+      observations: Gekregen... weet ik veel eigenlijk
+      id: 74a3d889-9b45-4fc1-934b-c73cb3987115
+    - name: Eikel
+      sprite: {fileID: 2800000, guid: 77eab2760878b3d45910533fe619407b, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 29600ae064c4ae14a8f77c594901c95e, type: 3}
+      description: De noot van de eikenboom
+      observations: Gekregen... weet ik veel eigenlijk
+      id: 86420d83-e96e-4294-821d-814beb1bf1ad
+  - treeName: Fagus sylvatica
+    dutchName: Beuk
+    treeId: 9B261002
+    collectibles:
+    - name: Beukenblad
+      sprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+      spriteSilhouette: {fileID: 0}
+      description: Blad van beuk
+      observations: Kan je vinden, in een boom
+      id: f11aa848-5932-4350-8ef4-ea0024c6686a
+  - treeName: Broussonetia papyrifera
+    dutchName: Papiermoerbei
+    treeId: 91261115
+    collectibles: []
+  - treeName: Fagus sylvatica 'Atropurpunicea'
+    dutchName: Paarse Beuk
+    treeId: 91261114
+    collectibles: []
+  - treeName: Carpinus betulus
+    dutchName: Haagbeuk
+    treeId: 9B261009
+    collectibles: []
+  - treeName: Castanea sativa
+    dutchName: Tamme Kastanje
+    treeId: 91261121
+    collectibles: []
+  defaultCollectibles: []
