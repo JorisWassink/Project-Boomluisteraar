@@ -9,30 +9,38 @@ public class CollectibleUI : MonoBehaviour
     [SerializeField] private float horizontalSpacing = 10;
     
     [SerializeField] private TextMeshProUGUI pageNameText;
+    [SerializeField] private TextMeshProUGUI discoveredText;
+    [SerializeField] private TextMeshProUGUI discriptionText;
+    [SerializeField] private TextMeshProUGUI observationText;
+    
+    [SerializeField] private RawImage image;
+    
     [SerializeField] private GameObject pageContentObject;
     [SerializeField] private Button pageLeftButton;
     [SerializeField] private Button pageRightButton;
     
     [SerializeField] private GameObject collectiblePrefab;
     
+    private GameManager _gameManager;
     private ProgressionManager _progressionManager;
-    private List<string> _treeIds;
-    private List<string> _pages = new();
     
+    private List<string> _collectibleIds;
+    private List<string> _pages = new();
+
+    private string _currentTreeId;
     private int _currentPage = 0;
     
     
     //Unity Event Functions
-    private void Awake()
-    {
-        _progressionManager = ProgressionManager.Instance;
-        _pages.Add("default");
-    }
-    
     private void Start()
     {
-        _treeIds = StaticVariables.GetTreeIds;
-        _pages.AddRange(_treeIds);
+        _gameManager = GameManager.Instance;
+        _progressionManager = _gameManager.progressionManager;
+
+        _currentTreeId = StaticVariables.SelectedTreeId;
+        _collectibleIds = StaticVariables.GetCollectibleIdsByTree(_currentTreeId);
+        
+        _pages.AddRange(_collectibleIds);
         
         pageLeftButton.onClick.AddListener(() => SetPage(_currentPage - 1));
         pageRightButton.onClick.AddListener(() => SetPage(_currentPage + 1));
@@ -47,26 +55,23 @@ public class CollectibleUI : MonoBehaviour
         
         _currentPage =  pageNumber;
         
-        List<string> collectibleIds = new();
-        string pageId = _pages[pageNumber];
-        string pageName = "";
+        string collectibleId = _pages[pageNumber];
+        bool isCollected =  _progressionManager.CollectibleIsUnlocked(collectibleId);
         
-        switch (pageId)
-        {
-            case "default":
-                collectibleIds = StaticVariables.GetDefaultCollectibleIds;
-                pageName = "General Collectibles";
-                break;
-            default:
-                string treeId = pageId;
-                collectibleIds = StaticVariables.GetCollectibleIdsByTree(treeId);
-                pageName = $"{StaticVariables.GetTreeName(treeId)} Collectibles";
-                break;
-        }
+        string collectibleName = StaticVariables.GetCollectibleName(collectibleId);
+        string descriptionString = StaticVariables.GetCollectibleDescription(collectibleId);
+        string observationString = StaticVariables.GetCollectibleObservations(collectibleId);
         
-        pageNameText.text = pageName;
+        Texture2D sprite = StaticVariables.GetCollectibleSprite(collectibleId, isCollected);
+
         
-        FillPage(collectibleIds);
+        pageNameText.text = isCollected ? collectibleName : "Onbekend object";
+        discoveredText.text = isCollected ? "Ontdekt" : "Nog niet ontdekt";
+        discriptionText.text = isCollected ? descriptionString : "Nog niet ontdekt";
+        observationText.text = observationString;
+        
+        image.texture = sprite;
+        
         CheckButtons(); 
     }
 
@@ -77,77 +82,6 @@ public class CollectibleUI : MonoBehaviour
         
         pageLeftButton.gameObject.SetActive(canGoLeft);
         pageRightButton.gameObject.SetActive(canGoRight);
-    }
-
-    private void FillPage(List<string> ids)
-    {
-        //clear page
-        while (pageContentObject.transform.childCount > 0) {
-            DestroyImmediate(pageContentObject.transform.GetChild(0).gameObject);
-        }
-
-        GameObject row = null;
-        int rowIndex = 0;
-        
-        for (int i = 0; i < ids.Count; i++)
-        {
-            string id = ids[i];
-            if(i % 3  == 0)
-            {
-                rowIndex++;
-                row = MakeRow(pageContentObject.transform, rowIndex);
-            }
-
-            if (row != null)
-            {
-                bool locked = !_progressionManager.CollectibleIsUnlocked(id);
-                MakeCollectible(row.transform, id, locked);
-            }
-        }
-    }
-    
-    //Helpers
-    private GameObject MakeRow(Transform parent, int rowIndex)
-    {
-        GameObject row = new GameObject();
-        row.AddComponent<RectTransform>();
-        HorizontalLayoutGroup hlg = row.AddComponent<HorizontalLayoutGroup>();
-        hlg.childForceExpandHeight =  true;
-        hlg.childForceExpandWidth = true;
-        hlg.childControlHeight = false;
-        hlg.childControlWidth = false;
-        hlg.spacing = horizontalSpacing;
-        row.transform.SetParent(parent);
-        row.name = $"Row{rowIndex}";
-        return row;
-    }
-    
-    private void MakeCollectible(Transform row, string id, bool locked)
-    {
-        string collectibleName = StaticVariables.GetCollectibleName(id);
-        Texture2D collectibleSprite = StaticVariables.GetCollectibleSprite(id);
-        
-        GameObject obj = Instantiate(collectiblePrefab, row);
-        obj.name = collectibleName;
-        
-        RawImage rawImage = obj.GetComponentInChildren<RawImage>();
-        rawImage.texture = collectibleSprite;
-        
-        TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = collectibleName;
-
-        if (locked)
-        {
-            //very bad temporary solution
-            GameObject greyFilter = new();
-            RectTransform rt = greyFilter.AddComponent<RectTransform>();
-            rt.SetParent(obj.transform);
-            rt.anchoredPosition  = new Vector2(0, 0);
-            RawImage image = greyFilter.AddComponent<RawImage>();
-            Color grey = Color.grey;
-            grey.a = .5f;
-            image.color = grey;
-        }
     }
     
 }

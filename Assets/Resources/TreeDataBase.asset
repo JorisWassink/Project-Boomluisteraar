@@ -14,31 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TreeModelDataBase
   trees:
   - name: Sequoiadendron giganteum
+    dutchName: Mammoetboom
     id: 9B261005
+    requiredExp: 999
     type: 2
     model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
   - name: Quercus robur
+    dutchName: Zomereik
     id: 91261120
+    requiredExp: 999
     type: 1
     model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
   - name: Fagus sylvatica
+    dutchName: Beuk
     id: 9B261002
+    requiredExp: 999
     type: 2
     model: {fileID: 4105606081656854162, guid: 52e41a013defa7b8d9d42530c9b46b40, type: 3}
   - name: Broussonetia papyrifera
+    dutchName: Papiermoerbei
     id: 91261115
+    requiredExp: 999
     type: 1
     model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
   - name: Fagus sylvatica 'Atropurpunicea'
+    dutchName: Paarse Beuk
     id: 91261114
+    requiredExp: 999
     type: 1
     model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
   - name: Carpinus betulus
+    dutchName: Haagbeuk
     id: 9B261009
+    requiredExp: 999
     type: 2
     model: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
-  - name: Tamme kastanje
+  - name: Castanea sativa
+    dutchName: Tamme Kastanje
     id: 91261121
+    requiredExp: 100
     type: 1
     model: {fileID: 8801485122542755193, guid: f370ff532e31537429715901b4a37530, type: 3}
   soils:

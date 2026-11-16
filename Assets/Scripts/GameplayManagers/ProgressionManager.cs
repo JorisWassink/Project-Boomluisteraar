@@ -7,21 +7,13 @@ using UnityEngine.Serialization;
 public class ProgressionManager : MonoBehaviour
 {
     [HideInInspector] public int playerExperience = 0;
+    [HideInInspector] public int nextExperienceTarget = 0;
     [HideInInspector] public UnityEvent onPointsUpdate = new UnityEvent();
     
     private Dictionary<string, bool> collectibles = new Dictionary<string, bool>();
-    
-    public static ProgressionManager Instance;
+    private List<int> expRequirements = new List<int>();
 
     //Unity event functions
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
-
     private void Start()
     {
         List<string> allCollectibleIds = StaticVariables.GetAllCollectibleIds;
@@ -29,6 +21,15 @@ public class ProgressionManager : MonoBehaviour
         {
             collectibles.Add(collectibleId, false);
         }
+
+        var r = StaticVariables.GetTreeIds;
+        foreach (string id in r)
+        {
+            expRequirements.Add(StaticVariables.GetTreeExpRequirement(id));
+        }
+        expRequirements.Sort();
+        nextExperienceTarget = expRequirements[0];
+        UpdatePoints(0);
     }
     
     //Public functions
@@ -51,6 +52,10 @@ public class ProgressionManager : MonoBehaviour
     //Private functions
     private void UpdatePoints(int points)
     {
+        if (points >= nextExperienceTarget)
+        {
+            //todo: proper system
+        }
         playerExperience = points;
         onPointsUpdate.Invoke();
     }
