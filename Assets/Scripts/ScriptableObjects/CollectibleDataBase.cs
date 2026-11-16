@@ -10,6 +10,9 @@ public class CollectibleDataBase : ScriptableObject
     {
         public string name;
         public Texture2D sprite;
+        public Texture2D spriteSilhouette;
+        public string description;
+        public string observations;
 
         [SerializeField, HideInInspector] string id;
         public string Id => id;
@@ -26,6 +29,19 @@ public class CollectibleDataBase : ScriptableObject
         public void SetDefaultSprite(Texture2D defaultSprite)
         {
             if (sprite == null) sprite = defaultSprite;
+
+            if (spriteSilhouette == null)
+            {
+                Color[] src = sprite.GetPixels();
+                Color[] dst = new Color[src.Length];
+                for (int i = 0; i < src.Length; i++)
+                    dst[i] = new Color(Color.grey.r, Color.grey.g, Color.grey.b, src[i].a);
+
+                var tex = new Texture2D(sprite.width, sprite.height, TextureFormat.RGBA32, false);
+                tex.SetPixels(dst);
+                tex.Apply();
+                spriteSilhouette = tex;
+            }
         }
     }
 
@@ -33,6 +49,7 @@ public class CollectibleDataBase : ScriptableObject
     public class CollectibleListEntry
     {
         public string treeName;
+        public string dutchName;
         public string treeId;
         public List<CollectibleEntry> collectibles = new();
     }
@@ -66,10 +83,20 @@ public class CollectibleDataBase : ScriptableObject
     {
         return GetCollectibleEntry(collectibleId).name;
     }
-    
-    public Texture2D GetCollectibleSprite(string collectibleId)
+
+    public string GetCollectibleDescription(string collectibleId)
     {
-        return GetCollectibleEntry(collectibleId).sprite;
+        return GetCollectibleEntry(collectibleId).description;
+    }
+
+    public string GetCollectibleObservations(string collectibleId)
+    {
+        return GetCollectibleEntry(collectibleId).observations;
+    }
+    
+    public Texture2D GetCollectibleSprite(string collectibleId, bool unlocked)
+    {
+        return unlocked ? GetCollectibleEntry(collectibleId).sprite : GetCollectibleEntry(collectibleId).spriteSilhouette;
     }
     
 
@@ -77,6 +104,7 @@ public class CollectibleDataBase : ScriptableObject
     {
         foreach (var t in allCollectibles)
             if (t.Id == id) return t;
+        
         return null;
     }
     
@@ -94,7 +122,8 @@ public class CollectibleDataBase : ScriptableObject
                 entry = new CollectibleListEntry { treeId = tree.id };
                 treeCollectibles.Add(entry);
             }
-            entry.treeName = tree.name; // keeps the label in sync after renames
+            entry.treeName = tree.name;
+            entry.dutchName =  tree.dutchName;
         }
 
         treeCollectibles.RemoveAll(e => !treeDataBase.trees.Exists(t => t.id == e.treeId));
@@ -126,6 +155,7 @@ public class CollectibleDataBase : ScriptableObject
         foreach (var list in treeCollectibles)
         {
             allCollectibles.AddRange(list.collectibles);
+            Debug.Log($"Adding {list.collectibles.Count} collectibles to the tree");
         }
     }
 #endif

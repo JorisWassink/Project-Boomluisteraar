@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class WorldMapUI : MonoBehaviour
 {
-    [SerializeField] private string labelText;
+    [SerializeField] private string requirementLabelText;
     [SerializeField] private TextMeshProUGUI experienceLabel;
+    [SerializeField] private TextMeshProUGUI requirementsLabel;
+    [SerializeField] private Slider experienceSlider;
     [SerializeField] private WorldMapUIScreens worldMapUIScreens;
 
     private GameObject _currentUI;
@@ -18,7 +21,6 @@ public class WorldMapUI : MonoBehaviour
     private List<GameObject> Screens =>  new List<GameObject>
     {
         worldMapUIScreens.mainMapUI, 
-        worldMapUIScreens.collectiblesUI
     };
 
     //Unity Event Functions
@@ -34,13 +36,6 @@ public class WorldMapUI : MonoBehaviour
     }
     
     //Public Functions
-    public void SetCollectiblesUI()
-    {
-        SetCurrentUI(worldMapUIScreens.collectiblesUI);
-        _treeSelectionManager.SetUIMode(true);
-        _progressionManager.PrintAllCollectibleNamesDebug();
-    }
-
     public void SetDefaultUI()
     {
         SetCurrentUI(worldMapUIScreens.mainMapUI);
@@ -51,8 +46,11 @@ public class WorldMapUI : MonoBehaviour
     private void UpdateExperienceLabel()
     {
         int points = _progressionManager.playerExperience;
+        int goal = _progressionManager.nextExperienceTarget;
 
-        experienceLabel.text = labelText + points;
+        experienceLabel.text = $"{points} /  {goal} XP";
+        experienceSlider.value = points / goal;
+        requirementsLabel.text = $"{requirementLabelText} {goal}XP";
     }
 
     private void SetCurrentUI(GameObject currentUI)
@@ -70,5 +68,4 @@ public class WorldMapUI : MonoBehaviour
 public struct WorldMapUIScreens
 {
     public GameObject mainMapUI;
-    public GameObject collectiblesUI;
 }

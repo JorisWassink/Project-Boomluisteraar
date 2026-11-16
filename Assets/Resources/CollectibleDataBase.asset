@@ -13,42 +13,52 @@ MonoBehaviour:
   m_Name: CollectibleDataBase
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleDataBase
   treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
-  defaultSprite: {fileID: 2800000, guid: 5557e8bc801101e8fb51d3553a9a6536, type: 3}
+  defaultSprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
   treeCollectibles:
   - treeName: Sequoiadendron giganteum
+    dutchName: Mammoetboom
     treeId: 9B261005
     collectibles: []
   - treeName: Quercus robur
+    dutchName: Zomereik
     treeId: 91261120
-    collectibles: []
+    collectibles:
+    - name: Eikenblad
+      sprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 6c9de211a1b3d5046830159eff0a69c2, type: 3}
+      description: Een blad van de zomereik
+      observations: Gekregen... weet ik veel eigenlijk
+      id: 74a3d889-9b45-4fc1-934b-c73cb3987115
+    - name: Eikel
+      sprite: {fileID: 2800000, guid: 77eab2760878b3d45910533fe619407b, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 29600ae064c4ae14a8f77c594901c95e, type: 3}
+      description: De noot van de eikenboom
+      observations: Gekregen... weet ik veel eigenlijk
+      id: 86420d83-e96e-4294-821d-814beb1bf1ad
   - treeName: Fagus sylvatica
+    dutchName: Beuk
     treeId: 9B261002
     collectibles:
-    - name: Fagus Leaf
-      sprite: {fileID: 2800000, guid: 5557e8bc801101e8fb51d3553a9a6536, type: 3}
+    - name: Beukenblad
+      sprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+      spriteSilhouette: {fileID: 0}
+      description: Blad van beuk
+      observations: Kan je vinden, in een boom
       id: f11aa848-5932-4350-8ef4-ea0024c6686a
   - treeName: Broussonetia papyrifera
+    dutchName: Papiermoerbei
     treeId: 91261115
     collectibles: []
   - treeName: Fagus sylvatica 'Atropurpunicea'
+    dutchName: Paarse Beuk
     treeId: 91261114
     collectibles: []
   - treeName: Carpinus betulus
+    dutchName: Haagbeuk
     treeId: 9B261009
     collectibles: []
-  - treeName: Tamme kastanje
+  - treeName: Castanea sativa
+    dutchName: Tamme Kastanje
     treeId: 91261121
     collectibles: []
-  defaultCollectibles:
-  - name: Ladybug
-    sprite: {fileID: 2800000, guid: b4263b6ae5277ff33ac8d4975b886b89, type: 3}
-    id: 8d20ef13-f5d0-4c21-9301-90aca3198e1c
-  - name: Green Ladybug
-    sprite: {fileID: 2800000, guid: 09f52622f31164fbaac9dd7010c8bfa0, type: 3}
-    id: 46f40769-edae-41c3-bb15-12ba2dbfbd28
-  - name: Blue Ladybug
-    sprite: {fileID: 2800000, guid: e13105c1013712694899be4eba3663eb, type: 3}
-    id: ff8551ec-0903-4d74-8e9d-f02aa426de55
-  - name: Pink Ladybug
-    sprite: {fileID: 2800000, guid: 09d7c2c1d128f460c9f4d98566a9e18b, type: 3}
-    id: 85302ec5-eb9b-404d-a9d7-3842b1d6fac4
+  defaultCollectibles: []
