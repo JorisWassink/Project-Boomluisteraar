@@ -34,7 +34,9 @@ public static class StaticVariables
     public static int GetTreeExpRequirement(string treeId)  => Trees.GetTreeExpRequirement(treeId);
     public static List<string> GetCollectibleIdsByTree(string treeId) => Collectibles.GetCollectibleIdsByTree(treeId);
     public static string GetCollectibleName(string collectibleID) => Collectibles.GetCollectibleName(collectibleID);
-    public static Texture2D GetCollectibleSprite(string collectibleID) => Collectibles.GetCollectibleSprite(collectibleID);
+    public static string GetCollectibleDescription(string collectibleID) => Collectibles.GetCollectibleDescription(collectibleID);
+    public static string GetCollectibleObservations(string collectibleID) => Collectibles.GetCollectibleObservations(collectibleID);
+    public static Texture2D GetCollectibleSprite(string collectibleID, bool unlocked) => Collectibles.GetCollectibleSprite(collectibleID, unlocked);
     public static List<string> GetAllCollectibleIds => Collectibles.GetAllCollectibleIds();
     public static List<string> GetDefaultCollectibleIds => Collectibles.GetDefaultCollectibleIds();
     public static List<string> GetTreeIds => Trees.GetTreeIds();
