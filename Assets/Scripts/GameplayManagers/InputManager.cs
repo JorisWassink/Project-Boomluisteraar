@@ -75,7 +75,7 @@ public class InputManager : MonoBehaviour
 
         if (context.performed && _pressActive)
         {
-            onMouseHold.Invoke(position);
+            onPointInputTap.Invoke(worldPos);
         }
 
         if (context.canceled)
@@ -122,11 +122,5 @@ public class InputManager : MonoBehaviour
         Vector3 pointOnFloor = Vector3.Lerp(cameraPosition, mouseWorldPosition, t);
         return pointOnFloor;
     }
-
-    public Ray GetPointerRay(Vector2 screenPosition)
-    {
-        return currentCamera.ScreenPointToRay(screenPosition);
-    }
-
 }
 

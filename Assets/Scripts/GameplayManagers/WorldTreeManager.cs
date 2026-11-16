@@ -27,7 +27,7 @@ public class WorldTreeManager : MonoBehaviour
             return;
         }
 
-        InputManager.Instance.onMouseClick.AddListener(OnWorldTap);
+        InputManager.Instance.onPointInputTap.AddListener(OnPointInput);
     }
 
     private void OnDestroy()
