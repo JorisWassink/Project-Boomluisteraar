@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
+  m_Name: OutlineDarkGrey
   m_Shader: {fileID: -6465566751694194690, guid: b13dfac20f738f94b81a226e240ad999, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -45,7 +45,7 @@ Material:
     - _Cull: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _Outline_Thickness: 7
+    - _Outline_Thickness: 0.01
     - _QueueControl: 1
     - _QueueOffset: 0
     - _SrcBlend: 1
@@ -55,7 +55,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.19999999, g: 0.19999999, b: 0.19999999, a: 1}
     - _Outlinecolor2: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     {
         [Scene.TreeView] = "GameplayScene",
         [Scene.WorldMap] = "WorldMap",
+        [Scene.JumpUpMiniGame] = "JUMPUP",
     };
 
 
@@ -58,7 +59,6 @@ public class GameManager : MonoBehaviour
         
         if (scene == Scene.WorldMap) managers = worldMapManagers;
         else if (scene == Scene.TreeView) managers = treeViewManagers;
-        else Debug.LogError($"Scene {scene.ToString()} is not a valid scene");
         
         LoadScene(scene, managers);
     }
@@ -124,4 +124,5 @@ public enum Scene
 {
     WorldMap,
     TreeView,
+    JumpUpMiniGame
 }

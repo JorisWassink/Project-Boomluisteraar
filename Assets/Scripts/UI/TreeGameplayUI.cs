@@ -12,7 +12,6 @@ public enum UIMenu
     TreeInfo,
     MiniGameMenu,
     DialogueMenu,
-    MinigameTest,
     CollectibleMenu
 }
 
@@ -25,6 +24,8 @@ public class TreeGameplayUI : MonoBehaviour
     [SerializeField] private GameObject miniGameMenu;
     [SerializeField] private GameObject collectibleMenu;
     [SerializeField] private GameObject dialogueMenu;
+    
+    private GameManager GameManager => GameManager.Instance;
     
     private GameObject _treeInfoUI;
     private GameObject _activeUI;
@@ -50,7 +51,7 @@ public class TreeGameplayUI : MonoBehaviour
         GameManager.Instance.SwitchScene(Scene.WorldMap);
     }
     public void ShowTreeInfo() => SetUI(treeInfoMenu);
-    public void ShowMiniGameMenu() => SetUI(miniGameMenu);
+    public void ShowMiniGameMenu() => GameManager.SwitchScene(Scene.JumpUpMiniGame);
     public void ShowCollectibleMenu() => SetUI(collectibleMenu);
     public void ShowDialogueMenu() => SetUI(dialogueMenu);
     //Private Functions
