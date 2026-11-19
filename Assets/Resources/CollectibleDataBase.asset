@@ -16,11 +16,11 @@ MonoBehaviour:
   defaultSprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
   treeCollectibles:
   - treeName: Sequoiadendron giganteum
-    dutchName: Mammoetboom
+    dutchName: 
     treeId: 9B261005
     collectibles: []
   - treeName: Quercus robur
-    dutchName: Zomereik
+    dutchName: 
     treeId: 91261120
     collectibles:
     - name: Eikenblad
@@ -36,7 +36,7 @@ MonoBehaviour:
       observations: Gekregen... weet ik veel eigenlijk
       id: 86420d83-e96e-4294-821d-814beb1bf1ad
   - treeName: Fagus sylvatica
-    dutchName: Beuk
+    dutchName: 
     treeId: 9B261002
     collectibles:
     - name: Beukenblad
@@ -46,19 +46,19 @@ MonoBehaviour:
       observations: Kan je vinden, in een boom
       id: f11aa848-5932-4350-8ef4-ea0024c6686a
   - treeName: Broussonetia papyrifera
-    dutchName: Papiermoerbei
+    dutchName: 
     treeId: 91261115
     collectibles: []
   - treeName: Fagus sylvatica 'Atropurpunicea'
-    dutchName: Paarse Beuk
+    dutchName: 
     treeId: 91261114
     collectibles: []
   - treeName: Carpinus betulus
-    dutchName: Haagbeuk
+    dutchName: 
     treeId: 9B261009
     collectibles: []
   - treeName: Castanea sativa
-    dutchName: Tamme Kastanje
+    dutchName: 
     treeId: 91261121
     collectibles: []
   defaultCollectibles: []

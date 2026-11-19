@@ -469,7 +469,7 @@ MonoBehaviour:
     y: -89.00601
     width: 153.90057
     height: 111.49869
-  viewportSize: {x: 46.134155, y: 92.37631}
+  viewportSize: {x: 51.961777, y: 92.37631}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,7 +1406,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560759161}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1560759164
 Camera:
   m_ObjectHideFlags: 0

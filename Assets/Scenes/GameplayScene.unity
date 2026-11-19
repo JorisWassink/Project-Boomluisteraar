@@ -336,6 +336,18 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1755bd4939912c0afeb110e56193b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraRegistrar
 --- !u!1 &381275716
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +418,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381275716}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &381275719
 Camera:
   m_ObjectHideFlags: 0
@@ -1006,7 +1018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26df6a75d33f32d7d8e94c3386f64a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayManager
-  currentCamera: {fileID: 0}
   currentTreeGameplay: {fileID: 0}
 --- !u!4 &1328052980
 Transform:
