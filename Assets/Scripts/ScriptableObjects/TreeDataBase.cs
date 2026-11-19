@@ -9,7 +9,7 @@ public class TreeDataBase : ScriptableObject
     public class TreeEntry
     {
         public string name;
-        public string dutchName;
+        public string englishName;
         public string id;
         public int requiredExp;
         public StaticVariables.DataType type;
@@ -32,9 +32,9 @@ public class TreeDataBase : ScriptableObject
         return GetTreeEntry(id).model;
     }
     
-    public string GetTreeName(string id, bool dutch)
+    public string GetTreeName(string id, bool english)
     {
-        return dutch ? GetTreeEntry(id).dutchName : GetTreeEntry(id).name;
+        return english ? GetTreeEntry(id).englishName : GetTreeEntry(id).name;
     }
     
     public int GetTreeExpRequirement(string id)

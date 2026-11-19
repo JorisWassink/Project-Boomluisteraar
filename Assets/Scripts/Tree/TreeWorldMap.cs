@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class TreeWorldMap : TreeInstance
 {
-    [SerializeField] public int requiredExperience = 0;
     
     [SerializeField] private float hitboxRadius = 10f;
     [SerializeField] private float treeHeight = 20f;    
     
     [SerializeField] private RawImage lockSprite;
     
+    [HideInInspector] public int requiredExperience = 0;
     [HideInInspector] public string id;
     [HideInInspector] public List<TreeModel> models = new();
     [HideInInspector] public Vector3 modelRotation;

@@ -13,6 +13,7 @@ public class WorldMapTree_Inspector : Editor
     const string ModelParentName = "Model";
 
     TextField _idField;
+    TextField _expField;
     TextField _sensorTypeField;
 
     List<string> _ids;
@@ -37,6 +38,7 @@ public class WorldMapTree_Inspector : Editor
         dropdown.RegisterValueChangedCallback(_ => OnTreeSelected(_ids[dropdown.index]));
 
         _idField = MakeReadOnlyField("ID");
+        _expField = MakeReadOnlyField("Required Exp");
         _sensorTypeField = MakeReadOnlyField("Sensor Type");
 
         InspectorElement.FillDefaultInspector(root, serializedObject, this);
@@ -44,6 +46,7 @@ public class WorldMapTree_Inspector : Editor
         root.Add(MakeDivider());
         root.Add(dropdown);
         root.Add(_idField);
+        root.Add(_expField);
         root.Add(_sensorTypeField);
         root.Add(MakeDivider());
 
@@ -66,6 +69,7 @@ public class WorldMapTree_Inspector : Editor
     {
         var entry = StaticVariables.GetTreeEntry(id);
         _idField.SetValueWithoutNotify(id);
+        _expField.SetValueWithoutNotify(entry.requiredExp.ToString());
         _sensorTypeField.SetValueWithoutNotify(entry.type.ToString());
     }
 

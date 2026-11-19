@@ -5,67 +5,47 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class WorldMapUI : MonoBehaviour
+public class WorldMapUI : UIManager
 {
     [SerializeField] private string requirementLabelText;
     [SerializeField] private TextMeshProUGUI experienceLabel;
     [SerializeField] private TextMeshProUGUI requirementsLabel;
     [SerializeField] private Slider experienceSlider;
-    [SerializeField] private WorldMapUIScreens worldMapUIScreens;
-
-    private GameObject _currentUI;
-    private GameManager _gameManager;
-    private TreeSelectionManager _treeSelectionManager;
-    private ProgressionManager _progressionManager;
     
-    private List<GameObject> Screens =>  new List<GameObject>
-    {
-        worldMapUIScreens.mainMapUI, 
-    };
 
     //Unity Event Functions
     private void Start()
     {
-        _gameManager = GameManager.Instance;
-        _treeSelectionManager = _gameManager.treeSelectionManager;
-        _progressionManager = _gameManager.progressionManager;
+        InitializeManagers();
         
-        _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
+        progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();
+        SetDialogueUI(DialogueType.WelcomeDialogue);
     }
     
     //Public Functions
-    public void SetDefaultUI()
+    public override void SetDialogueUI(DialogueType dialogueType)
     {
-        SetCurrentUI(worldMapUIScreens.mainMapUI);
-        _treeSelectionManager.SetUIMode(false);
+        dialogueManager.DisplayDialogue(Scene.WorldMap, progressionManager.currentGuideTreeId, dialogueType);
+        base.SetDialogueUI(dialogueType);
     }
     
+    public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, false);
+
     //Private Functions
     private void UpdateExperienceLabel()
     {
-        int points = _progressionManager.playerExperience;
-        int goal = _progressionManager.nextExperienceTarget;
+        int points = progressionManager.playerExperience;
+        int goal = progressionManager.nextExperienceTarget;
 
         experienceLabel.text = $"{points} /  {goal} XP";
-        experienceSlider.value = points / goal;
+        
+        if(goal > 0)
+            experienceSlider.value = points / goal;
+        else
+            experienceSlider.value = 1;
+        
         requirementsLabel.text = $"{requirementLabelText} {goal}XP";
     }
-
-    private void SetCurrentUI(GameObject currentUI)
-    {
-        foreach (GameObject ui in Screens)
-        {
-            ui.SetActive(false);
-        }
-        currentUI.SetActive(true);
-        _currentUI = currentUI;
-    }
-}
-
-[Serializable]
-public struct WorldMapUIScreens
-{
-    public GameObject mainMapUI;
 }

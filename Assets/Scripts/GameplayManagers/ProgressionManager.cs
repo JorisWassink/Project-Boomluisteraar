@@ -1,19 +1,55 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 
 public class ProgressionManager : MonoBehaviour
 {
     [HideInInspector] public int playerExperience = 0;
+    
     [HideInInspector] public int nextExperienceTarget = 0;
+    
     [HideInInspector] public UnityEvent onPointsUpdate = new UnityEvent();
+    [HideInInspector] public string currentGuideTreeId {get; private set;} 
     
     private Dictionary<string, bool> collectibles = new Dictionary<string, bool>();
-    private List<int> expRequirements = new List<int>();
-
+    private List<string> unLockedTrees = new List<string>();
+    private Dictionary<string, int> expRequirements = new ();
+    
     //Unity event functions
+    private void Awake()
+    {
+        List<string> treeIds = StaticVariables.GetTreeIds;
+        foreach (string id in treeIds)
+        {
+            expRequirements.Add(id, StaticVariables.GetTreeExpRequirement(id));
+        }
+
+        int highest = -1;
+        int lowest = 999;
+        
+        foreach ((string key, int requiredExp) in expRequirements)
+        {
+            if (playerExperience >= requiredExp && requiredExp > highest)
+            {
+                currentGuideTreeId = key;
+                highest = requiredExp;
+                continue;
+            }
+
+            if (requiredExp < lowest && requiredExp > playerExperience)
+            {
+                nextExperienceTarget = requiredExp;
+                lowest = requiredExp;
+            }
+        }
+        
+        UpdatePoints(0);
+    }
+
     private void Start()
     {
         List<string> allCollectibleIds = StaticVariables.GetAllCollectibleIds;
@@ -21,15 +57,6 @@ public class ProgressionManager : MonoBehaviour
         {
             collectibles.Add(collectibleId, false);
         }
-
-        var r = StaticVariables.GetTreeIds;
-        foreach (string id in r)
-        {
-            expRequirements.Add(StaticVariables.GetTreeExpRequirement(id));
-        }
-        expRequirements.Sort();
-        nextExperienceTarget = expRequirements[0];
-        UpdatePoints(0);
     }
     
     //Public functions
@@ -39,9 +66,9 @@ public class ProgressionManager : MonoBehaviour
         UpdatePoints(newPoints);
     }
 
-    public void RemovePoints(int points)
+    public void UnlockCollectible(string collectibleID)
     {
-        playerExperience -= points;
+        collectibles[collectibleID] = true;
     }
 
     public bool CollectibleIsUnlocked(string collectibleID)
@@ -52,21 +79,24 @@ public class ProgressionManager : MonoBehaviour
     //Private functions
     private void UpdatePoints(int points)
     {
-        if (points >= nextExperienceTarget)
-        {
-            //todo: proper system
-        }
         playerExperience = points;
+        SetUnlockedTrees();
         onPointsUpdate.Invoke();
     }
     
-    //Debug Functions
-    public void PrintAllCollectibleNamesDebug()
+    private void SetUnlockedTrees()
     {
-        string message = $"Printing all collectible names\n";
-
-        message = collectibles.Aggregate(message, (current, collectible) => current + $"{StaticVariables.GetCollectibleName(collectible.Key)}\n");
-
-        Debug.Log(message);
+        foreach (var tree in expRequirements)
+        {
+            if (playerExperience >= tree.Value)
+            {
+                unLockedTrees.Add(tree.Key);
+                currentGuideTreeId = tree.Key;
+                Debug.Log("Unlocked " + tree.Key);
+            }
+        }
+        
+        foreach (var tree in unLockedTrees)
+            expRequirements.Remove(tree);
     }
 }

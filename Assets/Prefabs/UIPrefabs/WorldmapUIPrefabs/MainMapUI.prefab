@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 68f2ab24f7454ba05af33e2c0dad702f, type: 3}
+  m_Texture: {fileID: 2800000, guid: f841f4b0b7b3494e29999d93fc1106ad, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -585,11 +585,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359086033833331760, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
       propertyPath: m_text
-      value: Volgende Boom Beschikbaar bij 100XP
+      value: 'Next tree unlocks at 100 XP
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8359086033833331760, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 26.55
       objectReference: {fileID: 0}
     - target: {fileID: 8359086033833331760, guid: 579dcf6d18f2d883da7a352bc7b2c23f, type: 3}
       propertyPath: m_TextWrappingMode
@@ -619,15 +621,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_text
-      value: Park
+      value: 'Park
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 50
+      value: 70.5
       objectReference: {fileID: 0}
     - target: {fileID: 6048887933149163708, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_Pivot.x
@@ -894,7 +894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontSize
-      value: 21.45
+      value: 26.8
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontColor.b
@@ -1020,11 +1020,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 472362876899168543, guid: 21f9131f2e14164d6ac6ce345e44abfa, type: 3}
       propertyPath: m_text
-      value: Praat met de Gids
+      value: 'Talk to Guide
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 472362876899168543, guid: 21f9131f2e14164d6ac6ce345e44abfa, type: 3}
       propertyPath: m_fontSize
-      value: 25.6
+      value: 35.45
       objectReference: {fileID: 0}
     - target: {fileID: 472362876899168543, guid: 21f9131f2e14164d6ac6ce345e44abfa, type: 3}
       propertyPath: m_TextWrappingMode
@@ -1158,7 +1160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontSize
-      value: 21.45
+      value: 26.8
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontColor.b

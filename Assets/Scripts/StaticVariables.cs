@@ -6,6 +6,7 @@ public static class StaticVariables
     static ScriptableObjectDataBase _so;
     static TreeDataBase _treeDataBase;
     static CollectibleDataBase _collectibleDataBase;
+    static DialogueDataBase _dialogueDataBase;
 
     static ScriptableObjectDataBase SO
     {
@@ -23,22 +24,28 @@ public static class StaticVariables
 
     static TreeDataBase Trees => _treeDataBase != null ? _treeDataBase : (_treeDataBase = SO.treeDataBase);
     static CollectibleDataBase Collectibles => _collectibleDataBase != null ? _collectibleDataBase : (_collectibleDataBase = SO.collectibleDataBase);
-
+    private static DialogueDataBase Dialogue => _dialogueDataBase != null ? _dialogueDataBase : (_dialogueDataBase = SO.dialogueDataBase);
 
     
     public static TreeDataBase.TreeEntry GetTreeEntry(string id) => Trees.GetTreeEntry(id);
     public static GameObject GetTreeModel(string treeId) => Trees.GetTreeModel(treeId);
-    public static string GetTreeName(string treeId, bool dutch) => Trees.GetTreeName(treeId, dutch);
-    public static string GetTreeName(string treeId) => Trees.GetTreeName(treeId, false);
+    public static string GetTreeName(string treeId, bool english) => Trees.GetTreeName(treeId, english);
+    public static string GetTreeName(string treeId) => Trees.GetTreeName(treeId, true);
     public static DataType GetTreeType(string treeId) => Trees.GetTreeType(treeId);
     public static int GetTreeExpRequirement(string treeId)  => Trees.GetTreeExpRequirement(treeId);
+    
+    
     public static List<string> GetCollectibleIdsByTree(string treeId) => Collectibles.GetCollectibleIdsByTree(treeId);
     public static string GetCollectibleName(string collectibleID) => Collectibles.GetCollectibleName(collectibleID);
     public static string GetCollectibleDescription(string collectibleID) => Collectibles.GetCollectibleDescription(collectibleID);
     public static string GetCollectibleObservations(string collectibleID) => Collectibles.GetCollectibleObservations(collectibleID);
     public static Texture2D GetCollectibleSprite(string collectibleID, bool unlocked) => Collectibles.GetCollectibleSprite(collectibleID, unlocked);
+    
+    
+    public static string GetCharacterName(string id) => Dialogue.GetCharacterName(id);
+    public static Texture2D GetCharacterSprite(string id) => Dialogue.GetCharacterSprite(id);
+    public static List<string> GetDialogueChunk(Scene scene, DialogueType dialogueType, string treeId) => Dialogue.GetDialogueChunk(scene, dialogueType, treeId);
     public static List<string> GetAllCollectibleIds => Collectibles.GetAllCollectibleIds();
-    public static List<string> GetDefaultCollectibleIds => Collectibles.GetDefaultCollectibleIds();
     public static List<string> GetTreeIds => Trees.GetTreeIds();
     
     public static string SelectedTreeId{get; set;}
