@@ -17,7 +17,7 @@ MonoBehaviour:
   characterEntries:
   - treeName: Purple Beech
     characterName: Arson Annie
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    sprite: {fileID: 2800000, guid: 310bc98b0886777998cbbde0cfd646d6, type: 3}
     worldMapDialogues:
       welcomeDialogue:
       - Welcome to the Park
@@ -32,7 +32,15 @@ MonoBehaviour:
     - dialogueChunkList:
       - Whats up beech?
       - Get it?
-    randomGameplayDialogueListEntries: []
+    randomGameplayDialogueListEntries:
+    - dialogueChunkList:
+      - A question as old as time...
+      - If this tree would fall over...
+      - And nobody would be around to see it...
+      - Would it make a noise?
+      - The awnser is obviously no
+      - Because sound has not been implemented yet
+      - duh...
     expRequirement: 0
     treeId: 91261114
   - treeName: European Beech
