@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60364603e621eb5bbe4394cec054085, type: 3}
+  m_Name: DialogueDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  characterEntries:
+  - treeName: Purple Beech
+    characterName: Arson Annie
+    sprite: {fileID: 2800000, guid: 310bc98b0886777998cbbde0cfd646d6, type: 3}
+    worldMapDialogues:
+      welcomeDialogue:
+      - Welcome to the Park
+      - My name is Arson Annie
+      - I represent the Purple beech
+      - But i am only temporary
+      - Because the developers are COWARDS
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries:
+    - dialogueChunkList:
+      - Whats up beech?
+      - Get it?
+    randomGameplayDialogueListEntries:
+    - dialogueChunkList:
+      - A question as old as time...
+      - If this tree would fall over...
+      - And nobody would be around to see it...
+      - Would it make a noise?
+      - The awnser is obviously no
+      - Because sound has not been implemented yet
+      - duh...
+    expRequirement: 0
+    treeId: 91261114
+  - treeName: European Beech
+    characterName: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 100
+    treeId: 9B261002
+  - treeName: Sweet Chestnut
+    characterName: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 200
+    treeId: 91261121
+  - treeName: Paper Mulberry
+    characterName: Arson Annie
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 999
+    treeId: 91261115
+  - treeName: Giant Redwood
+    characterName: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 999
+    treeId: 9B261005
+  - treeName: Oak
+    characterName: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 999
+    treeId: 91261120
+  - treeName: European Hornbeam
+    characterName: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogues:
+      welcomeDialogue: []
+    gamePlayDialogues:
+      coldComment: []
+      hotComment: []
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    expRequirement: 999
+    treeId: 9B261009

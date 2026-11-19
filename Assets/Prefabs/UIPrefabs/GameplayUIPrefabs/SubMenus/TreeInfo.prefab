@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 68f2ab24f7454ba05af33e2c0dad702f, type: 3}
+  m_Texture: {fileID: 2800000, guid: f841f4b0b7b3494e29999d93fc1106ad, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -178,8 +178,8 @@ RectTransform:
   - {fileID: 2971436832034918764}
   m_Father: {fileID: 2193071262679969342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0.2}
-  m_AnchorMax: {x: 0.5, y: 0.9}
+  m_AnchorMin: {x: 0.05, y: 0.1}
+  m_AnchorMax: {x: 0.95, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -223,7 +223,7 @@ RectTransform:
   m_Father: {fileID: 3827071050074883175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -259,7 +259,7 @@ RectTransform:
   - {fileID: 7118027052132499015}
   m_Father: {fileID: 3827071050074883175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.05}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 68f2ab24f7454ba05af33e2c0dad702f, type: 3}
+  m_Texture: {fileID: 2800000, guid: f841f4b0b7b3494e29999d93fc1106ad, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -771,11 +771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_text
-      value: Praat met de boom
+      value: Talk to the tree
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 25.6
+      value: 25.05
       objectReference: {fileID: 0}
     - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_Interactable
@@ -901,11 +901,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_text
-      value: Speel een Spel
+      value: Play a minigame
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 27.85
+      value: 23.25
       objectReference: {fileID: 0}
     - target: {fileID: 7181303678778674465, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1051,11 +1051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_text
-      value: Kijk in de verzameling
+      value: Look in the journal
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSize
-      value: 20.65
+      value: 21.05
       objectReference: {fileID: 0}
     - target: {fileID: 4441849825346562829, guid: 68a26ad2ba03c6d648e875321db11dcc, type: 3}
       propertyPath: m_fontSizeMin
@@ -1313,11 +1313,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_text
-      value: 'De boom voelt zich:'
+      value: 'The tree is feeling: Wet (I guess)'
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 20.4
       objectReference: {fileID: 0}
     - target: {fileID: 229695153208854945, guid: 69ab85cd7cfa0d91fa3c19b182df99fc, type: 3}
       propertyPath: m_fontColor.b
