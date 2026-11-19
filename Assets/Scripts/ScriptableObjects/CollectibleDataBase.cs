@@ -123,7 +123,7 @@ public class CollectibleDataBase : ScriptableObject
                 treeCollectibles.Add(entry);
             }
             entry.treeName = tree.name;
-            entry.dutchName =  tree.dutchName;
+            entry.dutchName =  tree.englishName;
         }
 
         treeCollectibles.RemoveAll(e => !treeDataBase.trees.Exists(t => t.id == e.treeId));
@@ -153,10 +153,8 @@ public class CollectibleDataBase : ScriptableObject
         allCollectibles.Clear();
         allCollectibles.AddRange(defaultCollectibles);
         foreach (var list in treeCollectibles)
-        {
             allCollectibles.AddRange(list.collectibles);
-            Debug.Log($"Adding {list.collectibles.Count} collectibles to the tree");
-        }
+        
     }
 #endif
 }

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60364603e621eb5bbe4394cec054085, type: 3}
+  m_Name: DialogueDataBase
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  characterEntries:
+  - treeName: Giant Redwood
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 9B261005
+  - treeName: Oak
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 91261120
+  - treeName: European Beech
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 9B261002
+  - treeName: Paper Mulberry
+    characterName: Arson Annie
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries:
+    - dialogueChunkList:
+      - Look at the fire!
+      - I havent felt this alive since 'nam!
+    treeId: 91261115
+  - treeName: Purple Beech
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 91261114
+  - treeName: European Hornbeam
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 9B261009
+  - treeName: Sweet Chestnut
+    characterName: 
+    id: 
+    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    worldMapDialogueEntries: []
+    treeId: 91261121

@@ -13,7 +13,7 @@ public class WorldMapUI : MonoBehaviour
     [SerializeField] private Slider experienceSlider;
     [SerializeField] private WorldMapUIScreens worldMapUIScreens;
 
-    private GameObject _currentUI;
+    private DialogueManager _dialogueManager;
     private GameManager _gameManager;
     private TreeSelectionManager _treeSelectionManager;
     private ProgressionManager _progressionManager;
@@ -21,6 +21,7 @@ public class WorldMapUI : MonoBehaviour
     private List<GameObject> Screens =>  new List<GameObject>
     {
         worldMapUIScreens.mainMapUI, 
+        worldMapUIScreens.dialogueUI
     };
 
     //Unity Event Functions
@@ -29,6 +30,9 @@ public class WorldMapUI : MonoBehaviour
         _gameManager = GameManager.Instance;
         _treeSelectionManager = _gameManager.treeSelectionManager;
         _progressionManager = _gameManager.progressionManager;
+        
+        //todo: less hardcody
+        _dialogueManager = worldMapUIScreens.dialogueUI.gameObject.GetComponent<DialogueManager>();
         
         _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
@@ -41,6 +45,13 @@ public class WorldMapUI : MonoBehaviour
         SetCurrentUI(worldMapUIScreens.mainMapUI);
         _treeSelectionManager.SetUIMode(false);
     }
+
+    public void OpenDialogue()
+    {
+        SetCurrentUI(worldMapUIScreens.dialogueUI, false);
+        _dialogueManager.DialogueOnEnable(_progressionManager.currentGuideTreeId);
+        _treeSelectionManager.SetUIMode(true);
+    }
     
     //Private Functions
     private void UpdateExperienceLabel()
@@ -49,18 +60,23 @@ public class WorldMapUI : MonoBehaviour
         int goal = _progressionManager.nextExperienceTarget;
 
         experienceLabel.text = $"{points} /  {goal} XP";
-        experienceSlider.value = points / goal;
+        
+        if(goal > 0)
+            experienceSlider.value = points / goal;
+        else
+            experienceSlider.value = 1;
+        
         requirementsLabel.text = $"{requirementLabelText} {goal}XP";
     }
 
-    private void SetCurrentUI(GameObject currentUI)
+    private void SetCurrentUI(GameObject currentUI, bool closePreviousUI = true)
     {
-        foreach (GameObject ui in Screens)
-        {
-            ui.SetActive(false);
-        }
+        Debug.Log("Set current UI to " + currentUI.name);
+        if (closePreviousUI)
+            foreach (GameObject ui in Screens)
+                ui.SetActive(false);
+        
         currentUI.SetActive(true);
-        _currentUI = currentUI;
     }
 }
 
@@ -68,4 +84,5 @@ public class WorldMapUI : MonoBehaviour
 public struct WorldMapUIScreens
 {
     public GameObject mainMapUI;
+    public GameObject dialogueUI;
 }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjectDataBase
   treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
   collectibleDataBase: {fileID: 11400000, guid: 8e826877d3b37997cb08c59338c499e5, type: 2}
+  dialogueDataBase: {fileID: 11400000, guid: d5c97d13d551a7cdf85c46d875c731da, type: 2}
