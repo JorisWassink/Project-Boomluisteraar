@@ -32,6 +32,12 @@ public class TreeGameplayUI : UIManager
     }
 
     //Public Functions
+    public override void SetDialogueUI(DialogueType dialogueType)
+    {
+        dialogueManager.DisplayDialogue(Scene.TreeView, progressionManager.currentGuideTreeId, dialogueType);
+        base.SetDialogueUI(dialogueType);
+    }
+
     public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, true);
     public void GoToWorldMap() => gameManager.SwitchScene(Scene.WorldMap);
     public void ShowMiniGameMenu() => gameManager.SwitchScene(Scene.JumpUpMiniGame);

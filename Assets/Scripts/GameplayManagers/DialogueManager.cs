@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI characterNameText;
+    [SerializeField] private TextMeshProUGUI treeNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private RawImage characterImage;
     [SerializeField] private UIManager uiManager;
@@ -15,35 +16,19 @@ public class DialogueManager : MonoBehaviour
     private List<string> currentDialogueList;
     private int currentDialogueIndex;
     
-    public void DialogueOnEnable(string treeId)
-    {
-        DisplayDialogue(treeId);
-    }
-
-    private List<string> SelectDialogueChunk(string treeId, DialogueType dialogueType, int index = 0)
-    {
-        switch (dialogueType)
-        {
-            case DialogueType.GuideDialogue:
-                if (index == 0)
-                    return StaticVariables.GetRandomWorldMapDialogueChunk(treeId);
-                else
-                //todo: make specific dialogue
-                    return StaticVariables.GetRandomWorldMapDialogueChunk(treeId);
-                break;
-            default:
-                return new List<string>() { "Dialogue not found" };
-                
-        }
-    }
-    
-    private void DisplayDialogue(string treeId)
+    public void DisplayDialogue(Scene scene, string treeId, DialogueType dialogueType)
     {
         if (currentCharacterId != treeId || currentCharacterId == null)
             UpdateCharacter(treeId);
         
-        currentDialogueList = SelectDialogueChunk(treeId, DialogueType.GuideDialogue);
+        currentDialogueList = SelectDialogueChunk(scene, treeId, dialogueType);
         UpdateDialogue();
+    }
+    
+    private List<string> SelectDialogueChunk(Scene scene, string treeId, DialogueType dialogueType)
+    {
+        List<string> dialogueChunk = StaticVariables.GetDialogueChunk(scene, dialogueType, treeId);
+        return dialogueChunk;
     }
 
     public void OnDialogueTapped()
@@ -73,6 +58,7 @@ public class DialogueManager : MonoBehaviour
         
         characterNameText.text = StaticVariables.GetCharacterName(id);
         characterImage.texture = StaticVariables.GetCharacterSprite(id);
+        treeNameText.text = StaticVariables.GetTreeName(id);
     }
 
     private void UpdateDialogue()
@@ -83,5 +69,6 @@ public class DialogueManager : MonoBehaviour
 
 public enum DialogueType
 {
-    GuideDialogue
+    Random,
+    WelcomeDialogue
 }

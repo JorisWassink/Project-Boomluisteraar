@@ -30,10 +30,14 @@ public class UIManager : MonoBehaviour
 
     public virtual void SetDefaultUI() { }
 
-    public void SetDialogueUI()
+    public void SetRandomDialogueUI()
+    {
+        SetDialogueUI(DialogueType.Random);
+    }
+    
+    public virtual void SetDialogueUI(DialogueType dialogueType)
     {
         SetCurrentUI(dialogueUIScreen,true, false);
-        dialogueManager.DialogueOnEnable(progressionManager.currentGuideTreeId);
     }
 
     protected void SetCurrentUI(GameObject currentUI, bool uiMode, bool closePreviousUI = true)

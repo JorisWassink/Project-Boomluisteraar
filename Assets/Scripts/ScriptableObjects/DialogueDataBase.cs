@@ -11,10 +11,13 @@ public class DialogueDataBase : ScriptableObject
     {
         public string treeName;
         public string characterName;
-        public string id;
         public Texture2D sprite;
-        public List<DialogueListEntry> worldMapDialogueEntries;
-        public int expRequirement;
+        public WorldMapDialogues worldMapDialogues;
+        public GamePlayDialogues gamePlayDialogues;
+        public List<RandomDialogueListEntry> randomWorldMapDialogueListEntries;
+        public List<RandomDialogueListEntry> randomGameplayDialogueListEntries;
+        
+        [HideInInspector] public int expRequirement;
         
         [HideInInspector] public string treeId;
 
@@ -28,21 +31,71 @@ public class DialogueDataBase : ScriptableObject
     }
 
     [Serializable]
-    public class DialogueListEntry
+    public class WorldMapDialogues
+    {
+        public List<string> welcomeDialogue;
+    }
+    
+    [Serializable]
+    public class RandomDialogueListEntry
     {
         public List<string> dialogueChunkList;
+    }
+
+    [Serializable]
+    public class GamePlayDialogues
+    {
+        public List<string> coldComment;
+        public List<string> hotComment;
     }
 
     [SerializeField] TreeDataBase treeDataBase;
     [SerializeField] Texture2D defaultSprite;
     
     public List<CharacterEntry> characterEntries = new();
+    
 
-    public List<string> GetRandomWorldmapGuideDialogueChunk(string treeId)
+    public List<string> GetDialogueChunk(Scene scene, DialogueType dialogueType, string treeId)
     {
-        CharacterEntry character = GetCharacterEntry(treeId);
-        List<DialogueListEntry> chunkList = character.worldMapDialogueEntries;
+        switch (scene)
+        {
+            case Scene.WorldMap:
+                return GetWorldMapDialogueChunk(dialogueType, treeId);
+            case Scene.TreeView:
+                return GetGameplayDialogueChunk(dialogueType, treeId);
+            default:
+                return new List<string>(){"Scene not found"};
+        }
+    }
 
+    private List<string> GetWorldMapDialogueChunk(DialogueType dialogueType, string treeId)
+    {
+        CharacterEntry entry = GetCharacterEntry(treeId);
+        switch (dialogueType)
+        {
+            case DialogueType.Random:
+                return GetRandomDialogueChunk(entry.randomWorldMapDialogueListEntries);
+            case DialogueType.WelcomeDialogue:
+                return entry.worldMapDialogues.welcomeDialogue;
+            default:
+                return new List<string>(){"No dialogue chunk found"};
+        }
+    }
+    
+    private List<string> GetGameplayDialogueChunk(DialogueType dialogueType, string treeId)
+    {
+        CharacterEntry entry = GetCharacterEntry(treeId);
+        switch (dialogueType)
+        {
+            case DialogueType.Random:
+                return GetRandomDialogueChunk(entry.randomGameplayDialogueListEntries);
+            default:
+                return new List<string>(){"No dialogue chunk found"};
+        }
+    }
+
+    public List<string> GetRandomDialogueChunk(List<RandomDialogueListEntry> chunkList)
+    {
         if (chunkList == null || chunkList.Count == 0)
         {
             return new List<string>(){"No dialogue chunk found"};
@@ -52,7 +105,6 @@ public class DialogueDataBase : ScriptableObject
         Debug.Log($"{index} out of {chunkList.Count}");
         return chunkList[index].dialogueChunkList;
     }
-
     public string GetCharacterName(string id)
     {
         CharacterEntry entry = GetCharacterEntry(id);
@@ -109,4 +161,9 @@ public class DialogueDataBase : ScriptableObject
         SyncWithTrees();
     }
 #endif
+
+    public enum WorldMapDialogueType
+    {
+        Welcome,
+    }
 }

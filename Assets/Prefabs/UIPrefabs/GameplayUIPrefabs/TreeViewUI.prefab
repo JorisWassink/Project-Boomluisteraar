@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3515052894539400672, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetDialogueUI
+      value: SetRandomDialogueUI
       objectReference: {fileID: 0}
     - target: {fileID: 3515052894539400672, guid: fc389abf3cd2117299290c6e3c4b58ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

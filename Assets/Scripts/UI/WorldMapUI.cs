@@ -21,9 +21,16 @@ public class WorldMapUI : UIManager
         progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();
+        SetDialogueUI(DialogueType.WelcomeDialogue);
     }
     
     //Public Functions
+    public override void SetDialogueUI(DialogueType dialogueType)
+    {
+        dialogueManager.DisplayDialogue(Scene.WorldMap, progressionManager.currentGuideTreeId, dialogueType);
+        base.SetDialogueUI(dialogueType);
+    }
+    
     public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, false);
 
     //Private Functions

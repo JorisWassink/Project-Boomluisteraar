@@ -33,14 +33,18 @@ public static class StaticVariables
     public static string GetTreeName(string treeId) => Trees.GetTreeName(treeId, true);
     public static DataType GetTreeType(string treeId) => Trees.GetTreeType(treeId);
     public static int GetTreeExpRequirement(string treeId)  => Trees.GetTreeExpRequirement(treeId);
+    
+    
     public static List<string> GetCollectibleIdsByTree(string treeId) => Collectibles.GetCollectibleIdsByTree(treeId);
     public static string GetCollectibleName(string collectibleID) => Collectibles.GetCollectibleName(collectibleID);
     public static string GetCollectibleDescription(string collectibleID) => Collectibles.GetCollectibleDescription(collectibleID);
     public static string GetCollectibleObservations(string collectibleID) => Collectibles.GetCollectibleObservations(collectibleID);
     public static Texture2D GetCollectibleSprite(string collectibleID, bool unlocked) => Collectibles.GetCollectibleSprite(collectibleID, unlocked);
+    
+    
     public static string GetCharacterName(string id) => Dialogue.GetCharacterName(id);
     public static Texture2D GetCharacterSprite(string id) => Dialogue.GetCharacterSprite(id);
-    public static List<string> GetRandomWorldMapDialogueChunk(string treeId) => Dialogue.GetRandomWorldmapGuideDialogueChunk(treeId);
+    public static List<string> GetDialogueChunk(Scene scene, DialogueType dialogueType, string treeId) => Dialogue.GetDialogueChunk(scene, dialogueType, treeId);
     public static List<string> GetAllCollectibleIds => Collectibles.GetAllCollectibleIds();
     public static List<string> GetTreeIds => Trees.GetTreeIds();
     
