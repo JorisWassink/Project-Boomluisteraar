@@ -13,7 +13,8 @@ public class ProgressionManager : MonoBehaviour
     [HideInInspector] public int nextExperienceTarget = 0;
     
     [HideInInspector] public UnityEvent onPointsUpdate = new UnityEvent();
-    [HideInInspector] public string currentGuideTreeId {get; private set;} 
+    [HideInInspector] public string currentGuideTreeId {get; private set;}
+    [HideInInspector] public bool IsFirstStart = true;
     
     private Dictionary<string, bool> collectibles = new Dictionary<string, bool>();
     private List<string> unLockedTrees = new List<string>();
@@ -74,6 +75,11 @@ public class ProgressionManager : MonoBehaviour
     public bool CollectibleIsUnlocked(string collectibleID)
     {
         return collectibles[collectibleID];
+    }
+
+    public bool treeIsUnlocked(string treeID)
+    {
+        return unLockedTrees.Contains(treeID);
     }
     
     //Private functions

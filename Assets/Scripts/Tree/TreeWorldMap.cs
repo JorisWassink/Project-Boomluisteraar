@@ -24,11 +24,7 @@ public class TreeWorldMap : TreeInstance
     //TODO: fix camera getting
     private Camera _cam;
     private bool _isUnlocked = true;
-
-
-    //QUIK FIX
-    public bool IsUnlocked => _isUnlocked;
-    public float HitboxRadius => hitboxRadius;
+    
 
     //Unity event functions
     private void Awake()
@@ -36,12 +32,12 @@ public class TreeWorldMap : TreeInstance
         InitializeTree(id);
     }
 
-    /*
+    
     private void Start()
     {
         pointPosition = GetModelCenterOnFloor();
     }
-    */
+    
 
     private void Update()
     {
@@ -53,7 +49,7 @@ public class TreeWorldMap : TreeInstance
     public void SetLockedStatus(bool isLocked)
     {
         var vector3 = lockSprite.gameObject.transform.position;
-        vector3.y = treeHeight + 5;
+        vector3.y = vector3.y + treeHeight * 1.2f;
         lockSprite.gameObject.transform.position = vector3;
         
         _isUnlocked = !isLocked;
@@ -68,9 +64,9 @@ public class TreeWorldMap : TreeInstance
     
     public void TrySelectTree(float distance)
     {
+        Debug.Log($"Distance: {distance}, hitboxRadius: {hitboxRadius}");
         if(!_isUnlocked) return;
         
-        Debug.Log($"Distance: {distance}, hitboxRadius: {hitboxRadius}");
         if (distance < hitboxRadius)
         {
             StaticVariables.SelectedTreeId = treeId;
@@ -110,7 +106,7 @@ public class TreeWorldMap : TreeInstance
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(center, hitboxRadius);
-        Vector3 position = pointPosition + new Vector3(0, treeHeight, 0);
+        Vector3 position = center + new Vector3(0, treeHeight, 0);
         
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(position , new Vector3(hitboxRadius, 0, hitboxRadius));

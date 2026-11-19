@@ -29,10 +29,7 @@ public class InputManager : MonoBehaviour
         Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
     
     public static InputManager Instance;
-
-    //QUICKFIX MOMENT
-    [SerializeField] private float tapMovementTolerance = 40f;
-
+    
     private Vector2 _pressPosition;
     private double _pressTime;
     private bool _pressActive;

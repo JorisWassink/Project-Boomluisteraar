@@ -7,6 +7,8 @@ public static class StaticVariables
     static TreeDataBase _treeDataBase;
     static CollectibleDataBase _collectibleDataBase;
     static DialogueDataBase _dialogueDataBase;
+    
+    public static bool IsFirstStart = true;
 
     static ScriptableObjectDataBase SO
     {

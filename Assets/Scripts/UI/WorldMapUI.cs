@@ -21,7 +21,11 @@ public class WorldMapUI : UIManager
         progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();
-        SetDialogueUI(DialogueType.WelcomeDialogue);
+        
+        if(progressionManager.IsFirstStart)
+            SetDialogueUI(DialogueType.WelcomeDialogue);
+        
+        progressionManager.IsFirstStart = false;
     }
     
     //Public Functions
