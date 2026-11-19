@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private RawImage characterImage;
-    [SerializeField] private WorldMapUI worldMapUI;
+    [SerializeField] private UIManager uiManager;
     
     private string currentCharacterId;
     private List<string> currentDialogueList;
@@ -26,10 +26,10 @@ public class DialogueManager : MonoBehaviour
         {
             case DialogueType.GuideDialogue:
                 if (index == 0)
-                    return StaticVariables.GetRandomWorldmapDialogueChunk(treeId);
+                    return StaticVariables.GetRandomWorldMapDialogueChunk(treeId);
                 else
                 //todo: make specific dialogue
-                    return StaticVariables.GetRandomWorldmapDialogueChunk(treeId);
+                    return StaticVariables.GetRandomWorldMapDialogueChunk(treeId);
                 break;
             default:
                 return new List<string>() { "Dialogue not found" };
@@ -58,8 +58,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = "";
         currentDialogueIndex = 0;
-        worldMapUI.SetDefaultUI();
-        Debug.Log("Dialogue closed");
+        uiManager.SetDefaultUI();
     }
 
     private void NextDialogue()
@@ -72,7 +71,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentCharacterId = id;
         
-        characterNameText.text = StaticVariables.GetTreeName(id, true);
+        characterNameText.text = StaticVariables.GetCharacterName(id);
         characterImage.texture = StaticVariables.GetCharacterSprite(id);
     }
 

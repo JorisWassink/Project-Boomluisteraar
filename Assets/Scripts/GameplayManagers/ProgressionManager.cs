@@ -28,9 +28,24 @@ public class ProgressionManager : MonoBehaviour
             expRequirements.Add(id, StaticVariables.GetTreeExpRequirement(id));
         }
 
-        List<int> requirements = expRequirements.Values.ToList();
-        requirements.Sort();
-        nextExperienceTarget = requirements[0];
+        int highest = -1;
+        int lowest = 999;
+        
+        foreach ((string key, int requiredExp) in expRequirements)
+        {
+            if (playerExperience >= requiredExp && requiredExp > highest)
+            {
+                currentGuideTreeId = key;
+                highest = requiredExp;
+                continue;
+            }
+
+            if (requiredExp < lowest && requiredExp > playerExperience)
+            {
+                nextExperienceTarget = requiredExp;
+                lowest = requiredExp;
+            }
+        }
         
         UpdatePoints(0);
     }
@@ -51,9 +66,9 @@ public class ProgressionManager : MonoBehaviour
         UpdatePoints(newPoints);
     }
 
-    public void RemovePoints(int points)
+    public void UnlockCollectible(string collectibleID)
     {
-        playerExperience -= points;
+        collectibles[collectibleID] = true;
     }
 
     public bool CollectibleIsUnlocked(string collectibleID)
@@ -64,10 +79,6 @@ public class ProgressionManager : MonoBehaviour
     //Private functions
     private void UpdatePoints(int points)
     {
-        if (points >= nextExperienceTarget)
-        {
-            // unLockedTrees.Add(currentTargetTree);
-        }
         playerExperience = points;
         SetUnlockedTrees();
         onPointsUpdate.Invoke();

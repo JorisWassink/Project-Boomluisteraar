@@ -38,8 +38,9 @@ public static class StaticVariables
     public static string GetCollectibleDescription(string collectibleID) => Collectibles.GetCollectibleDescription(collectibleID);
     public static string GetCollectibleObservations(string collectibleID) => Collectibles.GetCollectibleObservations(collectibleID);
     public static Texture2D GetCollectibleSprite(string collectibleID, bool unlocked) => Collectibles.GetCollectibleSprite(collectibleID, unlocked);
+    public static string GetCharacterName(string id) => Dialogue.GetCharacterName(id);
     public static Texture2D GetCharacterSprite(string id) => Dialogue.GetCharacterSprite(id);
-    public static List<string> GetRandomWorldmapDialogueChunk(string treeId) => Dialogue.GetRandomWorldmapGuideDialogueChunk(treeId);
+    public static List<string> GetRandomWorldMapDialogueChunk(string treeId) => Dialogue.GetRandomWorldmapGuideDialogueChunk(treeId);
     public static List<string> GetAllCollectibleIds => Collectibles.GetAllCollectibleIds();
     public static List<string> GetTreeIds => Trees.GetTreeIds();
     

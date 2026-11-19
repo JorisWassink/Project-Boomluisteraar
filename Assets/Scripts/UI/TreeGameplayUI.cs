@@ -6,62 +6,38 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-[Serializable]
-public enum UIMenu
+public class TreeGameplayUI : UIManager
 {
-    TreeInfo,
-    MiniGameMenu,
-    DialogueMenu,
-    CollectibleMenu
-}
-
-public class TreeGameplayUI : MonoBehaviour
-{
-    [SerializeField] private TextMeshProUGUI treeNameTextDutch;
+    [SerializeField] private TextMeshProUGUI treeNameTextEnglish;
     [SerializeField] private TextMeshProUGUI treeNameTextLatin;
     
-    [SerializeField] private GameObject treeInfoMenu;
     [SerializeField] private GameObject miniGameMenu;
     [SerializeField] private GameObject collectibleMenu;
-    [SerializeField] private GameObject dialogueMenu;
     
-    private GameManager GameManager => GameManager.Instance;
     
     private GameObject _treeInfoUI;
     private GameObject _activeUI;
-    private List<GameObject> _allUIs = new ();
     
     //Unity Event Functions
     private void Start()
     {
-        treeNameTextDutch.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameDutch;
-        treeNameTextLatin.text = GameManager.Instance.gameplayManager.currentTreeGameplay.treeNameLatin;
+        InitializeManagers();
+        treeNameTextEnglish.text = gameManager.gameplayManager.currentTreeGameplay.treeNameEnglish;
+        treeNameTextLatin.text = gameManager.gameplayManager.currentTreeGameplay.treeNameLatin;
         
-        _allUIs.Add(treeInfoMenu);
-        _allUIs.Add(miniGameMenu);
-        _allUIs.Add(collectibleMenu);
-        _allUIs.Add(dialogueMenu);
+        screens.Add(miniGameMenu);
+        screens.Add(collectibleMenu);
         
-        SetUI(treeInfoMenu);
+        SetDefaultUI();
     }
 
     //Public Functions
-    public void GoToWorldMap()
-    {
-        GameManager.Instance.SwitchScene(Scene.WorldMap);
-    }
-    public void ShowTreeInfo() => SetUI(treeInfoMenu);
-    public void ShowMiniGameMenu() => GameManager.SwitchScene(Scene.JumpUpMiniGame);
-    public void ShowCollectibleMenu() => SetUI(collectibleMenu);
-    public void ShowDialogueMenu() => SetUI(dialogueMenu);
-    //Private Functions
-    private void SetUI(GameObject menu)
-    {
-        foreach (GameObject ui in _allUIs)
-        {
-            ui.SetActive(false);
-        }
-        menu.SetActive(true);
-        _activeUI = menu;
-    }
+    public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, true);
+    public void GoToWorldMap() => gameManager.SwitchScene(Scene.WorldMap);
+    public void ShowMiniGameMenu() => gameManager.SwitchScene(Scene.JumpUpMiniGame);
+    
+    public void ShowTreeInfo() => SetDefaultUI();
+    public void ShowCollectibleMenu() => SetCurrentUI(collectibleMenu, true);
+    public void ShowDialogueMenu() => SetCurrentUI(dialogueUIScreen, true);
+
 }

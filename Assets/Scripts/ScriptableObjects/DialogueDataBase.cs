@@ -53,6 +53,12 @@ public class DialogueDataBase : ScriptableObject
         return chunkList[index].dialogueChunkList;
     }
 
+    public string GetCharacterName(string id)
+    {
+        CharacterEntry entry = GetCharacterEntry(id);
+        return entry.characterName;
+    }
+    
     public Texture2D GetCharacterSprite(string id)
     {
         CharacterEntry entry = GetCharacterEntry(id);

@@ -117,13 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb97290a2c55304c9348803c43ea936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  defaultUIScreen: {fileID: 323640392781172361}
+  dialogueUIScreen: {fileID: 4467342141383426387}
   requirementLabelText: Volgende Boom Beschikbaar bij
   experienceLabel: {fileID: 6650995740829767460}
   requirementsLabel: {fileID: 12032950762102159}
   experienceSlider: {fileID: 2449492301930055296}
-  worldMapUIScreens:
-    mainMapUI: {fileID: 323640392781172361}
-    dialogueUI: {fileID: 4467342141383426387}
 --- !u!1001 &3698820277569554091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3098393174169087109, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenDialogue
+      value: SetDialogueUI
       objectReference: {fileID: 0}
     - target: {fileID: 3098393174169087109, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -610,6 +609,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -226.92499
       objectReference: {fileID: 0}
+    - target: {fileID: 9132482582975506641, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 2191537915624645633}
     - target: {fileID: 9132482582975506641, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
       propertyPath: worldMapUI
       value: 
