@@ -255,6 +255,7 @@ MonoBehaviour:
   treeName: 
   requiredExperience: 0
   hitboxRadius: 10
+  treeHeight: 10
   lockSprite: {fileID: 2840415035747427531}
   id: 
   models:
@@ -272,3 +273,5 @@ MonoBehaviour:
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
   - id: 91261121
     prefab: {fileID: 2268703776573928566, guid: 841dba0e4016b3222840e2c3e3c4585a, type: 3}
+  modelRotation: {x: 20, y: 0, z: 0}
+  pointPosition: {x: 0, y: 0, z: 1.6746068}

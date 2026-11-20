@@ -3,69 +3,53 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class WorldMapUI : MonoBehaviour
+public class WorldMapUI : UIManager
 {
-    [SerializeField] private string labelText;
+    [SerializeField] private string requirementLabelText;
     [SerializeField] private TextMeshProUGUI experienceLabel;
-    [SerializeField] private WorldMapUIScreens worldMapUIScreens;
-
-    private GameObject _currentUI;
-    private TreeSelectionManager _treeSelectionManager;
-    private ProgressionManager _progressionManager;
+    [SerializeField] private TextMeshProUGUI requirementsLabel;
+    [SerializeField] private Slider experienceSlider;
     
-    private List<GameObject> Screens =>  new List<GameObject>
-    {
-        worldMapUIScreens.mainMapUI, 
-        worldMapUIScreens.collectiblesUI
-    };
 
     //Unity Event Functions
     private void Start()
     {
-        _treeSelectionManager = TreeSelectionManager.Instance;
-        _progressionManager = ProgressionManager.Instance;
-        _progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
+        InitializeManagers();
+        
+        progressionManager.onPointsUpdate.AddListener(UpdateExperienceLabel);
         UpdateExperienceLabel();
         SetDefaultUI();
+        
+        if(progressionManager.IsFirstStart)
+            SetDialogueUI(DialogueType.WelcomeDialogue);
+        
+        progressionManager.IsFirstStart = false;
     }
     
     //Public Functions
-    public void SetCollectiblesUI()
+    public override void SetDialogueUI(DialogueType dialogueType)
     {
-        SetCurrentUI(worldMapUIScreens.collectiblesUI);
-        _treeSelectionManager.SetUIMode(true);
-        _progressionManager.PrintAllCollectibleNamesDebug();
-    }
-
-    public void SetDefaultUI()
-    {
-        SetCurrentUI(worldMapUIScreens.mainMapUI);
-        _treeSelectionManager.SetUIMode(false);
+        dialogueManager.DisplayDialogue(Scene.WorldMap, progressionManager.currentGuideTreeId, dialogueType);
+        base.SetDialogueUI(dialogueType);
     }
     
+    public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, false);
+
     //Private Functions
     private void UpdateExperienceLabel()
     {
-        int points = _progressionManager.playerExperience;
+        int points = progressionManager.playerExperience;
+        int goal = progressionManager.nextExperienceTarget;
 
-        experienceLabel.text = labelText + points;
+        experienceLabel.text = $"{points} /  {goal} XP";
+        
+        if(goal > 0)
+            experienceSlider.value = points / goal;
+        else
+            experienceSlider.value = 1;
+        
+        requirementsLabel.text = $"{requirementLabelText} {goal}XP";
     }
-
-    private void SetCurrentUI(GameObject currentUI)
-    {
-        foreach (GameObject ui in Screens)
-        {
-            ui.SetActive(false);
-        }
-        currentUI.SetActive(true);
-        _currentUI = currentUI;
-    }
-}
-
-[Serializable]
-public struct WorldMapUIScreens
-{
-    public GameObject mainMapUI;
-    public GameObject collectiblesUI;
 }

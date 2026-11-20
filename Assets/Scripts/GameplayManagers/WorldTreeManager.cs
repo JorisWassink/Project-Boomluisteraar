@@ -1,40 +1,67 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldTreeManager : MonoBehaviour
 {
-    //TODO: editor tooling maybe?
-    private List<TreeWorldMap> _trees = new List<TreeWorldMap>();
-    private ProgressionManager progressionManager;
+    private List<TreeWorldMap> _trees = new ();
     
-    public static WorldTreeManager Instance;
-    
-    //Unity Event Functions
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
+    private GameManager _gameManager;
+    private ProgressionManager _progressionManager;
+    private InputManager _inputManager;
+
     
     void Start()
     {
         _trees = new List<TreeWorldMap>(GetComponentsInChildren<TreeWorldMap>());
-        progressionManager = ProgressionManager.Instance;
+        Debug.Log($"Tree count: {_trees.Count}");
         
-        //TODO: make this be called when the worldmap gets loaded, for now this works i think
+        _gameManager = GameManager.Instance;
+        _inputManager = _gameManager.inputManager;
+        _progressionManager = _gameManager.progressionManager;
+        
         CheckProgression();
+
+        if (InputManager.Instance == null)
+        {
+            Debug.LogError("WorldTreeManager: InputManager missing!");
+            return;
+        }
+        _inputManager.onPointInputTap.AddListener(OnPointInput);
+    }
+
+    private void OnDestroy()
+    {
+        _inputManager.onPointInputTap.RemoveListener(OnPointInput);
+    }
+
+    //private functions
+    private void OnPointInput(Vector3 pointPosition)
+    {
+        int closestTreeIndex = -1;
+        float closestDistance = float.MaxValue;
+
+        for (int index = 0; index < _trees.Count; index++)
+        {
+            var tree = _trees[index];
+            float currentDistance = Vector3.Distance(pointPosition, tree.pointPosition);
+            if (currentDistance <= closestDistance)
+            {
+                closestDistance = currentDistance;
+                closestTreeIndex = index;
+            }
+        }
+        
+        //test for hitbox in tree so they can be independent 
+        _trees[closestTreeIndex].TrySelectTree(closestDistance);
     }
     
-    //private functions
     private void CheckProgression()
     {
-        int playerExperience = progressionManager.playerExperience;
         foreach (TreeWorldMap tree in _trees)
         {
-            bool shouldBeLocked = playerExperience < tree.requiredExperience;
-            tree.SetLockedStatus(shouldBeLocked);
+            bool isUnlocked = _progressionManager.treeIsUnlocked(tree.treeId);
+            tree.SetLockedStatus(!isUnlocked);
         }
     }
 }

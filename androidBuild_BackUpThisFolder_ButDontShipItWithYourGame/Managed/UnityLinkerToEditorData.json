@@ -9,14 +9,26 @@
         "name": "Animation",
         "dependencies": [
           {
+            "name": "AnimationClip",
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
             "name": "Animator",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AnimatorController",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity"
+            ],
             "dependencyType": 1,
             "icon": null
           },
@@ -24,6 +36,12 @@
             "name": "AnimatorOverrideController",
             "scenes": [],
             "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Motion",
+            "scenes": [],
+            "dependencyType": 1,
             "icon": null
           },
           {
@@ -111,6 +129,7 @@
             "name": "Camera",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -132,6 +151,7 @@
             "name": "Cubemap",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -153,6 +173,7 @@
             "name": "EditorExtension",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 1,
@@ -168,6 +189,7 @@
             "name": "GameObject",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -193,7 +215,9 @@
           },
           {
             "name": "LODGroup",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/WorldMap.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -201,6 +225,7 @@
             "name": "LevelGameManager",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 1,
@@ -237,6 +262,7 @@
             "name": "LightmapSettings",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -252,6 +278,7 @@
             "name": "Material",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -288,6 +315,7 @@
             "name": "MonoBehaviour",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -303,6 +331,7 @@
             "name": "MonoScript",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 1,
@@ -312,6 +341,7 @@
             "name": "NamedObject",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 1,
@@ -351,6 +381,7 @@
             "name": "RectTransform",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -366,6 +397,7 @@
             "name": "RenderSettings",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -373,7 +405,10 @@
           },
           {
             "name": "RenderTexture",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/WorldMap.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -399,6 +434,7 @@
             "name": "Shader",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -426,6 +462,7 @@
             "name": "Sprite",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -439,7 +476,10 @@
           },
           {
             "name": "SpriteRenderer",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -582,6 +622,12 @@
             "icon": "package/com.unity.modules.jsonserialize"
           },
           {
+            "name": "Required by ParticleSystem Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.particlesystem"
+          },
+          {
             "name": "Required by Physics Module",
             "scenes": [],
             "dependencyType": 2,
@@ -628,6 +674,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.terrain"
+          },
+          {
+            "name": "Required by TerrainPhysics Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.terrainphysics"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -903,6 +955,27 @@
         ]
       },
       {
+        "name": "ParticleSystem",
+        "dependencies": [
+          {
+            "name": "ParticleSystem",
+            "scenes": [
+              "Assets/Scenes/WorldMap.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "ParticleSystemRenderer",
+            "scenes": [
+              "Assets/Scenes/WorldMap.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          }
+        ]
+      },
+      {
         "name": "Physics",
         "dependencies": [
           {
@@ -921,27 +994,9 @@
             "icon": null
           },
           {
-            "name": "MeshCollider",
-            "scenes": [
-              "Assets/Scenes/GameplayScene.unity",
-              "Assets/Scenes/WorldMap.unity"
-            ],
-            "dependencyType": 0,
-            "icon": null
-          },
-          {
             "name": "PhysicsManager",
             "scenes": [],
             "dependencyType": 1,
-            "icon": null
-          },
-          {
-            "name": "SphereCollider",
-            "scenes": [
-              "Assets/Scenes/GameplayScene.unity",
-              "Assets/Scenes/WorldMap.unity"
-            ],
-            "dependencyType": 0,
             "icon": null
           },
           {
@@ -949,6 +1004,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.physicsbackendphysx"
+          },
+          {
+            "name": "Required by TerrainPhysics Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.terrainphysics"
           },
           {
             "name": "Required by UIElements Module",
@@ -968,9 +1029,53 @@
         "name": "Physics2D",
         "dependencies": [
           {
+            "name": "BoxCollider2D",
+            "scenes": [
+              "Assets/Scenes/JUMPUP.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Collider2D",
+            "scenes": [],
+            "dependencyType": 1,
+            "icon": null
+          },
+          {
+            "name": "Effector2D",
+            "scenes": [
+              "Assets/Scenes/JUMPUP.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
             "name": "Physics2DSettings",
             "scenes": [],
             "dependencyType": 1,
+            "icon": null
+          },
+          {
+            "name": "PhysicsMaterial2D",
+            "scenes": [],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "PlatformEffector2D",
+            "scenes": [
+              "Assets/Scenes/JUMPUP.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Rigidbody2D",
+            "scenes": [
+              "Assets/Scenes/JUMPUP.unity"
+            ],
+            "dependencyType": 0,
             "icon": null
           }
         ]
@@ -1108,6 +1213,12 @@
             "icon": "package/com.unity.modules.jsonserialize"
           },
           {
+            "name": "Required by ParticleSystem Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.particlesystem"
+          },
+          {
             "name": "Required by Physics Module",
             "scenes": [],
             "dependencyType": 2,
@@ -1154,6 +1265,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.terrain"
+          },
+          {
+            "name": "Required by TerrainPhysics Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.terrainphysics"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -1274,13 +1391,48 @@
         "dependencies": [
           {
             "name": "Terrain",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/WorldMap.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "TerrainData",
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/WorldMap.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "TerrainLayer",
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/WorldMap.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Required by TerrainPhysics Module",
             "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.terrainphysics"
+          }
+        ]
+      },
+      {
+        "name": "TerrainPhysics",
+        "dependencies": [
+          {
+            "name": "TerrainCollider",
+            "scenes": [
+              "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/WorldMap.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           }
@@ -1327,6 +1479,7 @@
             "name": "Font",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -1371,6 +1524,7 @@
             "name": "Canvas",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,
@@ -1386,6 +1540,7 @@
             "name": "CanvasRenderer",
             "scenes": [
               "Assets/Scenes/GameplayScene.unity",
+              "Assets/Scenes/JUMPUP.unity",
               "Assets/Scenes/WorldMap.unity"
             ],
             "dependencyType": 0,

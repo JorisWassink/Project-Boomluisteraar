@@ -4,12 +4,14 @@ using UnityEngine;
 public abstract class TreeInstance : MonoBehaviour
 {
     [HideInInspector] public string treeId; //the sensor id, only for the tree types
-    [HideInInspector] public string treeName;
+    [HideInInspector] public string treeNameLatin;
+    [HideInInspector] public string treeNameEnglish;
     
     public virtual void InitializeTree(string id)
     {
         treeId = id;
-        treeName = StaticVariables.GetTreeName(id);
-        gameObject.name = treeName;
+        treeNameLatin = StaticVariables.GetTreeName(id, false);
+        treeNameEnglish = StaticVariables.GetTreeName(id, true);
+        gameObject.name = treeNameLatin;
     }
 }

@@ -5,4 +5,5 @@ public class ScriptableObjectDataBase : ScriptableObject
 {
     public TreeDataBase treeDataBase;
     public CollectibleDataBase collectibleDataBase;
+    public DialogueDataBase dialogueDataBase;
 }
