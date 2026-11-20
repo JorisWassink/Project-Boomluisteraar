@@ -48,11 +48,23 @@ MonoBehaviour:
   - treeName: Broussonetia papyrifera
     dutchName: Paper Mulberry
     treeId: 91261115
-    collectibles: []
+    collectibles:
+    - name: moerbei bloem
+      sprite: {fileID: 2800000, guid: e61e7791678bc9f40a2d669cfb4f3caf, type: 3}
+      spriteSilhouette: {fileID: 0}
+      description: 
+      observations: 
+      id: 87d59cc1-0260-4940-bc38-421c8af5bf63
   - treeName: Fagus sylvatica 'Atropurpunicea'
     dutchName: Purple Beech
     treeId: 91261114
-    collectibles: []
+    collectibles:
+    - name: Rode berk blad
+      sprite: {fileID: 2800000, guid: e4e15730f4c57ba4aa137d38c2c54439, type: 3}
+      spriteSilhouette: {fileID: 0}
+      description: 
+      observations: 
+      id: 3bd6da2f-e539-4110-aa2e-d53cb0f16347
   - treeName: Carpinus betulus
     dutchName: European Hornbeam
     treeId: 9B261009
@@ -60,5 +72,11 @@ MonoBehaviour:
   - treeName: Castanea sativa
     dutchName: Sweet Chestnut
     treeId: 91261121
-    collectibles: []
+    collectibles:
+    - name: kastanje blad
+      sprite: {fileID: 2800000, guid: 47b7206d364734a4b9673aa24842d6a0, type: 3}
+      spriteSilhouette: {fileID: 0}
+      description: 
+      observations: 
+      id: e3514c09-6c45-41a2-82bc-45bc019a8904
   defaultCollectibles: []
