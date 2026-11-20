@@ -7,17 +7,18 @@ public class WorldTreeManager : MonoBehaviour
     private List<TreeWorldMap> _trees = new ();
     
     private GameManager _gameManager;
-    private ProgressionManager ProgressionManager => _gameManager.progressionManager;
-    private InputManager InputManager => _gameManager.inputManager;
+    private ProgressionManager _progressionManager;
+    private InputManager _inputManager;
 
     
     void Start()
     {
         _trees = new List<TreeWorldMap>(GetComponentsInChildren<TreeWorldMap>());
+        Debug.Log($"Tree count: {_trees.Count}");
         
         _gameManager = GameManager.Instance;
-        
-        InputManager.onPointInputTap.AddListener(OnPointInput);
+        _inputManager = _gameManager.inputManager;
+        _progressionManager = _gameManager.progressionManager;
         
         CheckProgression();
 
@@ -26,13 +27,12 @@ public class WorldTreeManager : MonoBehaviour
             Debug.LogError("WorldTreeManager: InputManager missing!");
             return;
         }
-
-        InputManager.Instance.onPointInputTap.AddListener(OnPointInput);
+        _inputManager.onPointInputTap.AddListener(OnPointInput);
     }
 
     private void OnDestroy()
     {
-        InputManager.onPointInputTap.RemoveListener(OnPointInput);
+        _inputManager.onPointInputTap.RemoveListener(OnPointInput);
     }
 
     //private functions
@@ -58,11 +58,10 @@ public class WorldTreeManager : MonoBehaviour
     
     private void CheckProgression()
     {
-        int playerExperience = ProgressionManager.playerExperience;
         foreach (TreeWorldMap tree in _trees)
         {
-            bool shouldBeLocked = playerExperience < tree.requiredExperience;
-            tree.SetLockedStatus(shouldBeLocked);
+            bool isUnlocked = _progressionManager.treeIsUnlocked(tree.treeId);
+            tree.SetLockedStatus(!isUnlocked);
         }
     }
 }
