@@ -10,11 +10,10 @@ public class WorldTreeManager : MonoBehaviour
     private ProgressionManager _progressionManager;
     private InputManager _inputManager;
 
-    
-    void Start()
+    //Unity Event Functions
+    private void Start()
     {
         _trees = new List<TreeWorldMap>(GetComponentsInChildren<TreeWorldMap>());
-        Debug.Log($"Tree count: {_trees.Count}");
         
         _gameManager = GameManager.Instance;
         _inputManager = _gameManager.inputManager;

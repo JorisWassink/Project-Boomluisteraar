@@ -98,7 +98,6 @@ public class ProgressionManager : MonoBehaviour
             {
                 unLockedTrees.Add(tree.Key);
                 currentGuideTreeId = tree.Key;
-                Debug.Log("Unlocked " + tree.Key);
             }
         }
         

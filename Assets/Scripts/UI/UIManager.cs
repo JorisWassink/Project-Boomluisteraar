@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+[RequireComponent(typeof(DialogueEventManager))]
 public class UIManager : MonoBehaviour
 {
     [SerializeField] protected GameObject defaultUIScreen;
@@ -13,19 +14,26 @@ public class UIManager : MonoBehaviour
     protected ProgressionManager progressionManager;
 
 
-    protected List<GameObject> screens => new List<GameObject>
-    {
-        defaultUIScreen, 
-        dialogueUIScreen
-    };
+    public List<GameObject> screens = new();
 
-    protected void InitializeManagers()
+    protected void Start()
+    {
+        InitializeManagers();
+        
+        screens.Add(defaultUIScreen);
+        screens.Add(dialogueUIScreen);
+    }
+
+    private void InitializeManagers()
     {
         gameManager = GameManager.Instance;
         treeSelectionManager = gameManager.treeSelectionManager;
         progressionManager = gameManager.progressionManager;
         
         dialogueManager = dialogueUIScreen.GetComponent<DialogueManager>();
+        
+        var dem = GetComponent<DialogueEventManager>();
+        dialogueManager.SetDialogueEventManager(dem);
     }
 
     public virtual void SetDefaultUI() { }
@@ -34,8 +42,20 @@ public class UIManager : MonoBehaviour
     {
         SetDialogueUI(DialogueType.Random);
     }
+
+    protected void SwitchScene(Scene scene)
+    {
+        Debug.Log($"Switching to {scene}");
+        gameManager.SwitchScene(scene);
+    }
     
-    public virtual void SetDialogueUI(DialogueType dialogueType)
+    protected void SetDialogueUI(DialogueEvent dialogueEvent)
+    {
+        dialogueManager.SetNewDialogueChunk(dialogueEvent);
+        SetDialogueUI(DialogueType.EventDialogue);    
+    }
+    
+    protected virtual void SetDialogueUI(DialogueType dialogueType)
     {
         SetCurrentUI(dialogueUIScreen,true, false);
     }
@@ -43,12 +63,12 @@ public class UIManager : MonoBehaviour
     protected void SetCurrentUI(GameObject currentUI, bool uiMode, bool closePreviousUI = true)
     {
         Debug.Log("Set current UI to " + currentUI.name);
+        
         if (closePreviousUI)
             foreach (GameObject ui in screens)
                 ui.SetActive(false);
         
         currentUI.SetActive(true);
         treeSelectionManager.SetUIMode(uiMode);
-
     }
 }

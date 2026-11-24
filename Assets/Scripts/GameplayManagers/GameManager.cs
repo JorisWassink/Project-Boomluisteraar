@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
 
 public enum Scene
 {
+    TitleScreen,
     WorldMap,
     TreeView,
     JumpUpMiniGame
