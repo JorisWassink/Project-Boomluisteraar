@@ -19,7 +19,7 @@ public class CharacterSelectDrawer : PropertyDrawer
         foreach (var c in db.characterEntries)
         {
             ids.Add(c.treeId);
-            names.Add(string.IsNullOrEmpty(c.characterName) ? c.treeName : c.characterName);
+            names.Add(string.IsNullOrEmpty(c.characterName) ? c.characterEntry.treeName : c.characterName);
         }
 
         int current = ids.IndexOf(prop.stringValue);

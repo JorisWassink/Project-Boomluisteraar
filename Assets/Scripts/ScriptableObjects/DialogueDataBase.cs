@@ -8,27 +8,18 @@ using Random = UnityEngine.Random;
 public class DialogueDataBase : ScriptableObject
 {
     [Serializable]
-    public class CharacterEntry
+    public class CharacterDialogueEntry
     {
-        public string treeName;
         public string characterName;
-        public Texture2D sprite;
         public WorldMapDialogues worldMapDialogues;
         public GamePlayDialogues gamePlayDialogues;
         public List<RandomDialogueListEntry> randomWorldMapDialogueListEntries;
         public List<RandomDialogueListEntry> randomGameplayDialogueListEntries;
         
+        [HideInInspector] public CharacterDataBase.CharacterEntry characterEntry;
         [HideInInspector] public int expRequirement;
         
         [HideInInspector] public string treeId;
-
-        public void SetDefaultSprite(Texture2D tex)
-        {
-            if (sprite == null)
-            {
-                sprite = tex;
-            }
-        }
     }
     
     [Serializable]
@@ -37,6 +28,7 @@ public class DialogueDataBase : ScriptableObject
         public DialogueEvent eventType;
         [CharacterSelect] public string character;
         public DialogueChunk dialogues;
+        [HideInInspector] public CharacterDataBase.CharacterEntry characterEntry;
         
     }
 
@@ -80,13 +72,14 @@ public class DialogueDataBase : ScriptableObject
         public bool isEvent = false;
         public string dialogueText;
         public EventCommands command;
+        public CharacterEmotion emotion;
     }
 
-    [SerializeField] TreeDataBase treeDataBase;
+    [SerializeField] CharacterDataBase characterDataBase;
     [SerializeField] Texture2D defaultSprite;
 
     public List<EventDialogue> eventDialogues = new();
-    public List<CharacterEntry> characterEntries = new();
+    public List<CharacterDialogueEntry> characterEntries = new();
     
 
     public DialogueChunk GetDialogueChunk(Scene scene, DialogueType dialogueType, string treeId)
@@ -116,11 +109,11 @@ public class DialogueDataBase : ScriptableObject
     
     private DialogueChunk GetTitleScreenDialogueChunk(DialogueType dialogueType, string treeId)
     {
-        CharacterEntry entry = GetCharacterEntry(treeId);
+        CharacterDialogueEntry dialogueEntry = GetCharacterDialogueEntry(treeId);
         switch (dialogueType)
         {
             case DialogueType.Random:
-                return GetRandomDialogueChunk(entry.randomWorldMapDialogueListEntries);
+                return GetRandomDialogueChunk(dialogueEntry.randomWorldMapDialogueListEntries);
             default:
                 return DialogueChunk.Empty;
         }
@@ -129,11 +122,11 @@ public class DialogueDataBase : ScriptableObject
     
     private DialogueChunk GetWorldMapDialogueChunk(DialogueType dialogueType, string treeId)
     {
-        CharacterEntry entry = GetCharacterEntry(treeId);
+        CharacterDialogueEntry dialogueEntry = GetCharacterDialogueEntry(treeId);
         switch (dialogueType)
         {
             case DialogueType.Random:
-                return GetRandomDialogueChunk(entry.randomWorldMapDialogueListEntries);
+                return GetRandomDialogueChunk(dialogueEntry.randomWorldMapDialogueListEntries);
             default:
                 return DialogueChunk.Empty;
         }
@@ -141,11 +134,11 @@ public class DialogueDataBase : ScriptableObject
     
     private DialogueChunk GetGameplayDialogueChunk(DialogueType dialogueType, string treeId)
     {
-        CharacterEntry entry = GetCharacterEntry(treeId);
+        CharacterDialogueEntry dialogueEntry = GetCharacterDialogueEntry(treeId);
         switch (dialogueType)
         {
             case DialogueType.Random:
-                return GetRandomDialogueChunk(entry.randomGameplayDialogueListEntries);
+                return GetRandomDialogueChunk(dialogueEntry.randomGameplayDialogueListEntries);
             default:
                 return DialogueChunk.Empty;
         }
@@ -165,17 +158,25 @@ public class DialogueDataBase : ScriptableObject
     
     public string GetCharacterName(string id)
     {
-        CharacterEntry entry = GetCharacterEntry(id);
-        return entry.characterName;
+        CharacterDataBase.CharacterEntry dialogueEntry = GetCharacterEntry(id);
+        return dialogueEntry.characterName;
     }
     
-    public Texture2D GetCharacterSprite(string id)
+    public Texture2D GetCharacterSprite(string id, CharacterEmotion emotion)
     {
-        CharacterEntry entry = GetCharacterEntry(id);
-        return entry.sprite;
+        CharacterDataBase.CharacterEntry dialogueEntry = GetCharacterEntry(id);
+        Texture2D sprite;
+        switch (emotion)
+        {
+            case CharacterEmotion.Default:
+            default:
+                sprite = dialogueEntry.sprites.defaultSprite;
+                break;
+        }
+        return sprite;
     }
     
-    private CharacterEntry GetCharacterEntry(string id)
+    private CharacterDialogueEntry GetCharacterDialogueEntry(string id)
     {
         foreach (var t in characterEntries)
             if (t.treeId == id) return t;
@@ -183,30 +184,41 @@ public class DialogueDataBase : ScriptableObject
         return null;
     }
     
+    private CharacterDataBase.CharacterEntry GetCharacterEntry(string id)
+    {
+        Debug.Log(characterDataBase.characters);
+        if (characterDataBase == null) return null;
+        foreach (var ce in characterDataBase.characters)
+        {
+            Debug.Log(ce.characterName);
+        }
+        return characterDataBase.characters.Find(c => c.characterId == id);
+    }
 
 
 #if UNITY_EDITOR
-    [ContextMenu("Sync With Tree Database")]
-    void SyncWithTrees()
+    [ContextMenu("Sync With Character Database")]
+    void SyncWithCharacters()
     {
-        if (treeDataBase == null) return;
+        if (characterDataBase == null) return;
 
-        foreach (var tree in treeDataBase.trees)
+        foreach (var character in characterDataBase.characters)
         {
-            var entry = characterEntries.Find(e => e.treeId == tree.id);
+            var entry = characterEntries.Find(e => e.treeId == character.characterId);
             if (entry == null)
             {
-                entry = new CharacterEntry { treeId = tree.id };
+                entry = new CharacterDialogueEntry { treeId = character.characterId };
                 characterEntries.Add(entry);
             }
-            entry.treeName = tree.englishName;
-            entry.expRequirement = tree.requiredExp;
+            entry.characterEntry = character;
+            entry.characterName = character.characterName;
+            entry.expRequirement = character.expRequirement;
         }
 
         
         characterEntries.Sort((a, b) => a.expRequirement.CompareTo(b.expRequirement));
 
-        characterEntries.RemoveAll(e => !treeDataBase.trees.Exists(t => t.id == e.treeId));
+        characterEntries.RemoveAll(e => !characterDataBase.characters.Exists(t => t.characterId == e.treeId));
 
         UnityEditor.EditorUtility.SetDirty(this);
     }
@@ -228,19 +240,17 @@ public class DialogueDataBase : ScriptableObject
 
     void OnValidate()
     {
-        foreach (var c in characterEntries)
-        {
-            c.SetDefaultSprite(defaultSprite);
-        }
+        SyncWithCharacters();
+        SyncEventDialogues();
 
         foreach (var e in eventDialogues)
         {
+            e.dialogues ??= new DialogueChunk { chunkEntries = new List<ChunkEntry>() };
             e.dialogues.characterID = e.character;
+            e.characterEntry = GetCharacterEntry(e.character);
         }
-        
-        SyncEventDialogues();
-        SyncWithTrees();
     }
+    
 #endif
 
 }

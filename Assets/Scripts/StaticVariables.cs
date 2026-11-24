@@ -44,7 +44,7 @@ public static class StaticVariables
     public static string GetCollectibleObservations(string collectibleID) => Collectibles.GetCollectibleObservations(collectibleID);
     public static Texture2D GetCollectibleSprite(string collectibleID, bool unlocked) => Collectibles.GetCollectibleSprite(collectibleID, unlocked);
     public static string GetCharacterName(string id) => Dialogue.GetCharacterName(id);
-    public static Texture2D GetCharacterSprite(string id) => Dialogue.GetCharacterSprite(id);
+    public static Texture2D GetCharacterSprite(string id, CharacterEmotion emotion = CharacterEmotion.Default) => Dialogue.GetCharacterSprite(id, emotion);
     public static DialogueChunk GetDialogueChunk(Scene scene, DialogueType dialogueType, string treeId) => Dialogue.GetDialogueChunk(scene, dialogueType, treeId);
     public static DialogueChunk GetDialogueChunk(DialogueEvent eventDialogue) => Dialogue.GetEventDialogueChunk(eventDialogue);
 

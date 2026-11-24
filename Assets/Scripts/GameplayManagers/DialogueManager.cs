@@ -102,7 +102,7 @@ public class DialogueManager : MonoBehaviour
         UpdateImage(id);
     }
 
-    private void UpdateImage(string id)
+    private void UpdateImage(string id, CharacterEmotion emotion)
     {
         Texture2D texture = StaticVariables.GetCharacterSprite(id);
         float ratio = (float)texture.width / (float)texture.height;
@@ -126,6 +126,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            UpdateImage(_currentCharacterId, chunkEntry.emotion);
             dialogueText.text = chunkEntry.dialogueText;
         }
     }
