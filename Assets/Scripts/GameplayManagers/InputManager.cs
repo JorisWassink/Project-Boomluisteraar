@@ -78,9 +78,14 @@ public class InputManager : MonoBehaviour
         if (context.canceled)
         {
             onPointInputEnd.Invoke(worldPos);
+            Debug.Log("Clicked");
             if (context.duration > clickDuration) return;
+            Debug.Log("Click is short enough");
             if (Vector3.Distance(PointerPos, _mousePositionAtClick) < dragAmount)
+            {
+                Debug.Log("Invoking click event");
                 onPointInputTap.Invoke(worldPos);
+            }
         }
         
         Debug.DrawRay(worldPos, Vector3.up * 50, Color.red, 5);

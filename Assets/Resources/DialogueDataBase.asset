@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60364603e621eb5bbe4394cec054085, type: 3}
   m_Name: DialogueDataBase
   m_EditorClassIdentifier: Assembly-CSharp::DialogueDataBase
-  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  characterDataBase: {fileID: 11400000, guid: 083e21b57cd4706f78b360aab22be12b, type: 2}
   defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
   eventDialogues:
   - eventType: 0
@@ -20,24 +20,137 @@ MonoBehaviour:
     dialogues:
       chunkEntries:
       - isEvent: 0
-        dialogueText: Ey check this out
+        dialogueText: ....Hi
         command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "So you\u2019re the new kid? Great\u2026guess we\u2019re stuck
+          with you"
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: "Well, I guess I have to show you around\u2026not like you
+          can just figure it out on your own\u2026"
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "Click on that button there to start. Or\u2026don\u2019t. I\u2019d
+          prefer it if you don\u2019t"
+        command: 0
+        emotion: 2
       - isEvent: 1
-        dialogueText: Ey check this out
+        dialogueText: "Click on that button there to start. Or\u2026don\u2019t. I\u2019d
+          prefer it if you don\u2019t"
         command: 0
-      characterID: 
+        emotion: 2
+      characterID: 91261114
+    characterEntry:
+      treeName: Purple Beech
+      characterName: Copper
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 74244c27d2e5aa26f985d11e8013cbcd, type: 3}
+        happySprite: {fileID: 2800000, guid: 7f766bc6e5c9c94f996f684bdd1029da, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 8ba7d2f4b7c91541abeffaf38fc2a684, type: 3}
+      expRequirement: 0
+      characterId: 91261114
   - eventType: 1
     character: 91261114
     dialogues:
       chunkEntries:
       - isEvent: 0
-        dialogueText: Fart
+        dialogueText: "Couldn\u2019t wait to get started, huh? What a shame\u2026"
         command: 0
-      characterID: 
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "Listen, I\u2019m not the best with this..."
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: Introductory stuff...
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "Cause it sucks, and I hate it\u2026"
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: "But lucky me. Polly wrote me a script here\u2026"
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "I guess I have to read it now\u2026"
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: '''Welcome to Pal Park, the Park where you make Pals.'''
+        command: 0
+        emotion: 1
+      - isEvent: 0
+        dialogueText: "'My name\u2019s Copper, and I\u2019ll be your guide.'"
+        command: 0
+        emotion: 1
+      - isEvent: 0
+        dialogueText: "'Here, you\u2019ll learn all about the various wonderful trees
+          that call this place home..."
+        command: 0
+        emotion: 1
+      - isEvent: 0
+        dialogueText: And hopefully make some new friends along the way.'
+        command: 0
+        emotion: 1
+      - isEvent: 0
+        dialogueText: "\u2018Strike a welcoming pose\u2019."
+        command: 0
+        emotion: 1
+      - isEvent: 0
+        dialogueText: Wait...
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: Thats not part of the script
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: "I\u2019m not reading the rest. You get the gist."
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "You\u2019re in a park. You talk to trees. Etcetera"
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "You don\u2019t need more advice. Just\u2026click around and
+          see what happens."
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "I\u2019m not your babysitter"
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: "And if you wanna talk to me\u2026"
+        command: 0
+        emotion: 0
+      - isEvent: 0
+        dialogueText: "at least try to not be annoying\u2026"
+        command: 0
+        emotion: 2
+      - isEvent: 0
+        dialogueText: "Anyway, you\u2019re free to go now\u2026bye."
+        command: 0
+        emotion: 0
+      characterID: 91261114
+    characterEntry:
+      treeName: Purple Beech
+      characterName: Copper
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 74244c27d2e5aa26f985d11e8013cbcd, type: 3}
+        happySprite: {fileID: 2800000, guid: 7f766bc6e5c9c94f996f684bdd1029da, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 8ba7d2f4b7c91541abeffaf38fc2a684, type: 3}
+      expRequirement: 0
+      characterId: 91261114
   characterEntries:
-  - treeName: Purple Beech
-    characterName: Copper
-    sprite: {fileID: 2800000, guid: 765f05fe27faaf53a8a6c7efa37864da, type: 3}
+  - characterName: Copper
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -51,17 +164,47 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries:
     - dialogueChunkList:
-        chunkEntries: []
+        chunkEntries:
+        - isEvent: 0
+          dialogueText: Your math teacher is a nazi
+          command: 0
+          emotion: 0
+        - isEvent: 0
+          dialogueText: It was on the news the other day
+          command: 0
+          emotion: 1
         characterID: 
-    randomGameplayDialogueListEntries:
     - dialogueChunkList:
-        chunkEntries: []
+        chunkEntries:
+        - isEvent: 0
+          dialogueText: I need to make sure I dont speak my mind too much
+          command: 0
+          emotion: 0
+        - isEvent: 0
+          dialogueText: Otherwise they will do the same to me as they did to annie
+          command: 0
+          emotion: 2
         characterID: 
+    - dialogueChunkList:
+        chunkEntries:
+        - isEvent: 0
+          dialogueText: Give me your kneecaps
+          command: 0
+          emotion: 0
+        characterID: 
+    randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: Purple Beech
+      characterName: Copper
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 74244c27d2e5aa26f985d11e8013cbcd, type: 3}
+        happySprite: {fileID: 2800000, guid: 7f766bc6e5c9c94f996f684bdd1029da, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 8ba7d2f4b7c91541abeffaf38fc2a684, type: 3}
+      expRequirement: 0
+      characterId: 91261114
     expRequirement: 0
     treeId: 91261114
-  - treeName: European Beech
-    characterName: 
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  - characterName: Arson Annie
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -75,11 +218,18 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries: []
     randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: European Beech
+      characterName: Arson Annie
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 100
+      characterId: 9B261002
     expRequirement: 100
     treeId: 9B261002
-  - treeName: Sweet Chestnut
-    characterName: 
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  - characterName: Sweet Chestnut
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -93,11 +243,18 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries: []
     randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: Sweet Chestnut
+      characterName: Sweet Chestnut
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 200
+      characterId: 91261121
     expRequirement: 200
     treeId: 91261121
-  - treeName: Paper Mulberry
-    characterName: Arson Annie
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  - characterName: Giant Redwood
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -111,29 +268,18 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries: []
     randomGameplayDialogueListEntries: []
-    expRequirement: 999
-    treeId: 91261115
-  - treeName: Giant Redwood
-    characterName: 
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
-    worldMapDialogues:
-      welcomeDialogue:
-        chunkEntries: []
-        characterID: 
-    gamePlayDialogues:
-      coldComment:
-        chunkEntries: []
-        characterID: 
-      hotComment:
-        chunkEntries: []
-        characterID: 
-    randomWorldMapDialogueListEntries: []
-    randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: Giant Redwood
+      characterName: Giant Redwood
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 999
+      characterId: 9B261005
     expRequirement: 999
     treeId: 9B261005
-  - treeName: Oak
-    characterName: 
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  - characterName: Oak
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -147,11 +293,18 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries: []
     randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: Oak
+      characterName: Oak
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 999
+      characterId: 91261120
     expRequirement: 999
     treeId: 91261120
-  - treeName: European Hornbeam
-    characterName: 
-    sprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  - characterName: Paper Mulberry
     worldMapDialogues:
       welcomeDialogue:
         chunkEntries: []
@@ -165,5 +318,39 @@ MonoBehaviour:
         characterID: 
     randomWorldMapDialogueListEntries: []
     randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: Paper Mulberry
+      characterName: Paper Mulberry
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 999
+      characterId: 91261115
+    expRequirement: 999
+    treeId: 91261115
+  - characterName: European Hornbeam
+    worldMapDialogues:
+      welcomeDialogue:
+        chunkEntries: []
+        characterID: 
+    gamePlayDialogues:
+      coldComment:
+        chunkEntries: []
+        characterID: 
+      hotComment:
+        chunkEntries: []
+        characterID: 
+    randomWorldMapDialogueListEntries: []
+    randomGameplayDialogueListEntries: []
+    characterEntry:
+      treeName: European Hornbeam
+      characterName: European Hornbeam
+      sprites:
+        defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+        grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      expRequirement: 999
+      characterId: 9B261009
     expRequirement: 999
     treeId: 9B261009

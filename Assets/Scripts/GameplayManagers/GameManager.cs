@@ -78,13 +78,10 @@ public class GameManager : MonoBehaviour
     private void InitializeManagers()
     {
         progressionManager = gameObject.AddComponent<ProgressionManager>();
-        
         treeSelectionManager = gameObject.AddComponent<TreeSelectionManager>();
-        
         gameplayManager = gameObject.AddComponent<GameplayManager>();
         
         worldMapManagers.Add(treeSelectionManager);
-        
         treeViewManagers.Add(gameplayManager);
 
         InitializeManagers(worldMapManagers);

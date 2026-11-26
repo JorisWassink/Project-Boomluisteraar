@@ -23,7 +23,7 @@ public class WorldMapUI : UIManager
         SetDefaultUI();
         
         if(progressionManager.IsFirstStart)
-            SetDialogueUI(DialogueEvent.FirstWorldMapVisit);
+            SetEventDialogue(DialogueEvent.FirstWorldMapVisit);
         
         progressionManager.IsFirstStart = false;
     }
@@ -31,6 +31,12 @@ public class WorldMapUI : UIManager
     //Public Functions
    
     public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, false);
+    
+    public override void SetRandomDialogueUI()
+    {
+        dialogueManager.SetNewDialogueChunk(Scene.WorldMap, progressionManager.currentGuideTreeId, DialogueType.Random);
+        SetDialogueUI();
+    }
 
     //Private Functions
     private void UpdateExperienceLabel()

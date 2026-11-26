@@ -52,7 +52,19 @@ MonoBehaviour:
   - treeName: Fagus sylvatica 'Atropurpunicea'
     dutchName: Purple Beech
     treeId: 91261114
-    collectibles: []
+    collectibles:
+    - name: Leaf
+      sprite: {fileID: 2800000, guid: 52934f3c6b6ce85468e3fcc57e9648e3, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 6c9de211a1b3d5046830159eff0a69c2, type: 3}
+      description: leaf
+      observations: grows in tree (usually)
+      id: 5e32a413-4600-4c10-a178-e53857ca2049
+    - name: Acorn
+      sprite: {fileID: 2800000, guid: 77eab2760878b3d45910533fe619407b, type: 3}
+      spriteSilhouette: {fileID: 2800000, guid: 29600ae064c4ae14a8f77c594901c95e, type: 3}
+      description: Its an acorn
+      observations: Does not grow on beeches
+      id: ad58b44d-4e87-4132-81f7-a83fb575c5e0
   - treeName: Carpinus betulus
     dutchName: European Hornbeam
     treeId: 9B261009

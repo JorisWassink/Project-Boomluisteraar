@@ -32,10 +32,10 @@ public class TreeGameplayUI : UIManager
     }
 
     //Public Functions
-    protected override void SetDialogueUI(DialogueType dialogueType)
+    public override void SetRandomDialogueUI()
     {
-        dialogueManager.SetNewDialogueChunk(Scene.TreeView, progressionManager.currentGuideTreeId, dialogueType);
-        base.SetDialogueUI(dialogueType);
+        dialogueManager.SetNewDialogueChunk(Scene.TreeView, progressionManager.currentGuideTreeId, DialogueType.Random);
+        base.SetDialogueUI();
     }
 
     public override void SetDefaultUI() => SetCurrentUI(defaultUIScreen, true);

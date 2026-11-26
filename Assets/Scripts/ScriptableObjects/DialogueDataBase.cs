@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using CharacterEntry = CharacterDataBase.CharacterEntry;
 
 [CreateAssetMenu(fileName = "DialogueDataBase", menuName = "Scriptable Objects/DialogueDataBase")]
 public class DialogueDataBase : ScriptableObject
@@ -168,6 +169,12 @@ public class DialogueDataBase : ScriptableObject
         Texture2D sprite;
         switch (emotion)
         {
+            case CharacterEmotion.Grumpy:
+                sprite = dialogueEntry.sprites.grumpySprite;
+                break;
+            case CharacterEmotion.Happy:
+                sprite = dialogueEntry.sprites.happySprite;
+                break;
             case CharacterEmotion.Default:
             default:
                 sprite = dialogueEntry.sprites.defaultSprite;
@@ -184,15 +191,19 @@ public class DialogueDataBase : ScriptableObject
         return null;
     }
     
-    private CharacterDataBase.CharacterEntry GetCharacterEntry(string id)
+    private CharacterEntry GetCharacterEntry(string id)
     {
-        Debug.Log(characterDataBase.characters);
-        if (characterDataBase == null) return null;
-        foreach (var ce in characterDataBase.characters)
+        if (characterDataBase == null)
         {
-            Debug.Log(ce.characterName);
+            Debug.LogError($"CharacterDataBase not set");
+            return null;
         }
-        return characterDataBase.characters.Find(c => c.characterId == id);
+        
+        CharacterEntry characterEntry = characterDataBase.characters.Find(c => c.characterId == id);
+        if (characterEntry != null) return characterEntry;
+        
+        Debug.LogWarning($"no character found with id {id}");
+        return null;
     }
 
 

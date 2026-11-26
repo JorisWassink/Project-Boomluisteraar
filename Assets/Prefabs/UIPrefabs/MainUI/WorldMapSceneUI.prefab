@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4559928065401940929}
     m_Modifications:
     - target: {fileID: 3098393174169087109, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 4463524339350615793}
+    - target: {fileID: 3098393174169087109, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -38,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710515938895715108, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_fontSize
-      value: 25.65
+      value: 25.8
       objectReference: {fileID: 0}
     - target: {fileID: 3974730450067982370, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_Name
@@ -46,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5458712290967321985, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_fontSize
-      value: 64.7
+      value: 62.05
       objectReference: {fileID: 0}
     - target: {fileID: 7750485420669733515, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -58,15 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005654193434055055, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_fontSize
-      value: 24.55
+      value: 25.9
       objectReference: {fileID: 0}
     - target: {fileID: 8426858777351899817, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_fontSize
-      value: 30.5
+      value: 30.55
       objectReference: {fileID: 0}
     - target: {fileID: 8562500558529265186, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_fontSize
-      value: 24.55
+      value: 25.9
       objectReference: {fileID: 0}
     - target: {fileID: 8649980705998901325, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
       propertyPath: m_Pivot.x
@@ -164,10 +168,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 327996293250395337, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+    - {fileID: 2052018474225221792, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1095090876556310096, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4463524339350615793}
+    - targetCorrespondingSourceObject: {fileID: 3716809114810869238, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7898521893658482030}
   m_SourcePrefab: {fileID: 100100000, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
 --- !u!114 &537456014048714537 stripped
 MonoBehaviour:
@@ -180,11 +192,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!1 &1940320301715712338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1095090876556310096, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+  m_PrefabInstance: {fileID: 1576238227706519298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4463524339350615793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940320301715712338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1955448553306655712, guid: f433262c18dfb44b491e1545e3580f7e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2519473823824058144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3974730450067982370, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
   m_PrefabInstance: {fileID: 1576238227706519298}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2759350201879296756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3716809114810869238, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
+  m_PrefabInstance: {fileID: 1576238227706519298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7898521893658482030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759350201879296756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1955448553306655712, guid: f433262c18dfb44b491e1545e3580f7e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &2783658633280046118 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3710515938895715108, guid: c80068c1f67173d5c9a396933ecf474c, type: 3}
@@ -226,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3608250971178109430, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
       propertyPath: m_fontSize
-      value: 54.65
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5327138566126396804, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
       propertyPath: m_Pivot.x
@@ -326,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8808452149883618696, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
       propertyPath: m_fontSize
-      value: 29.9
+      value: 37.3
       objectReference: {fileID: 0}
     - target: {fileID: 9132482582975506641, guid: 6821103ce250911a0b13db591fe607b9, type: 3}
       propertyPath: uiManager
@@ -469,6 +551,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5489940402551120206, guid: b2046e362377cca948afc8847c3e7234, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7261163795369416915}
+    - targetCorrespondingSourceObject: {fileID: 5489940402551120206, guid: b2046e362377cca948afc8847c3e7234, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3235722182959770849}
   m_SourcePrefab: {fileID: 100100000, guid: b2046e362377cca948afc8847c3e7234, type: 3}
 --- !u!1 &279138473873085284 stripped
 GameObject:
@@ -489,10 +574,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldMapUI
   defaultUIScreen: {fileID: 2519473823824058144}
   dialogueUIScreen: {fileID: 2083639462416667969}
+  screens: []
   requirementLabelText: Next tree unlocks at
   experienceLabel: {fileID: 8846793992861798029}
   requirementsLabel: {fileID: 2783658633280046118}
   experienceSlider: {fileID: 537456014048714537}
+--- !u!114 &3235722182959770849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279138473873085284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d6ea73db0ea8006bd9f18be4fd1582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueEventManager
+  commands: []
 --- !u!224 &4559928065401940929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8117601067587049963, guid: b2046e362377cca948afc8847c3e7234, type: 3}

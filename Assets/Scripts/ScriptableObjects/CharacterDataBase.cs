@@ -20,10 +20,10 @@ public class CharacterDataBase : ScriptableObject
 
         public void SetDefaultSprite(Texture2D defaultSprite)
         {
-            if (sprites.defaultSprite == null)
-            {
-                sprites.defaultSprite = defaultSprite;
-            }
+            if (sprites.defaultSprite == null) sprites.defaultSprite = defaultSprite;
+            if (sprites.grumpySprite == null) sprites.grumpySprite = sprites.defaultSprite;
+            if (sprites.happySprite == null) sprites.happySprite = sprites.defaultSprite;
+            
 
             if (characterName == "")
             {
@@ -36,6 +36,8 @@ public class CharacterDataBase : ScriptableObject
     public class SpriteListEntry
     {
         public Texture2D defaultSprite;
+        public Texture2D happySprite;
+        public Texture2D grumpySprite;
     }
     [SerializeField] TreeDataBase treeDataBase;
     [SerializeField] Texture2D defaultSprite;
@@ -84,5 +86,5 @@ public enum CharacterEmotion
 {
     Default,
     Happy,
-    Sad,
+    Grumpy,
 }

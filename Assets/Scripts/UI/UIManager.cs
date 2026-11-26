@@ -37,11 +37,7 @@ public class UIManager : MonoBehaviour
     }
 
     public virtual void SetDefaultUI() { }
-
-    public void SetRandomDialogueUI()
-    {
-        SetDialogueUI(DialogueType.Random);
-    }
+    
 
     protected void SwitchScene(Scene scene)
     {
@@ -49,13 +45,17 @@ public class UIManager : MonoBehaviour
         gameManager.SwitchScene(scene);
     }
     
-    protected void SetDialogueUI(DialogueEvent dialogueEvent)
+    public virtual void SetRandomDialogueUI()
+    {
+        SetDialogueUI();
+    }
+    protected void SetEventDialogue(DialogueEvent dialogueEvent)
     {
         dialogueManager.SetNewDialogueChunk(dialogueEvent);
-        SetDialogueUI(DialogueType.EventDialogue);    
+        SetDialogueUI();    
     }
     
-    protected virtual void SetDialogueUI(DialogueType dialogueType)
+    protected void SetDialogueUI()
     {
         SetCurrentUI(dialogueUIScreen,true, false);
     }

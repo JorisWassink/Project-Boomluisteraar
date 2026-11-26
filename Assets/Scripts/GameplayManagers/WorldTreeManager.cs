@@ -52,6 +52,7 @@ public class WorldTreeManager : MonoBehaviour
         }
         
         //test for hitbox in tree so they can be independent 
+        Debug.Log($"Closest tree: {_trees[closestTreeIndex].name}");
         _trees[closestTreeIndex].TrySelectTree(closestDistance);
     }
     

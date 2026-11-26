@@ -6,18 +6,20 @@ using UnityEngine.UI;
 
 public class CollectibleUI : MonoBehaviour
 {
-    [SerializeField] private float horizontalSpacing = 10;
+    [SerializeField] private TextMeshProUGUI unlockedText;
+    [SerializeField] private Slider slider;
     
+    [SerializeField] private TextMeshProUGUI treeNameText;
     [SerializeField] private TextMeshProUGUI pageNameText;
     [SerializeField] private TextMeshProUGUI discoveredText;
-    [SerializeField] private TextMeshProUGUI discriptionText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI observationText;
     
     [SerializeField] private RawImage image;
     
-    [SerializeField] private GameObject pageContentObject;
     [SerializeField] private Button pageLeftButton;
     [SerializeField] private Button pageRightButton;
+    [SerializeField] private TextMeshProUGUI pageText;
     
     [SerializeField] private GameObject collectiblePrefab;
     
@@ -46,6 +48,8 @@ public class CollectibleUI : MonoBehaviour
         pageRightButton.onClick.AddListener(() => SetPage(_currentPage + 1));
  
         SetPage(_currentPage);
+        
+        treeNameText.text = StaticVariables.GetTreeName(_currentTreeId);
     }
     
     //Private Functions
@@ -65,14 +69,29 @@ public class CollectibleUI : MonoBehaviour
         Texture2D sprite = StaticVariables.GetCollectibleSprite(collectibleId, isCollected);
 
         
-        pageNameText.text = isCollected ? collectibleName : "Onbekend object";
-        discoveredText.text = isCollected ? "Ontdekt" : "Nog niet ontdekt";
-        discriptionText.text = isCollected ? descriptionString : "Nog niet ontdekt";
+        pageNameText.text = isCollected ? collectibleName : "Unknown collectable";
+        discoveredText.text = isCollected ? "Discovered" : "Undiscovered";
+        descriptionText.text = isCollected ? descriptionString : "This collectible is not discovered yet";
         observationText.text = observationString;
         
         image.texture = sprite;
-        
+        SetProgress();
         CheckButtons(); 
+    }
+
+    private void SetProgress()
+    {
+        int total =  _pages.Count;
+        int unlocked = 0;
+        foreach (var id in _pages)
+        {
+            if (_gameManager.progressionManager.CollectibleIsUnlocked(id))
+            {
+                unlocked++;
+            }
+        }
+        unlockedText.text = $"{unlocked} of {total} found";
+        slider.value = (float)unlocked/(float)total;
     }
 
     private void CheckButtons()
@@ -82,6 +101,8 @@ public class CollectibleUI : MonoBehaviour
         
         pageLeftButton.gameObject.SetActive(canGoLeft);
         pageRightButton.gameObject.SetActive(canGoRight);
+
+        pageText.text = $"Entry  {_currentPage + 1} of {_pages.Count}";
     }
     
 }

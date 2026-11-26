@@ -7,7 +7,7 @@ public class TitleScreenUI : UIManager
     public new void Start()
     {
         base.Start();
-        SetDialogueUI(DialogueEvent.FirstGameStart);
+        SetEventDialogue(DialogueEvent.FirstGameStart);
     }
     
     //Public Functions

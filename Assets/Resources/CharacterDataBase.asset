@@ -12,3 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1693a7a377cbf02bac2f599f6959caf, type: 3}
   m_Name: CharacterDataBase
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDataBase
+  treeDataBase: {fileID: 11400000, guid: eb9e115e3330eca7aa8e9b8edda47427, type: 2}
+  defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+  characters:
+  - treeName: Purple Beech
+    characterName: Copper
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 74244c27d2e5aa26f985d11e8013cbcd, type: 3}
+      happySprite: {fileID: 2800000, guid: 7f766bc6e5c9c94f996f684bdd1029da, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 8ba7d2f4b7c91541abeffaf38fc2a684, type: 3}
+    expRequirement: 0
+    characterId: 91261114
+  - treeName: European Beech
+    characterName: Arson Annie
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 100
+    characterId: 9B261002
+  - treeName: Sweet Chestnut
+    characterName: Sweet Chestnut
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 200
+    characterId: 91261121
+  - treeName: Giant Redwood
+    characterName: Giant Redwood
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 999
+    characterId: 9B261005
+  - treeName: Oak
+    characterName: Oak
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 999
+    characterId: 91261120
+  - treeName: Paper Mulberry
+    characterName: Paper Mulberry
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 999
+    characterId: 91261115
+  - treeName: European Hornbeam
+    characterName: European Hornbeam
+    sprites:
+      defaultSprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      happySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+      grumpySprite: {fileID: 2800000, guid: 76a3799ad294ad250a53cacaaa295782, type: 3}
+    expRequirement: 999
+    characterId: 9B261009

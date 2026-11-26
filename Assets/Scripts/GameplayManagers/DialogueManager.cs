@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     
     public void SetNewDialogueChunk(Scene scene, string treeId, DialogueType dialogueType)
     {
-        Debug.Log("Setting new dialogue chunk");
+        Debug.Log($"Setting new dialogue chunk; scene: {scene}, treeId: {treeId}, dialogueType: {dialogueType}");
         DataChunk dialogueChunk = SelectDialogueChunk(scene, treeId, dialogueType);
         DisplayDialogueChunk(dialogueChunk);
     }
@@ -45,16 +45,12 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("DisplayDialogueChunk was called with an empty data chunk");
             dataChunk = DataChunk.Empty;
         }
-        Debug.Log(dataChunk.characterID);
-        CheckCharacter(dataChunk.characterID);
-        
-        foreach (ChunkEntry chunkEntry in dataChunk.chunkEntries)
-        {
-            if(chunkEntry.isEvent)
-                Debug.Log(chunkEntry.command);
-            else
-                Debug.Log(chunkEntry.dialogueText);
-        }
+
+        if (string.IsNullOrEmpty(dataChunk.characterID))
+            Debug.LogWarning("Dialogue chunk does not contain a character ID");
+        else
+            CheckCharacter(dataChunk.characterID);
+
         _currentDialogueChunk = dataChunk;
         _currentDialogueIndex = 0;
         UpdateDialogue();
@@ -99,12 +95,12 @@ public class DialogueManager : MonoBehaviour
         _currentCharacterId = id;
         characterNameText.text = StaticVariables.GetCharacterName(id);
         
-        UpdateImage(id);
     }
 
     private void UpdateImage(string id, CharacterEmotion emotion)
     {
-        Texture2D texture = StaticVariables.GetCharacterSprite(id);
+        Debug.Log($"Setting emotion {emotion}");
+        Texture2D texture = StaticVariables.GetCharacterSprite(id, emotion);
         float ratio = (float)texture.width / (float)texture.height;
         
         if (characterImage.gameObject.TryGetComponent(out AspectRatioFitter aspectRatioFitter))
